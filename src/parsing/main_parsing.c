@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 14:33:32 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:09:39 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 		data->mapinfo->we_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
 		
 	}
-
 	else if (file[*i] == 'E' && file[*i + 1] && file[*i + 1] == 'A')
 	{
 		if (data->checklist.check_ea)
@@ -113,9 +112,7 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 		while (file[*i] == ' ')
 			++(*i);
 		data->mapinfo->ea_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
-		
 	}
-
 	return (EXIT_SUCCESS);	
 }
 
@@ -197,6 +194,23 @@ int	parse_file(char *file_name, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+void	get_player_info_cont(int i, int j, char **map, t_data *data)
+{
+	if (map[i][j] == 'E')
+	{
+		data->player.dir_x = 0.0;
+		data->player.dir_y = 1.0;
+		data->plane.x = 0.66;
+		data->plane.y = 0.0;
+	}
+	else if (map[i][j] == 'W')
+	{
+		data->player.dir_x = 0.0;
+		data->player.dir_y = -1.0;
+		data->plane.x = -0.66;
+		data->plane.y = 0.0;
+	}	
+}
 
 int	get_player_info(int i, int j, char **map, t_data *data)
 {
@@ -205,43 +219,22 @@ int	get_player_info(int i, int j, char **map, t_data *data)
 	data->checklist.check_dir = 1;
 	data->player.pos_x = i + 0.5;
 	data->player.pos_y = j + 0.5;
-
 	if (map[i][j] == 'N')
 	{
 		data->player.dir_x = -1.0;
 		data->player.dir_y = 0.0;
-		
 		data->plane.x = 0.0;
 		data->plane.y = 0.66;
-
 	}
 	else if (map[i][j] == 'S')
 	{
 		data->player.dir_x = 1.0;
 		data->player.dir_y = 0.0;
-
 		data->plane.x = 0.0;
 		data->plane.y = -0.66;
-
 	}
-	else if (map[i][j] == 'E')
-	{
-
-		data->player.dir_x = 0.0;
-		data->player.dir_y = 1.0;
-
-		data->plane.x = 0.66;
-		data->plane.y = 0.0;
-
-	}
-	else if (map[i][j] == 'W')
-	{
-		data->player.dir_x = 0.0;
-		data->player.dir_y = -1.0;
-
-		data->plane.x = -0.66;
-		data->plane.y = 0.0;
-	}	
+	else
+		get_player_info_cont(i, j, map, data);
 	return (EXIT_SUCCESS);
 }
 
@@ -326,7 +319,6 @@ void	ft_free_all(t_data *data)
 	if (data->mapinfo->file)
 		free(data->mapinfo->file);
 	free(data->mapinfo);
-	// free(data->player);	
 }
 
 int main(int argc, char **argv)
@@ -334,12 +326,8 @@ int main(int argc, char **argv)
 	t_data data;
 
 	data = (t_data){0};
-	
 	data.mapinfo = (t_mapinfo *){0};
-
 	data.mapinfo = malloc(sizeof(t_mapinfo));
-	// data.player = malloc(sizeof(t_thing));
-	
 
 	if (parse_args(argc, argv))
 	{
