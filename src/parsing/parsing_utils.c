@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:11:43 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 17:10:05 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:15:46 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	print_info(t_data *data)
 	printf("\n");
 
 	// int i = 0;
-	// while (data.mapinfo.map[i])
+	// while (data.cmap[i])
 	// {
-	// 	printf("%s\n", data.mapinfo.map[i]);
+	// 	printf("%s\n", data.cmap[i]);
 	// 	i++;
 	// }
 	

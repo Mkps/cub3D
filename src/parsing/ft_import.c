@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:06:47 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 17:10:42 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:16:02 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ int	ft_import(char **argv, t_data *data)
 		ft_mlx_exit(data, EXIT_FAILURE);
 	if (check_paths(&data->mapinfo) == EXIT_FAILURE)
 		ft_mlx_exit(data, EXIT_FAILURE);
-	if (check_map_is_valid(data->mapinfo.map, data) == EXIT_FAILURE)
+	if (check_map_is_valid(data->cmap, data) == EXIT_FAILURE)
 		return (ft_exit_cleanup(data, EXIT_FAILURE));
-    if (search_player(data->mapinfo.map, data))
+    if (search_player(data->cmap, data))
         return (EXIT_FAILURE);
     print_info(data);
 	if (map_convert(data) == EXIT_FAILURE)

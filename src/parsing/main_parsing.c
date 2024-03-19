@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 17:09:55 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:19:22 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,20 +142,20 @@ int	fill_map_line(int *i, char *file, t_data *data)
 {
 	static int line = 0;
 
-	data->mapinfo.map[line] = malloc(sizeof(char) * data->mapinfo.width + 1);
+	data->cmap[line] = ft_calloc(sizeof(char), data->mapinfo.width + 1);
 	
 	int j = 0;
 	while (file[j] && file[j] != '\n')
 	{
-		data->mapinfo.map[line][j] = file[j];
+		data->cmap[line][j] = file[j];
 		++j;
 	}
 	while (j < data->mapinfo.width)
 	{
-		data->mapinfo.map[line][j] = ' ';
+		data->cmap[line][j] = ' ';
 		++j;
 	}
-	data->mapinfo.map[line][j] = '\0';
+	data->cmap[line][j] = '\0';
 	*i += ft_strlen_eol(file) + 1;
 	line++;
 	return (line);
@@ -171,9 +171,7 @@ int	parse_file(char *file_name, t_data *data)
 	data->checklist = (t_checklist){0};
 	i = 0;
 
-	data->mapinfo.map = malloc(sizeof(char *) * data->mapinfo.height + 1);
-	data->mapinfo.map[0] = NULL;
-	
+	data->cmap = ft_calloc(sizeof(char *), data->mapinfo.height + 1);
 	while (data->mapinfo.file[i])
 	{
 		if (ft_isprint(data->mapinfo.file[i]) && !ft_isdigit(data->mapinfo.file[i]))
@@ -269,7 +267,7 @@ int check_map_is_valid(char **map, t_data *data)
 {
 	(void)map;
 	if (data->mapinfo.width < 3 || data->mapinfo.height < 3
-		|| check_map_is_closed(data->mapinfo.map, data))
+		|| check_map_is_closed(data->cmap, data))
 	{
 		printf("%s", MAP_ERROR);
 		return (EXIT_FAILURE);
@@ -296,16 +294,16 @@ void	ft_free_all(t_data *data)
 	ft_free_textures(data);
 
 	i = 0;
-	if (data->mapinfo.map[0])
+	if (data->cmap[0])
 	{	
 		while (i < data->mapinfo.height)
 		{
-			free(data->mapinfo.map[i]);
+			free(data->cmap[i]);
 			++i;
 		}
 	}
-	if (data->mapinfo.map)
-		free(data->mapinfo.map);
+	if (data->cmap)
+		free(data->cmap);
 	if (data->mapinfo.file)
 		free(data->mapinfo.file);
 }
@@ -319,9 +317,9 @@ int main(int argc, char **argv, t_data *data)
 		return (EXIT_FAILURE);
 	if (check_paths(data->mapinfo))
 		return (EXIT_FAILURE);
-	if (check_map_is_valid(data->mapinfo.map, data))
+	if (check_map_is_valid(data->cmap, data))
 		return (EXIT_FAILURE);
-	if (search_player(data->mapinfo.map, data))
+	if (search_player(data->cmap, data))
 		return (EXIT_FAILURE);
 	print_info(data);
 	ft_free_all(data);
