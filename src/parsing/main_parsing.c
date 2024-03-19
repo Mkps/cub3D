@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 17:24:32 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:30:06 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ int	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 	j = 0;
 	while (j < nb_whitespaces)
 	{
-		data->mapinfo->map[line][j] = ' ';		
+		data->cmap[line][j] = ' ';		
 		++j;
 	}
 	j = 0;
@@ -188,9 +188,15 @@ int	parse_file(char *file_name, t_data *data)
 	data->checklist = (t_checklist){0};
 	i = 0;
 
+	nb_whitespaces = 0;
 	data->cmap = ft_calloc(sizeof(char *), data->mapinfo.height + 1);
 	while (data->mapinfo.file[i])
 	{
+		while (is_whitespace(data->mapinfo.file[i]))
+		{
+			++nb_whitespaces;
+			++i;
+		}
 		if (ft_isprint(data->mapinfo.file[i]) && !ft_isdigit(data->mapinfo.file[i]))
 		{
 			if (parse_cardinal_pt(&i, data->mapinfo.file, data))
@@ -202,7 +208,7 @@ int	parse_file(char *file_name, t_data *data)
 			i += ft_strlen_eol(data->mapinfo.file + i) + 1;
 		}
 		else if (ft_isdigit(data->mapinfo.file[i]))
-			nb_lines = fill_map_line(&i, data->mapinfo.file + i, data);
+			nb_lines = fill_map_line(nb_whitespaces, &i, data->mapinfo.file + i, data);
 		else
 			i++;
 	}
