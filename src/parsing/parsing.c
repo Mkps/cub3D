@@ -6,24 +6,13 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:06:05 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 11:44:14 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:06:12 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "main_parsing.h"
 
+#include "../../include/cub3d.h"
 
-// # include <stdio.h>
-// # include <stdlib.h>
-// # include <unistd.h>
-// # include <X11/X.h>
-// # include <X11/keysym.h>
-// # include <math.h>
-// # include <sys/stat.h>
-// # include <fcntl.h>
-
-#include "../../include/parsing.h"
-#include "../../libft/libft.h"
 
 // int get_map_nb_lines(char **map)
 // {

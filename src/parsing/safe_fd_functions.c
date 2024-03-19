@@ -6,12 +6,12 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:15 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 11:44:17 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:06:15 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parsing.h"
-#include "../../libft/libft.h"
+#include "../../include/cub3d.h"
+
 
 int safe_open(char *file_name)
 {

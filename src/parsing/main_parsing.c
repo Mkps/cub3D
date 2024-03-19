@@ -6,16 +6,16 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 11:44:04 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:05:58 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parsing.h"
-#include "../../libft/libft.h"
+#include "../../include/cub3d.h"
 
-uint32_t ft_rgb_to_uint32(int red, int green, int blue)
+
+int ft_rgb_to_int(int red, int green, int blue)
 {
-    return ((uint32_t)red << 16) | ((uint32_t)green << 8) | blue;
+    return ((int)red << 16) | ((int)green << 8) | blue;
 }
 
 int get_file_content(char *file_name, t_data *data)
@@ -178,7 +178,6 @@ int	parse_file(char *file_name, t_data *data)
 	get_file_content(file_name, data);
 
 	data->checklist = (t_checklist){0};
-	// data->mapinfo->map = (char **){0};
 	i = 0;
 
 	data->mapinfo->map = malloc(sizeof(char *) * data->mapinfo->height + 1);
@@ -223,36 +222,56 @@ int	get_player_info(char **map, t_data *data)
 				if (data->checklist.check_dir == 1)
 					return (print_error(DUPLICATE_ERROR));
 				data->checklist.check_dir = 1;
-				data->player->dir = NORTH;
-				data->player->x = i + 0.5;
-				data->player->y = j + 0.5;
+				data->player.dir_x = -1.0;
+				data->player.dir_y = 0.0;
+				
+				data->plane.x = 0.0;
+				data->plane.y = 0.66;
+				
+				data->player.pos_x = i + 0.5;
+				data->player.pos_y = j + 0.5;
 			}
 			else if (map[i][j] == 'S')
 			{
 				if (data->checklist.check_dir == 1)
 					return (print_error(DUPLICATE_ERROR));
 				data->checklist.check_dir = 1;
-				data->player->dir = SOUTH;
-				data->player->x = i + 0.5;
-				data->player->y = j + 0.5;
+				data->player.dir_x = 1.0;
+				data->player.dir_y = 0.0;
+
+				data->plane.x = 0.0;
+				data->plane.y = -0.66;
+
+				data->player.pos_x = i + 0.5;
+				data->player.pos_y = j + 0.5;
 			}
 			else if (map[i][j] == 'E')
 			{
 				if (data->checklist.check_dir == 1)
 					return (print_error(DUPLICATE_ERROR));
 				data->checklist.check_dir = 1;
-				data->player->dir = EAST;
-				data->player->x = i + 0.5;
-				data->player->y = j + 0.5;
+				data->player.dir_x = 0.0;
+				data->player.dir_y = 1.0;
+
+				data->plane.x = 0.66;
+				data->plane.y = 0.0;
+
+				data->player.pos_x = i + 0.5;
+				data->player.pos_y = j + 0.5;
 			}
 			else if (map[i][j] == 'W')
 			{
 				if (data->checklist.check_dir == 1)
 					return (print_error(DUPLICATE_ERROR));
 				data->checklist.check_dir = 1;
-				data->player->dir = WEST;
-				data->player->x = i + 0.5;
-				data->player->y = j + 0.5;
+				data->player.dir_x = 0.0;
+				data->player.dir_y = -1.0;
+
+				data->plane.x = -0.66;
+				data->plane.y = 0.0;
+
+				data->player.pos_x = i + 0.5;
+				data->player.pos_y = j + 0.5;
 			}
 			j++;
 		}
@@ -317,7 +336,7 @@ void	ft_free_all(t_data *data)
 	if (data->mapinfo->file)
 		free(data->mapinfo->file);
 	free(data->mapinfo);
-	free(data->player);	
+	// free(data->player);	
 }
 
 int main(int argc, char **argv)
@@ -329,7 +348,7 @@ int main(int argc, char **argv)
 	data.mapinfo = (t_mapinfo *){0};
 
 	data.mapinfo = malloc(sizeof(t_mapinfo));
-	data.player = malloc(sizeof(t_player));
+	// data.player = malloc(sizeof(t_thing));
 	
 
 	if (parse_args(argc, argv))
