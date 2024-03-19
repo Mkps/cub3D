@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:42:54 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 12:20:47 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:01:52 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void	move_forward(t_data *data)
 
 	m_x = data->player.pos_x + data->player.dir_x * 3 * MS;
 	m_y = data->player.pos_y + data->player.dir_y * 3 * MS;
-	if (m_x < 0.25 || m_x > data->m_data.height - 0.25
-		|| m_y < 0.25 || m_y > data->m_data.width - 0.25)
+	if (m_x < 0.25 || m_x > data->mapinfo.height - 0.25
+		|| m_y < 0.25 || m_y > data->mapinfo.width - 0.25)
 		return ;
 	map.x = data->map[(int)m_x][(int)(data->player.pos_y)];
 	map.y = data->map[(int)(data->player.pos_x)][(int)m_y];
@@ -42,8 +42,8 @@ static void	move_backward(t_data *data)
 
 	m_x = data->player.pos_x - data->player.dir_x * 3 * MS;
 	m_y = data->player.pos_y - data->player.dir_y * 3 * MS;
-	if (m_x < 0.25 || m_x > data->m_data.height - 0.25
-		|| m_y < 0.25 || m_y > data->m_data.width - 0.25)
+	if (m_x < 0.25 || m_x > data->mapinfo.height - 0.25
+		|| m_y < 0.25 || m_y > data->mapinfo.width - 0.25)
 		return ;
 	map.x = data->map[(int)m_x][(int)(data->player.pos_y)];
 	map.y = data->map[(int)(data->player.pos_x)][(int)m_y];
@@ -61,8 +61,8 @@ static void	move_right(t_data *data)
 
 	m_x = data->player.pos_x + data->plane.x * 3 * MS;
 	m_y = data->player.pos_y + data->plane.y * 3 * MS;
-	if (m_x < 0.25 || m_x > data->m_data.height - 0.25
-		|| m_y < 0.25 || m_y > data->m_data.width - 0.25)
+	if (m_x < 0.25 || m_x > data->mapinfo.height - 0.25
+		|| m_y < 0.25 || m_y > data->mapinfo.width - 0.25)
 		return ;
 	map.x = data->map[(int)m_x][(int)(data->player.pos_y)];
 	map.y = data->map[(int)(data->player.pos_x)][(int)m_y];
@@ -80,8 +80,8 @@ static void	move_left(t_data *data)
 
 	m_x = data->player.pos_x - data->plane.x * 3 * MS;
 	m_y = data->player.pos_y - data->plane.y * 3 * MS;
-	if (m_x < 0.25 || m_x > data->m_data.height - 0.25
-		|| m_y < 0.25 || m_y > data->m_data.width - 0.25)
+	if (m_x < 0.25 || m_x > data->mapinfo.height - 0.25
+		|| m_y < 0.25 || m_y > data->mapinfo.width - 0.25)
 		return ;
 	map.x = data->map[(int)m_x][(int)(data->player.pos_y)];
 	map.y = data->map[(int)(data->player.pos_x)][(int)m_y];

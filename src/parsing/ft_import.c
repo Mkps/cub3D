@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_import.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:06:47 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 14:05:20 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:10:42 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ static void	print_map(t_data *data)
 	int	j;
 
 	i = -1;
-	while (++i < data->m_data.height)
+	while (++i < data->mapinfo.height)
 	{
 		j = -1;
-		while (++j < data->m_data.width)
+		while (++j < data->mapinfo.width)
 		{
 			if (data->map[i][j] == -42)
 				printf("|x|");
@@ -69,12 +69,12 @@ int	map_alloc(t_data *data)
 	int	i;
 
 	i = -1;
-	data->map = malloc(sizeof (int *) * data->m_data.height);
+	data->map = malloc(sizeof (int *) * data->mapinfo.height);
 	if (!data->map)
 		return (output_error(NULL, "Failed to malloc int map", 1));
-	while (++i < data->m_data.height)
+	while (++i < data->mapinfo.height)
 	{
-		data->map[i] = malloc(sizeof(int) * data->m_data.width);
+		data->map[i] = malloc(sizeof(int) * data->mapinfo.width);
 		if (!data->map[i])
 		{
 			free_map(data, i);
@@ -97,7 +97,7 @@ int	map_convert(t_data *data)
 		j = -1;
 		while (data->cmap[i][++j])
 			data->map[i][j] = chr_convert(data->cmap[i][j]);
-		while (j < data->m_data.width)
+		while (j < data->mapinfo.width)
 		{
 			data->map[i][j] = -42;
 			j++;
@@ -110,11 +110,11 @@ int	ft_import(char **argv, t_data *data)
 {
 	if (parse_file(argv[1], data) == EXIT_FAILURE)
 		ft_mlx_exit(data, EXIT_FAILURE);
-	if (check_paths(data->mapinfo) == EXIT_FAILURE)
+	if (check_paths(&data->mapinfo) == EXIT_FAILURE)
 		ft_mlx_exit(data, EXIT_FAILURE);
-	if (check_map_is_valid(data->mapinfo->map, data) == EXIT_FAILURE)
+	if (check_map_is_valid(data->mapinfo.map, data) == EXIT_FAILURE)
 		return (ft_exit_cleanup(data, EXIT_FAILURE));
-    if (search_player(data->mapinfo->map, data))
+    if (search_player(data->mapinfo.map, data))
         return (EXIT_FAILURE);
     print_info(data);
 	if (map_convert(data) == EXIT_FAILURE)

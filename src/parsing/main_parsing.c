@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 16:43:30 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:09:55 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ int get_file_content(char *file_name, t_data *data)
 	data->fd = safe_open(file_name);
 	if (data->fd == -1)
 		return (EXIT_FAILURE);
-	data->mapinfo->file = ft_strdup("\0");
-	data->mapinfo->file_size = 0;
-	data->mapinfo->file_nb_lines = 0;
+	data->mapinfo.file = ft_strdup("\0");
+	data->mapinfo.file_size = 0;
+	data->mapinfo.file_nb_lines = 0;
 	line = get_next_line(data->fd);
 	max_width = ft_strlen(line);
 	map_height = 0;
 	while (line)
 	{
-		data->mapinfo->file = ft_strjoin_and_free(data->mapinfo->file, line);
-		data->mapinfo->file_size += ft_strlen(line);
+		data->mapinfo.file = ft_strjoin_and_free(data->mapinfo.file, line);
+		data->mapinfo.file_size += ft_strlen(line);
 		if (ft_isdigit(line[0]))
 			++map_height;
 		free(line);
@@ -47,8 +47,8 @@ int get_file_content(char *file_name, t_data *data)
 			max_width = line_len;
 	}
 	safe_close(data->fd);
-	data->mapinfo->width = max_width;
-	data->mapinfo->height = map_height;
+	data->mapinfo.width = max_width;
+	data->mapinfo.height = map_height;
 	return (EXIT_SUCCESS);
 }
 
@@ -70,7 +70,7 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 			return (print_error(SYNTAX_ERROR));
 		while (file[*i] == ' ')
 			++(*i);
-		data->mapinfo->no_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
+		data->mapinfo.no_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
 	}
 	else if (file[*i] == 'S' && file[*i + 1] && file[*i + 1] == 'O')
 	{
@@ -82,7 +82,7 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 			return (print_error(SYNTAX_ERROR));
 		while (file[*i] == ' ')
 			++(*i);
-		data->mapinfo->so_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
+		data->mapinfo.so_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
 	}
 
 	else if (file[*i] == 'W' && file[*i + 1] && file[*i + 1] == 'E')
@@ -97,7 +97,7 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 		while (file[*i] == ' ')
 			++(*i);
 		
-		data->mapinfo->we_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
+		data->mapinfo.we_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
 		
 	}
 	else if (file[*i] == 'E' && file[*i + 1] && file[*i + 1] == 'A')
@@ -110,7 +110,7 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 			return (print_error(SYNTAX_ERROR));
 		while (file[*i] == ' ')
 			++(*i);
-		data->mapinfo->ea_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
+		data->mapinfo.ea_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
 		
 	}
 	return (EXIT_SUCCESS);	
@@ -142,20 +142,20 @@ int	fill_map_line(int *i, char *file, t_data *data)
 {
 	static int line = 0;
 
-	data->mapinfo->map[line] = malloc(sizeof(char) * data->mapinfo->width + 1);
+	data->mapinfo.map[line] = malloc(sizeof(char) * data->mapinfo.width + 1);
 	
 	int j = 0;
 	while (file[j] && file[j] != '\n')
 	{
-		data->mapinfo->map[line][j] = file[j];
+		data->mapinfo.map[line][j] = file[j];
 		++j;
 	}
-	while (j < data->mapinfo->width)
+	while (j < data->mapinfo.width)
 	{
-		data->mapinfo->map[line][j] = ' ';
+		data->mapinfo.map[line][j] = ' ';
 		++j;
 	}
-	data->mapinfo->map[line][j] = '\0';
+	data->mapinfo.map[line][j] = '\0';
 	*i += ft_strlen_eol(file) + 1;
 	line++;
 	return (line);
@@ -171,23 +171,23 @@ int	parse_file(char *file_name, t_data *data)
 	data->checklist = (t_checklist){0};
 	i = 0;
 
-	data->mapinfo->map = malloc(sizeof(char *) * data->mapinfo->height + 1);
-	data->mapinfo->map[0] = NULL;
+	data->mapinfo.map = malloc(sizeof(char *) * data->mapinfo.height + 1);
+	data->mapinfo.map[0] = NULL;
 	
-	while (data->mapinfo->file[i])
+	while (data->mapinfo.file[i])
 	{
-		if (ft_isprint(data->mapinfo->file[i]) && !ft_isdigit(data->mapinfo->file[i]))
+		if (ft_isprint(data->mapinfo.file[i]) && !ft_isdigit(data->mapinfo.file[i]))
 		{
-			if (parse_cardinal_pt(&i, data->mapinfo->file, data))
+			if (parse_cardinal_pt(&i, data->mapinfo.file, data))
 				return (EXIT_FAILURE);
 
-			if (parse_rgb(&i, data->mapinfo->file, data))
+			if (parse_rgb(&i, data->mapinfo.file, data))
 				return (EXIT_FAILURE);
 				
-			i += ft_strlen_eol(data->mapinfo->file + i) + 1;
+			i += ft_strlen_eol(data->mapinfo.file + i) + 1;
 		}
-		else if (ft_isdigit(data->mapinfo->file[i]))
-			nb_lines = fill_map_line(&i, data->mapinfo->file + i, data);
+		else if (ft_isdigit(data->mapinfo.file[i]))
+			nb_lines = fill_map_line(&i, data->mapinfo.file + i, data);
 		else
 			i++;
 	}
@@ -245,7 +245,7 @@ int	search_player(char **map, t_data *data)
 
 	i = 0;
 	data->checklist = (t_checklist){0};
-	while (i < data->mapinfo->height)
+	while (i < data->mapinfo.height)
 	{
 		j = 0;
 		while (map[i][j])
@@ -268,8 +268,8 @@ int	search_player(char **map, t_data *data)
 int check_map_is_valid(char **map, t_data *data)
 {
 	(void)map;
-	if (data->mapinfo->width < 3 || data->mapinfo->height < 3
-		|| check_map_is_closed(data->mapinfo->map, data))
+	if (data->mapinfo.width < 3 || data->mapinfo.height < 3
+		|| check_map_is_closed(data->mapinfo.map, data))
 	{
 		printf("%s", MAP_ERROR);
 		return (EXIT_FAILURE);
@@ -279,14 +279,14 @@ int check_map_is_valid(char **map, t_data *data)
 
 void	ft_free_textures(t_data *data)
 {
-	if (data->mapinfo->no_texture)
-		free(data->mapinfo->no_texture);
-	if (data->mapinfo->so_texture)
-		free(data->mapinfo->so_texture);
-	if (data->mapinfo->ea_texture)
-		free(data->mapinfo->ea_texture);
-	if (data->mapinfo->we_texture)
-		free(data->mapinfo->we_texture);	
+	if (data->mapinfo.no_texture)
+		free(data->mapinfo.no_texture);
+	if (data->mapinfo.so_texture)
+		free(data->mapinfo.so_texture);
+	if (data->mapinfo.ea_texture)
+		free(data->mapinfo.ea_texture);
+	if (data->mapinfo.we_texture)
+		free(data->mapinfo.we_texture);	
 }
 
 void	ft_free_all(t_data *data)
@@ -296,18 +296,18 @@ void	ft_free_all(t_data *data)
 	ft_free_textures(data);
 
 	i = 0;
-	if (data->mapinfo->map[0])
+	if (data->mapinfo.map[0])
 	{	
-		while (i < data->mapinfo->height)
+		while (i < data->mapinfo.height)
 		{
-			free(data->mapinfo->map[i]);
+			free(data->mapinfo.map[i]);
 			++i;
 		}
 	}
-	if (data->mapinfo->map)
-		free(data->mapinfo->map);
-	if (data->mapinfo->file)
-		free(data->mapinfo->file);
+	if (data->mapinfo.map)
+		free(data->mapinfo.map);
+	if (data->mapinfo.file)
+		free(data->mapinfo.file);
 }
 //	free(data.mapinfo);
 	// free(data->player);	
@@ -319,9 +319,9 @@ int main(int argc, char **argv, t_data *data)
 		return (EXIT_FAILURE);
 	if (check_paths(data->mapinfo))
 		return (EXIT_FAILURE);
-	if (check_map_is_valid(data->mapinfo->map, data))
+	if (check_map_is_valid(data->mapinfo.map, data))
 		return (EXIT_FAILURE);
-	if (search_player(data->mapinfo->map, data))
+	if (search_player(data->mapinfo.map, data))
 		return (EXIT_FAILURE);
 	print_info(data);
 	ft_free_all(data);

@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:11:43 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 16:06:46 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:10:05 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,25 @@ int ft_strlen_eol(char *str)
 
 void	print_info(t_data *data)
 {
-	printf("%s\n", data->mapinfo->no_texture);
-	printf("%s\n", data->mapinfo->so_texture);
-	printf("%s\n", data->mapinfo->ea_texture);
-	printf("%s\n", data->mapinfo->we_texture);
+	printf("%s\n", data->mapinfo.no_texture);
+	printf("%s\n", data->mapinfo.so_texture);
+	printf("%s\n", data->mapinfo.ea_texture);
+	printf("%s\n", data->mapinfo.we_texture);
 
 
 	printf("\n");
 
 
-	printf("%d\n", data->mapinfo->c_color);
-	printf("%d\n", data->mapinfo->f_color);
+	printf("%d\n", data->mapinfo.c_color);
+	printf("%d\n", data->mapinfo.f_color);
 
 
 	printf("\n");
 
 	// int i = 0;
-	// while (data.mapinfo->map[i])
+	// while (data.mapinfo.map[i])
 	// {
-	// 	printf("%s\n", data.mapinfo->map[i]);
+	// 	printf("%s\n", data.mapinfo.map[i]);
 	// 	i++;
 	// }
 	

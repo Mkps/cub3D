@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:42:45 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 12:20:47 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:01:52 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	get_mmap_color(t_data *data, int x, int y)
 {
 	int		color;
 
-	if (x < 0 || x >= data->m_data.height || y < 0 || y >= data->m_data.width)
+	if (x < 0 || x >= data->mapinfo.height || y < 0 || y >= data->mapinfo.width)
 		return (0xFF00FF);
 	if (data->map[x][y] == -42)
 		color = 0xFF00FF;

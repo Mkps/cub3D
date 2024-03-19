@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:06:05 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 16:06:46 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:10:55 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	get_map_width(char **map, t_data *data)
 
 	i = 0;
 	width = 0;
-	height = data->mapinfo->height;
+	height = data->mapinfo.height;
 	while (i < height)
 	{
 		j = 0;
@@ -53,7 +53,7 @@ int check_upper_wall(char **map, t_data *data)
 	int height;
 
 	j = 0;
-	height = data->mapinfo->height;
+	height = data->mapinfo.height;
 	while (map[0][j])
 	{
 		if (map[0][j] != '1' && map[0][j] != ' ')
@@ -84,7 +84,7 @@ int check_bottom_wall(char **map, t_data *data)
 	int j;
 	int end;
 
-	end = data->mapinfo->height - 1;
+	end = data->mapinfo.height - 1;
 	j = 0;
 	while (map[end][j])
 	{
@@ -120,7 +120,7 @@ int check_left_wall(char **map, t_data *data)
 
 	i = 0;
 	j = 0;
-	height = data->mapinfo->height;
+	height = data->mapinfo.height;
 	while (i < height && map[i][j])
 	{
 		j = 0;
@@ -152,8 +152,8 @@ int check_right_wall(char **map, t_data *data)
 	int	height;
 	int	width;
 
-	width = data->mapinfo->width;
-	height = data->mapinfo->height;
+	width = data->mapinfo.width;
+	height = data->mapinfo.height;
 	i = 0;
 	j = width - 2;
 
