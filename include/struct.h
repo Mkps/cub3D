@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:44:06 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/11 14:42:35 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:24:27 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,14 +161,7 @@ typedef struct s_world
 typedef struct s_data
 {
 	void		*mlx;
-	int			sprite_count;
-	t_sprite	*sprite;
-	t_xpm		t;
 	t_world		world;
-	t_xpm		barrel;
-	t_xpm		light;
-	t_xpm		pillar;
-	t_sprite	anim;
 	char		**cmap;
 	int			**map;
 	void		*w_ptr;
