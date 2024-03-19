@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:06:05 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 14:06:12 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:06:46 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int check_upper_wall(char **map, t_data *data)
 			++i;
 			if (i < height)
 			{
-				if (map[i][j] 
-					&& (map[i][j] != ' ' && map[i][j] != '1')
+				if ((map[i][j] 
+					&& (map[i][j] != ' ' && map[i][j] != '1'))
 					|| ((map[i][j] && map[i][j] != '1' && map[i][j + 1] && map[i][j + 1] != '1' && map[i][j + 1] != ' ')
 					|| (map[i][j] && map[i][j] != '1' && map[i][j - 1] && map[i][j - 1] != '1' && map[i][j - 1] != ' ')))
 						return (-1);
@@ -99,8 +99,8 @@ int check_bottom_wall(char **map, t_data *data)
 			if (i >= 0)
 			{
 				//CHECK SEGFAULT DANS LE CAS OU MAP[I][J - 1] OU MAP[I][J + 1] N'EXISTENT PAS
-				if (map[i][j] 
-					&& (map[i][j] != ' ' && map[i][j] != '1')
+				if ((map[i][j] 
+					&& (map[i][j] != ' ' && map[i][j] != '1'))
 					|| ((map[i][j] && map[i][j] != '1' && map[i][j + 1] && map[i][j + 1] != '1' && map[i][j + 1] != ' ')
 					|| (map[i][j] && map[i][j] != '1' && map[i][j - 1] && map[i][j - 1] != '1' && map[i][j - 1] != ' ')))
 						return (-1);

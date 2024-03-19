@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:43:51 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 12:20:09 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:43:53 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,20 @@ int	ft_exit_cleanup(t_data *data, int exit_code)
 	if (BONUS == 2)
 		destroy_sprite(data);
 	return (exit_code);
+}
+
+void	free_tab(void **tab)
+{
+	int	i;
+
+	i = -1;
+	while (tab[++i])
+		free(tab[i]);
+	if (tab)
+	{
+		free(tab);
+		tab = NULL;
+	}
 }
 
 void	destroy_map(t_data *data)

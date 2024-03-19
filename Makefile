@@ -33,13 +33,9 @@ SRC_NAME =	main.c \
 			parsing/init_data.c \
 			parsing/parsing.c \
 			parsing/utils.c \
-			parsing/main_.c \
 			render/hooks.c \
 			render/raycast_wall.c \
-			render/raycast_sprite_sort.c \
 			render/exit.c \
-			render/raycast_sprite_init.c \
-			render/raycast_sprite.c \
 			render/render.c \
 			render/img_init.c \
 			render/color_utils.c \
