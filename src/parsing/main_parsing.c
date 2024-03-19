@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 17:06:27 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:19:41 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,13 +138,20 @@ int parse_rgb(int *i, char *file, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-int	fill_map_line(int *i, char *file, t_data *data)
+int	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 {
 	static int line = 0;
+	int j;
 
 	data->mapinfo->map[line] = malloc(sizeof(char) * data->mapinfo->width + 1);
 	
-	int j = 0;
+	j = 0;
+	while (j < nb_whitespaces)
+	{
+		data->mapinfo->map[line][j] = ' ';		
+		++j;
+	}
+	j = 0;
 	while (file[j] && file[j] != '\n')
 	{
 		data->mapinfo->map[line][j] = file[j];
@@ -173,6 +180,7 @@ int is_whitespace(char c)
 int	parse_file(char *file_name, t_data *data)
 {
 	int	i;
+	int nb_whitespaces;
 	int nb_lines;
 		
 	get_file_content(file_name, data);
@@ -183,10 +191,14 @@ int	parse_file(char *file_name, t_data *data)
 	data->mapinfo->map = malloc(sizeof(char *) * data->mapinfo->height + 1);
 	data->mapinfo->map[0] = NULL;
 	
+	nb_whitespaces = 0;
 	while (data->mapinfo->file[i])
 	{
 		while (is_whitespace(data->mapinfo->file[i]))
-			i++;
+		{
+			++i;
+			++nb_whitespaces;
+		}
 		if (ft_isprint(data->mapinfo->file[i]) && !ft_isdigit(data->mapinfo->file[i]))
 		{
 			if (parse_cardinal_pt(&i, data->mapinfo->file, data))
@@ -198,7 +210,7 @@ int	parse_file(char *file_name, t_data *data)
 			i += ft_strlen_eol(data->mapinfo->file + i) + 1;
 		}
 		else if (ft_isdigit(data->mapinfo->file[i]))
-			nb_lines = fill_map_line(&i, data->mapinfo->file + i, data);
+			nb_lines = fill_map_line(nb_whitespaces, &i, data->mapinfo->file + i, data);
 		else
 			i++;
 	}
