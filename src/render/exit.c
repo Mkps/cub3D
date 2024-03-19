@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:43:51 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 15:43:53 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:01:52 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	destroy_map(t_data *data)
 	x = -1;
 	if (data->map)
 	{
-		while (++x < data->m_data.height)
+		while (++x < data->mapinfo.height)
 		{
 			free(data->map[x]);
 		}
@@ -53,10 +53,10 @@ void	destroy_map(t_data *data)
 			free(data->cmap[x]);
 		free(data->cmap);
 	}
-	if (data->m_data.fd > 0)
-		close(data->m_data.fd);
-	if (data->m_data.file)
-		free_tab((void **)data->m_data.file);
+	if (data->mapinfo.fd > 0)
+		close(data->mapinfo.fd);
+	if (data->mapinfo.file)
+		free_tab((void **)data->mapinfo.file);
 	if (data->map)
 		free(data->map);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:10:45 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 16:24:40 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:01:52 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	init_world(t_data *data)
 	data->world.f_color = -3;
 	data->map = NULL;
 	data->cmap = NULL;
-	data->m_data.fd = -1;
-	data->m_data.file = NULL;
-	data->m_data.has_door = 0;
+	data->mapinfo.fd = -1;
+	data->mapinfo.file = NULL;
+	data->mapinfo.has_door = 0;
 }
 
 static void	zero_data(t_data *data)
@@ -44,7 +44,6 @@ static void	zero_data(t_data *data)
 	data->img_a.img = NULL;
 	data->cmap = NULL;
 	data->map = NULL;
-    data->mapinfo = malloc(sizeof (t_mapinfo));
 }
 
 int	ft_data_init_mlx(t_data *data)

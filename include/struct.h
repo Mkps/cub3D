@@ -82,6 +82,11 @@ typedef struct s_mapinfo
     int f_color; //floor
     int c_color; //ceiling
 
+	int			fd;
+	int			line_count;
+	char		*path;
+	int			eom;
+	int			has_door;
 
 } t_mapinfo;
 
@@ -211,7 +216,7 @@ typedef struct s_data
     char 		*file;
     size_t 		file_size;
     int 		fd;
-    t_mapinfo 	*mapinfo;
+    t_mapinfo 	mapinfo;
     t_checklist checklist;
 
 	void		*mlx;
@@ -231,7 +236,6 @@ typedef struct s_data
 	t_keys		keys;
 	t_thing		player;
 	t_window	w_data;
-	t_mdata		m_data;
 	double		*z_buffer;
 	int			mouselook_on;
 }	t_data;

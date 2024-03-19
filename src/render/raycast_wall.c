@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:43:29 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 12:09:17 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:01:52 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	init_wall(t_data *data, t_ray_data ray, t_wall *t)
 	t->draw.y = (double)t->line_h / 2 + (double)t->h / 2;
 	if (t->draw.y >= t->h)
 		t->draw.y = t->h - 1;
-	if (ray.map.x < 0 || ray.map.x > data->m_data.height
-		|| ray.map.y < 0 || ray.map.y > data->m_data.width)
+	if (ray.map.x < 0 || ray.map.x > data->mapinfo.height
+		|| ray.map.y < 0 || ray.map.y > data->mapinfo.width)
 		t->tex_num = 0;
 	else
 		t->tex_num = data->map[(int)ray.map.x][(int)ray.map.y];
@@ -61,8 +61,8 @@ static int	is_oob(t_ray_data *r, t_data *data)
 {
 	if (r->map.y < 0.25
 		|| r->map.x < 0.25
-		|| r->map.y > data->m_data.width - 0.25
-		|| r->map.x > data->m_data.height - 0.25)
+		|| r->map.y > data->mapinfo.width - 0.25
+		|| r->map.x > data->mapinfo.height - 0.25)
 		return (1);
 	return (0);
 }

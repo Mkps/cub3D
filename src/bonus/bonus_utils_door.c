@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 14:36:00 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 12:20:47 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:01:52 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	valid_mapchr(t_data *data, char c)
 	if (BONUS == 1)
 	{
 		if (!(ft_strchr("D", c)))
-			data->m_data.has_door = 1;
+			data->mapinfo.has_door = 1;
 		if (!(ft_strchr("10NSEWD", c)))
 			return (0);
 		return (1);
@@ -42,9 +42,9 @@ void	destroy_door(t_data *data)
 
 void	door_check(t_data *data, char c)
 {
-	if (c != '\0' && ft_strchr("D", c) && !data->m_data.has_door \
+	if (c != '\0' && ft_strchr("D", c) && !data->mapinfo.has_door \
 		&& BONUS > 0)
-		data->m_data.has_door = 1;
+		data->mapinfo.has_door = 1;
 }
 
 void	close_door(t_data *d, int map_x, int map_y)
