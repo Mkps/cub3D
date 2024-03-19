@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+         #
+#    By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 12:58:01 by aloubier          #+#    #+#              #
-#    Updated: 2024/03/11 14:07:35 by aloubier         ###   ########.fr        #
+#    Updated: 2024/03/19 16:44:24 by rraffi-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ SRC_NAME =	main.c \
 SRC = $(addprefix $(SRCDIR)/, $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_NAME:c=o))
 
-CC = cc
+CC = cc -g3
 
 LIB = -lft -lmlx -lXext -lX11 -lm
 

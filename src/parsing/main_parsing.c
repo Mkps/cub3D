@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 16:06:41 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:43:30 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 			++(*i);
 		data->mapinfo->no_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
 	}
-
 	else if (file[*i] == 'S' && file[*i + 1] && file[*i + 1] == 'O')
 	{
 		if (data->checklist.check_so)

@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:10:45 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 12:00:46 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:24:40 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	zero_data(t_data *data)
 	data->img_a.img = NULL;
 	data->cmap = NULL;
 	data->map = NULL;
-    data->mapinfo = malloc(sizeof (t_mapinfo *));
+    data->mapinfo = malloc(sizeof (t_mapinfo));
 }
 
 int	ft_data_init_mlx(t_data *data)
