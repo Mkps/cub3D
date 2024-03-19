@@ -44,6 +44,7 @@ static void	zero_data(t_data *data)
 	data->img_a.img = NULL;
 	data->cmap = NULL;
 	data->map = NULL;
+    data->mapinfo = malloc(sizeof (t_mapinfo *));
 }
 
 int	ft_data_init_mlx(t_data *data)

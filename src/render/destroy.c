@@ -6,24 +6,11 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:08:35 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 12:20:47 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:41:58 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-void	destroy_sprite(t_data *data)
-{
-	int	x;
-
-	x = -1;
-	while (++x < data->sprite_count)
-	{
-		mlx_destroy_image(data->mlx, data->sprite[x].animation[0].img.img);
-		free(data->sprite[x].animation);
-	}
-	free(data->sprite);
-}
 
 void	destroy_walls(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:42:50 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 12:20:47 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:44:44 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-unsigned int	ft_mlx_pixel_get(t_img *img, int x, int y)
+size_t	ft_mlx_pixel_get(t_img *img, int x, int y)
 {
 	char	*dst;
 

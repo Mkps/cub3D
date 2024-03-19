@@ -6,11 +6,11 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:12:26 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 12:20:47 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:42:20 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../include/cub3d.h"
 
 int	main(int argc, char **argv)
 {
@@ -25,7 +25,6 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	mlx_hook(data.w_ptr, 6, 1L << 6, ft_mlx_mouse_move, &data);
-	mlx_hook(data.w_ptr, 8, 1L << 5, ft_mlx_mouse_exit, &data);
 	mlx_mouse_hook(data.w_ptr, ft_mlx_mouse_hook, &data);
 	mlx_hook(data.w_ptr, 2, 1L << 0, ft_mlx_key_hook, &data);
 	mlx_key_hook(data.w_ptr, ft_keyup, &data);

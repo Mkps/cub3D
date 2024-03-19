@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 15:09:39 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:06:41 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 		while (file[*i] == ' ')
 			++(*i);
 		data->mapinfo->ea_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
+		
 	}
 	return (EXIT_SUCCESS);	
 }
@@ -265,19 +266,9 @@ int	search_player(char **map, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-
-int	parse_args(int argc, char **argv)
-{
-	if (argc != 2)
-	{
-		printf("%s", ARG_ERROR);
-		return (EXIT_FAILURE);		
-	}
-	return (EXIT_SUCCESS);
-}
-
 int check_map_is_valid(char **map, t_data *data)
 {
+	(void)map;
 	if (data->mapinfo->width < 3 || data->mapinfo->height < 3
 		|| check_map_is_closed(data->mapinfo->map, data))
 	{
@@ -318,53 +309,25 @@ void	ft_free_all(t_data *data)
 		free(data->mapinfo->map);
 	if (data->mapinfo->file)
 		free(data->mapinfo->file);
-	free(data->mapinfo);
 }
+//	free(data.mapinfo);
+	// free(data->player);	
 
-int main(int argc, char **argv)
+/**
+int main(int argc, char **argv, t_data *data)
 {
-	t_data data;
-
-	data = (t_data){0};
-	data.mapinfo = (t_mapinfo *){0};
-	data.mapinfo = malloc(sizeof(t_mapinfo));
-
-	if (parse_args(argc, argv))
-	{
-		ft_free_all(&data);
+	if (parse_file(argv[1], data))
 		return (EXIT_FAILURE);
-	}
-
-	if (parse_file(argv[1], &data))
-	{
-		ft_free_all(&data);
+	if (check_paths(data->mapinfo))
 		return (EXIT_FAILURE);
-	}
-
-	if (check_paths(data.mapinfo))
-	{
-		ft_free_all(&data);
+	if (check_map_is_valid(data->mapinfo->map, data))
 		return (EXIT_FAILURE);
-	}
-	
-
-	if (check_map_is_valid(data.mapinfo->map, &data))
-	{
-		ft_free_all(&data);
+	if (search_player(data->mapinfo->map, data))
 		return (EXIT_FAILURE);
-	}
-
-	if (search_player(data.mapinfo->map, &data))
-	{
-		ft_free_all(&data);
-		return (EXIT_FAILURE);
-	}
-	
 	print_info(data);
-
-	ft_free_all(&data);
-
+	ft_free_all(data);
 }
+**/
 
 // int	main(int argc, char **argv)
 // {

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+#include <stdlib.h>
 
 int	chr_convert(char c)
 {
@@ -107,16 +108,15 @@ int	map_convert(t_data *data)
 
 int	ft_import(char **argv, t_data *data)
 {
-	if (check_file(argv[1], 1) == EXIT_FAILURE)
+	if (parse_file(argv[1], data) == EXIT_FAILURE)
 		ft_mlx_exit(data, EXIT_FAILURE);
-	if (parse_data(argv[1], data) == EXIT_FAILURE)
+	if (check_paths(data->mapinfo) == EXIT_FAILURE)
 		ft_mlx_exit(data, EXIT_FAILURE);
-	if (get_file_data(data, data->m_data.file) == EXIT_FAILURE)
+	if (check_map_is_valid(data->mapinfo->map, data) == EXIT_FAILURE)
 		return (ft_exit_cleanup(data, EXIT_FAILURE));
-	if (check_map_validity(data, data->cmap) == EXIT_FAILURE)
-		return (ft_exit_cleanup(data, EXIT_FAILURE));
-	if (check_textures_validity(data, &data->world) == EXIT_FAILURE)
-		return (ft_exit_cleanup(data, EXIT_FAILURE));
+    if (search_player(data->mapinfo->map, data))
+        return (EXIT_FAILURE);
+    print_info(data);
 	if (map_convert(data) == EXIT_FAILURE)
 		return (ft_exit_cleanup(data, EXIT_FAILURE));
 	return (0);
