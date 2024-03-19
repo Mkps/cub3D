@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:44:10 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 16:12:28 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:12:04 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <fcntl.h>
 # include <aio.h>
 # include <stdlib.h>
-# include "../minilibx/mlx.h"
+// # include "../minilibx/mlx.h"
 
 
 typedef void (*	t_function_ptr)(t_data *data);
@@ -126,6 +126,8 @@ int     parse_file(char *str, t_data *data);
 int     check_map_is_valid(char **map, t_data *data);
 int     check_paths(t_mapinfo *mapinfo);
 int     search_player(char **map, t_data *data);
+int is_whitespace(char c);
+int	print_error(char *error_message);
 
 
 #endif

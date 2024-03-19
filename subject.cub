@@ -1,6 +1,7 @@
-NO north.xpm
+                NO       north.xpm
 SO south.xpm
-WE west.xpm
+WE                      
+                        west.xpm
     EA east.xpm
 
 F 220,100,0
