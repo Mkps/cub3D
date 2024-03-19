@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:32:25 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/11 12:38:43 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:40:45 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,9 @@ int		ft_ptr(unsigned long long input);
 int		ft_number(int input);
 int		ft_unsigned(unsigned int input);
 int		ft_printf(const char *src, ...);
+int		ft_atoi_rgb(const char *nptr, int *index);
+char	*ft_strjoin_and_free(char *s1, char const *s2);
+char	*ft_strjoin_n(char *s1, char *s2);
+
 
 #endif
