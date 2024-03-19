@@ -6,12 +6,12 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:13:22 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 11:43:52 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:05:33 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parsing.h"
-#include "../../libft/libft.h"
+#include "../../include/cub3d.h"
+
 
 int check_paths(t_mapinfo *mapinfo)
 {

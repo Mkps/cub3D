@@ -6,12 +6,12 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 12:15:12 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:05:58 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parsing.h"
-#include "../../libft/libft.h"
+#include "../../include/cub3d.h"
+
 
 int ft_rgb_to_int(int red, int green, int blue)
 {

@@ -1,23 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emcnab <emcnab@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 11:05:36 by emcnab            #+#    #+#             */
-/*   Updated: 2024/03/03 14:13:16 by emcnab           ###   ########.fr       */
+/*   Updated: 2024/03/19 14:05:55 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
-#include <stdlib.h>
+#include "../../include/cub3d.h"
 
-#include "mlx.h"
-#include "validate_args.h"
-#include "programdata.h"
-#include "bind_hooks.h"
-#include "teardown.h"
 
 int32_t	main(int32_t argc, char const *argv[])
 {
