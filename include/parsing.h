@@ -1,5 +1,5 @@
-#ifndef MAINPARSING_H
-#define MAINPARSING_H
+#ifndef PARSING_H
+#define PARSING_H
 
 # define WINDOW_WIDTH 1024
 # define WINDOW_HEIGHT 1024
@@ -19,12 +19,6 @@
 # define SOUTH 270
 # define FLOOR 1
 # define CEILING 2
-// # include <stdio.h>
-// # include <stdlib.h>
-// # include <unistd.h>
-// # include <math.h>
-// # include <sys/stat.h>
-// # include <fcntl.h>
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -115,7 +109,5 @@ int check_rgb_syntax(char *str);
 int ft_strlen_eol(char *str);
 // int ft_strlen_char(char *str, char c);
 void	print_info(t_data data);
-
-
 
 #endif

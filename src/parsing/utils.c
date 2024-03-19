@@ -12,7 +12,6 @@
 
 #include "../../include/cub3d.h"
 
-
 void	ft_swap(int *a, int *b)
 {
 	int	tmp;

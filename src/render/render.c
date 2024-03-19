@@ -6,11 +6,11 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:43:34 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/11 14:41:54 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:10:26 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "cub3d.h"
 
 void	move_sprite(t_data *data, t_sprite *sprite)
 {
