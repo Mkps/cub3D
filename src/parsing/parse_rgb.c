@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:34:15 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 11:44:07 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:53:16 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int parse_and_get_rgb(int *i, int flag, t_data *data)
 		return (EXIT_FAILURE);						
 	}
 	if (flag == FLOOR)
-		data->mapinfo->f_color = ft_rgb_to_uint32(red, green, blue);
+		data->mapinfo->f_color = ft_rgb_to_int(red, green, blue);
 	else if (flag == CEILING)
-		data->mapinfo->c_color = ft_rgb_to_uint32(red, green, blue);
+		data->mapinfo->c_color = ft_rgb_to_int(red, green, blue);
 	
 	return (EXIT_SUCCESS);
 }

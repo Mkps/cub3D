@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:11:43 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 11:44:10 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:17:25 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	print_info(t_data data)
 	// }
 
 
-	printf("%f\n", data.player->dir);
-	printf("%f\n", data.player->x);
-	printf("%f\n", data.player->y);	
+	printf("%f\n", data.player.dir_x);
+	printf("%f\n", data.player.dir_y);
 }
