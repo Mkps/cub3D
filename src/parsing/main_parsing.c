@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 16:06:41 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:06:27 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,21 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 			return (print_error(DUPLICATE_ERROR));
 		data->checklist.check_no = 1;
 		*i += 2;
-		if (!file[*i] || file[*i] != ' ')
+		if (!file[*i] || !is_whitespace(file[*i]))
 			return (print_error(SYNTAX_ERROR));
-		while (file[*i] == ' ')
+		while (is_whitespace(file[*i]))
 			++(*i);
 		data->mapinfo->no_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
 	}
-
 	else if (file[*i] == 'S' && file[*i + 1] && file[*i + 1] == 'O')
 	{
 		if (data->checklist.check_so)
 			return (print_error(DUPLICATE_ERROR));
 		data->checklist.check_so = 1;
 		*i += 2;
-		if (!file[*i] || file[*i] != ' ')
+		if (!file[*i] || !is_whitespace(file[*i]))
 			return (print_error(SYNTAX_ERROR));
-		while (file[*i] == ' ')
+		while (is_whitespace(file[*i]))
 			++(*i);
 		data->mapinfo->so_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
 	}
@@ -92,10 +91,10 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 			return (print_error(DUPLICATE_ERROR));
 		data->checklist.check_we = 1;
 		*i += 2;
-		if (!file[*i] || file[*i] != ' ')
+		if (!file[*i] || !is_whitespace(file[*i]))
 			return (print_error(SYNTAX_ERROR));
 		
-		while (file[*i] == ' ')
+		while (is_whitespace(file[*i]))
 			++(*i);
 		
 		data->mapinfo->we_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
@@ -107,9 +106,9 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 			return (print_error(DUPLICATE_ERROR));
 		data->checklist.check_ea = 1;
 		*i += 2;
-		if (!file[*i] || file[*i] != ' ')
+		if (!file[*i] || !is_whitespace(file[*i]))
 			return (print_error(SYNTAX_ERROR));
-		while (file[*i] == ' ')
+		while (is_whitespace(file[*i]))
 			++(*i);
 		data->mapinfo->ea_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
 		
@@ -162,6 +161,15 @@ int	fill_map_line(int *i, char *file, t_data *data)
 	return (line);
 }
 
+int is_whitespace(char c)
+{
+	if (c == '\f' || c == '\n'
+		|| c == '\r' || c == '\t'
+		|| c == '\v')
+		return (1);
+	return (0);
+}
+
 int	parse_file(char *file_name, t_data *data)
 {
 	int	i;
@@ -177,6 +185,8 @@ int	parse_file(char *file_name, t_data *data)
 	
 	while (data->mapinfo->file[i])
 	{
+		while (is_whitespace(data->mapinfo->file[i]))
+			i++;
 		if (ft_isprint(data->mapinfo->file[i]) && !ft_isdigit(data->mapinfo->file[i]))
 		{
 			if (parse_cardinal_pt(&i, data->mapinfo->file, data))
@@ -194,6 +204,39 @@ int	parse_file(char *file_name, t_data *data)
 	}
 	return (EXIT_SUCCESS);
 }
+
+// int	parse_file(char *file_name, t_data *data)
+// {
+// 	int	i;
+// 	int nb_lines;
+		
+// 	get_file_content(file_name, data);
+
+// 	data->checklist = (t_checklist){0};
+// 	i = 0;
+
+// 	data->mapinfo->map = malloc(sizeof(char *) * data->mapinfo->height + 1);
+// 	data->mapinfo->map[0] = NULL;
+	
+// 	while (data->mapinfo->file[i])
+// 	{
+// 		if (ft_isprint(data->mapinfo->file[i]) && !ft_isdigit(data->mapinfo->file[i]))
+// 		{
+// 			if (parse_cardinal_pt(&i, data->mapinfo->file, data))
+// 				return (EXIT_FAILURE);
+
+// 			if (parse_rgb(&i, data->mapinfo->file, data))
+// 				return (EXIT_FAILURE);
+				
+// 			i += ft_strlen_eol(data->mapinfo->file + i) + 1;
+// 		}
+// 		else if (ft_isdigit(data->mapinfo->file[i]))
+// 			nb_lines = fill_map_line(&i, data->mapinfo->file + i, data);
+// 		else
+// 			i++;
+// 	}
+// 	return (EXIT_SUCCESS);
+// }
 
 void	get_player_info_cont(int i, int j, char **map, t_data *data)
 {

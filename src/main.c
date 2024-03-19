@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:12:26 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 15:42:20 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:43:49 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	main(int argc, char **argv)
 	{
 		return (EXIT_FAILURE);
 	}
-	mlx_hook(data.w_ptr, 6, 1L << 6, ft_mlx_mouse_move, &data);
-	mlx_mouse_hook(data.w_ptr, ft_mlx_mouse_hook, &data);
-	mlx_hook(data.w_ptr, 2, 1L << 0, ft_mlx_key_hook, &data);
-	mlx_key_hook(data.w_ptr, ft_keyup, &data);
-	mlx_hook(data.w_ptr, 17, 0, ft_mlx_destroy_hook, &data);
-	mlx_loop_hook(data.mlx, ft_mlx_render, &data);
-	mlx_loop(data.mlx);
+	// mlx_hook(data.w_ptr, 6, 1L << 6, ft_mlx_mouse_move, &data);
+	// mlx_mouse_hook(data.w_ptr, ft_mlx_mouse_hook, &data);
+	// mlx_hook(data.w_ptr, 2, 1L << 0, ft_mlx_key_hook, &data);
+	// mlx_key_hook(data.w_ptr, ft_keyup, &data);
+	// mlx_hook(data.w_ptr, 17, 0, ft_mlx_destroy_hook, &data);
+	// mlx_loop_hook(data.mlx, ft_mlx_render, &data);
+	// mlx_loop(data.mlx);
 	return (0);
 }

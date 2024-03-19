@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:34:15 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 16:06:44 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:11:19 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,14 @@ int parse_and_get_rgb(int *i, int flag, t_data *data)
 	int index;
 
 	++(*i);
-	if (!data->mapinfo->file[*i] || data->mapinfo->file[*i] != ' ')
-		printf("%s", SYNTAX_ERROR);
+	if (!data->mapinfo->file[*i] || !is_whitespace(data->mapinfo->file[*i]))
+		return(print_error(SYNTAX_ERROR));
 
-	while (data->mapinfo->file[*i] && data->mapinfo->file[*i] == ' ')
+	while (data->mapinfo->file[*i] && is_whitespace(data->mapinfo->file[*i]))
 		++(*i);
 			
 	if (check_rgb_syntax(data->mapinfo->file + *i))
-	{
-		printf("%s", SYNTAX_ERROR);
-		return (EXIT_FAILURE);					
-	}
+		return(print_error(SYNTAX_ERROR));
 
 	index = *i;
 	red = ft_atoi_rgb(data->mapinfo->file + index, &index);
@@ -38,10 +35,7 @@ int parse_and_get_rgb(int *i, int flag, t_data *data)
 	blue = ft_atoi_rgb(data->mapinfo->file + index, &index);
 			
 	if (check_rgb_values(red, green, blue))
-	{
-		printf("Error : wrong RGB values for the floor\n");
-		return (EXIT_FAILURE);						
-	}
+		return(print_error(RGB_VALUE_ERROR));
 	if (flag == FLOOR)
 		data->mapinfo->f_color = ft_rgb_to_int(red, green, blue);
 	else if (flag == CEILING)
