@@ -1,38 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window_init.c                                      :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:43:51 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/11 11:16:37 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:20:09 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
-
-int	init_img(t_data *data, t_img *current_img)
-{
-	int	bpp;
-	int	line_length;
-	int	endian;
-
-	if (!data->mlx)
-		return (EXIT_FAILURE);
-	current_img->img = mlx_new_image(data->mlx,
-			data->w_data.width, data->w_data.height);
-	if (!current_img->img)
-		return (EXIT_FAILURE);
-	current_img->addr = mlx_get_data_addr(current_img->img,
-			&bpp, &line_length, &endian);
-	if (!current_img->addr)
-		return (EXIT_FAILURE);
-	current_img->line_length = line_length;
-	current_img->bits_per_pixel = bpp;
-	current_img->endian = endian;
-	return (EXIT_SUCCESS);
-}
+#include "../../include/cub3d.h"
 
 int	ft_exit_cleanup(t_data *data, int exit_code)
 {

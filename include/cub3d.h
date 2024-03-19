@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:44:10 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 10:38:55 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:12:04 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <math.h>
 # include <errno.h>
 # include <time.h>
+
+# include "parsing.h"
+# include "s_player.h"
 
 typedef void (*	t_function_ptr)(t_data *data);
 

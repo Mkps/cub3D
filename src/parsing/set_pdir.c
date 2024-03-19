@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../inc/cub3d.h"
+#include "../../include/cub3d.h"
+
 
 // static void	set_pdir_cont(t_data *data, char tab)
 // {
