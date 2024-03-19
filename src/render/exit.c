@@ -6,11 +6,11 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:43:51 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 12:05:14 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:20:09 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../include/cub3d.h"
 
 int	ft_exit_cleanup(t_data *data, int exit_code)
 {

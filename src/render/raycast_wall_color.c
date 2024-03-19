@@ -6,11 +6,11 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 19:11:48 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/11 14:16:20 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:20:47 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../include/cub3d.h"
 
 uint32_t	w_color_side(t_data *data, t_wall *t, t_ray_data *ray)
 {

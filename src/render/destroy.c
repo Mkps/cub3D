@@ -6,11 +6,11 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:08:35 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/11 14:31:57 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:20:47 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../include/cub3d.h"
 
 void	destroy_sprite(t_data *data)
 {

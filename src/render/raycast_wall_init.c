@@ -6,11 +6,11 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:43:25 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/09 13:41:10 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:20:47 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../include/cub3d.h"
 
 void	init_w_tex(t_data *data, t_ray_data ray, t_wall *t)
 {

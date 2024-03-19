@@ -6,11 +6,11 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:42:54 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/11 13:35:50 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:20:47 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../include/cub3d.h"
 
 void	rotate_right(t_data *data);
 void	rotate_left(t_data *data);

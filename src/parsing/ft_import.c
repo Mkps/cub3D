@@ -6,11 +6,11 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:06:47 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/11 13:21:11 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:20:47 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../include/cub3d.h"
 
 int	chr_convert(char c)
 {
