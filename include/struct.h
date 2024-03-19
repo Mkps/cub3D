@@ -55,6 +55,7 @@
 # define SYNTAX_ERROR "Error : Wrong syntax"
 # define MAP_ERROR "Error : Map isn't valid"
 # define NO_PLAYER_ERROR "Error : There is no player"
+# define RGB_VALUE_ERROR "Invalid RGB value"
 
 # define FLOOR 1
 # define CEILING 2

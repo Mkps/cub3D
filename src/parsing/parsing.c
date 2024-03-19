@@ -6,23 +6,11 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:06:05 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 14:06:12 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:18:17 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../include/cub3d.h"
-
-
-// int get_map_nb_lines(char **map)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (map[i])
-// 		i++;
-// 	return (i);
-// }
 
 int	get_map_width(char **map, t_data *data)
 {
@@ -46,14 +34,12 @@ int	get_map_width(char **map, t_data *data)
 	return (width);
 }
 
-int check_upper_wall(char **map, t_data *data)
+int check_upper_wall(int height, char **map, t_data *data)
 {
 	int i;
 	int j;
-	int height;
 
 	j = 0;
-	height = data->mapinfo->height;
 	while (map[0][j])
 	{
 		if (map[0][j] != '1' && map[0][j] != ' ')
@@ -112,15 +98,13 @@ int check_bottom_wall(char **map, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-int check_left_wall(char **map, t_data *data)
+int check_left_wall(int height, char **map, t_data *data)
 {
 	int i;
 	int j;
-	int	height;
 
 	i = 0;
 	j = 0;
-	height = data->mapinfo->height;
 	while (i < height && map[i][j])
 	{
 		j = 0;
@@ -145,15 +129,11 @@ int check_left_wall(char **map, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-int check_right_wall(char **map, t_data *data)
+int check_right_wall(int height, int width, char **map, t_data *data)
 {
 	int i;
 	int j;
-	int	height;
-	int	width;
 
-	width = data->mapinfo->width;
-	height = data->mapinfo->height;
 	i = 0;
 	j = width - 2;
 
@@ -183,17 +163,16 @@ int check_right_wall(char **map, t_data *data)
 
 int	check_map_is_closed(char **map, t_data *data)
 {
-	// int i1 = check_bottom_wall(map) ;
-	// int i2 = check_upper_wall(map);
-	// int i3 = check_left_wall(map);
-	// int i4 = check_right_wall(map);
+	int height;
+	int width;
 
-	// printf("%d\n%d\n%d\n%d\n", i1, i2, i3, i4);
+	height = data->mapinfo->height;
+	width = data->mapinfo->width;
 
 	if (check_bottom_wall(map, data) == -1
-		|| check_upper_wall(map, data) == - 1
-		|| check_left_wall(map, data) == -1
-		|| check_right_wall(map, data) == -1)
+		|| check_upper_wall(height, map, data) == - 1
+		|| check_left_wall(height, map, data) == -1
+		|| check_right_wall(height, width, map, data) == -1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

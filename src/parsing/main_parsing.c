@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 15:09:39 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:39:32 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,29 @@ int ft_rgb_to_int(int red, int green, int blue)
     return ((int)red << 16) | ((int)green << 8) | blue;
 }
 
+int	init_data_mapinfo(char *file_name, t_data *data)
+{
+	data->fd = safe_open(file_name);
+	if (data->fd == -1)
+		return (EXIT_FAILURE);
+	data->mapinfo->file = ft_strdup("\0");
+	data->mapinfo->file_size = 0;
+	data->mapinfo->file_nb_lines = 0;
+	return (EXIT_SUCCESS);
+}
+
+int	get_line_content(char *line, t_data *data)
+{
+	static int map_height = 0;
+
+	data->mapinfo->file = ft_strjoin_and_free(data->mapinfo->file, line);
+	data->mapinfo->file_size += ft_strlen(line);
+	if (ft_isdigit(line[0]))
+		++map_height;
+	return (map_height);
+}
+
+
 int get_file_content(char *file_name, t_data *data)
 {
 	char *line;
@@ -25,21 +48,14 @@ int get_file_content(char *file_name, t_data *data)
 	int		line_len;
 	int		map_height;
 
-	data->fd = safe_open(file_name);
-	if (data->fd == -1)
+	if (init_data_mapinfo(data))
 		return (EXIT_FAILURE);
-	data->mapinfo->file = ft_strdup("\0");
-	data->mapinfo->file_size = 0;
-	data->mapinfo->file_nb_lines = 0;
 	line = get_next_line(data->fd);
 	max_width = ft_strlen(line);
 	map_height = 0;
 	while (line)
 	{
-		data->mapinfo->file = ft_strjoin_and_free(data->mapinfo->file, line);
-		data->mapinfo->file_size += ft_strlen(line);
-		if (ft_isdigit(line[0]))
-			++map_height;
+		map_height = get_line_content(line, data);
 		free(line);
 		line = get_next_line(data->fd);
 		line_len = ft_strlen(line);
@@ -167,29 +183,24 @@ int	parse_file(char *file_name, t_data *data)
 	int nb_lines;
 		
 	get_file_content(file_name, data);
-
 	data->checklist = (t_checklist){0};
 	i = 0;
-
 	data->mapinfo->map = malloc(sizeof(char *) * data->mapinfo->height + 1);
 	data->mapinfo->map[0] = NULL;
-	
 	while (data->mapinfo->file[i])
 	{
 		if (ft_isprint(data->mapinfo->file[i]) && !ft_isdigit(data->mapinfo->file[i]))
 		{
 			if (parse_cardinal_pt(&i, data->mapinfo->file, data))
 				return (EXIT_FAILURE);
-
 			if (parse_rgb(&i, data->mapinfo->file, data))
 				return (EXIT_FAILURE);
-				
 			i += ft_strlen_eol(data->mapinfo->file + i) + 1;
 		}
 		else if (ft_isdigit(data->mapinfo->file[i]))
 			nb_lines = fill_map_line(&i, data->mapinfo->file + i, data);
 		else
-			i++;
+			++i;
 	}
 	return (EXIT_SUCCESS);
 }

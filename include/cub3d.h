@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:44:10 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 15:02:07 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:19:34 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int check_rgb_syntax(char *str);
 int ft_strlen_eol(char *str);
 // int ft_strlen_char(char *str, char c);
 void	print_info(t_data data);
+int	print_error(char *error_message);
 
 
 #endif
