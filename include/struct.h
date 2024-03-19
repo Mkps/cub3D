@@ -56,6 +56,9 @@
 # define MAP_ERROR "Error : Map isn't valid"
 # define NO_PLAYER_ERROR "Error : There is no player"
 
+# define FLOOR 1
+# define CEILING 2
+
 # include <aio.h>
 
 

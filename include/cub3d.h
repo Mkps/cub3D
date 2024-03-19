@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:44:10 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 14:57:53 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:02:07 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CUB3D_H
 
 # include "struct.h"
-# include "parsing.h"
 # include "s_player.h"
 
 // # include "../minilibx/mlx.h"
@@ -31,9 +30,6 @@
 # include <aio.h>
 # include <stdlib.h>
 
-
-# include "parsing.h"
-# include "s_player.h"
 
 typedef void (*	t_function_ptr)(t_data *data);
 
@@ -72,7 +68,7 @@ void		sort_sprites(int *order, double *dist, int amount);
 void		draw_rect(t_data *data, t_coord pos, t_coord size, int color);
 void		move_player(t_data *data);
 void		draw_img(t_data *data, t_coord pos, t_coord size, t_img *sprite);
-uint		ft_mlx_pixel_get(t_img *img, int x, int y);
+size_t		ft_mlx_pixel_get(t_img *img, int x, int y);
 int			ft_mlx_close_window(int keycode, t_data *data);
 int			ft_mlx_destroy_hook(t_data *data);
 void		ft_mlx_fill(t_img img, int size_x, int size_y, int color);
