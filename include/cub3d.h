@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:44:10 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 12:12:04 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:57:53 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 # define CUB3D_H
 
 # include "struct.h"
-# include "../minilibx/mlx.h"
+# include "parsing.h"
+# include "s_player.h"
+
+// # include "../minilibx/mlx.h"
 # include "../libft/libft.h"
 # include <stdint.h>
 # include <stdio.h>
@@ -23,6 +26,11 @@
 # include <math.h>
 # include <errno.h>
 # include <time.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <aio.h>
+# include <stdlib.h>
+
 
 # include "parsing.h"
 # include "s_player.h"
@@ -101,5 +109,23 @@ int			output_error(char *detail, char *str, int code);
 int			ft_exit_cleanup(t_data *data, int exit_code);
 int			check_map_validity(t_data *data, char **map_tab);
 int			check_textures_validity(t_data *data, t_world *w);
+
+int safe_open(char *file_name);
+void safe_close(int fd);
+// int get_map_nb_lines(char **map);
+int	get_map_width(char **map, t_data *data);
+int ft_rgb_to_int(int red, int green, int blue);
+int parse_and_get_rgb(int *i, int flag, t_data *data);
+int check_rgb_syntax(char *str);
+int check_rgb_values(int red, int green, int blue);
+int	check_map_is_closed(char **map, t_data *data);
+
+int check_paths(t_mapinfo *mapinfo);
+int check_rgb_values(int red, int green, int blue);
+int check_rgb_syntax(char *str);
+int ft_strlen_eol(char *str);
+// int ft_strlen_char(char *str, char c);
+void	print_info(t_data data);
+
 
 #endif

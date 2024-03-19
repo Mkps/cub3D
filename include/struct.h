@@ -1,3 +1,14 @@
+// /* ************************************************************************** */
+// /*                                                                            */
+// /*                                                        :::      ::::::::   */
+// /*   struct.h                                           :+:      :+:    :+:   */
+// /*                                                    +:+ +:+         +:+     */
+// /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
+// /*                                                +#+#+#+#+#+   +#+           */
+// /*   Created: 2023/12/21 18:44:06 by aloubier          #+#    #+#             */
+// /*   Updated: 2024/03/11 14:42:35 by aloubier         ###   ########.fr       */
+// /*                                                                            */
+// /* ************************************************************************** */
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -36,6 +47,50 @@
 # define E_INVRGVC "Invalid RGB color for ceiling"
 # define E_INVRGVF "Invalid RGB color for floor"
 # define E_DUPTXT "Duplicate texture"
+
+# define ARG_ERROR "Error : Invalid arguments"
+# define OPEN_FD_ERROR "Error : Could not open file"
+# define CLOSE_FD_ERROR "Error : Could not close file"
+# define DUPLICATE_ERROR "Error : Duplicate detected in file"
+# define SYNTAX_ERROR "Error : Wrong syntax"
+# define MAP_ERROR "Error : Map isn't valid"
+# define NO_PLAYER_ERROR "Error : There is no player"
+
+# include <aio.h>
+
+
+typedef struct s_checklist
+{
+    int check_no;
+    int check_so;
+    int check_we;
+    int check_ea;
+    int floor;
+    int ceiling;
+    int check_dir;
+} t_checklist;
+
+typedef struct s_mapinfo
+{
+    int width;
+    int height;
+
+    char **map;
+    char *file;
+    size_t file_size;
+    size_t file_nb_lines;
+
+    char *no_texture;
+    char *so_texture;
+    char *we_texture;
+    char *ea_texture;
+    //door
+
+    int f_color; //floor
+    int c_color; //ceiling
+
+
+} t_mapinfo;
 
 typedef struct s_img
 {
@@ -160,6 +215,12 @@ typedef struct s_world
 
 typedef struct s_data
 {
+    char 		*file;
+    size_t 		file_size;
+    int 		fd;
+    t_mapinfo 	*mapinfo;
+    t_checklist checklist;
+
 	void		*mlx;
 	t_world		world;
 	char		**cmap;
