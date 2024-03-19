@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 14:05:58 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:33:32 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int get_file_content(char *file_name, t_data *data)
 	safe_close(data->fd);
 	data->mapinfo->width = max_width;
 	data->mapinfo->height = map_height;
-	// printf("WIDTH = %d\nHEIGHT = %d\n", max_width, nb_lines);
 	return (EXIT_SUCCESS);
 }
 
@@ -129,9 +128,6 @@ int parse_rgb(int *i, char *file, t_data *data)
 		data->checklist.floor = 1;
 		if (parse_and_get_rgb(i, FLOOR, data))
 			return (EXIT_FAILURE);
-		// *i += ft_strlen_eol(data->mapinfo->file + *i) + 1;
-		
-
 	}
 
 	else if (file[*i] == 'C')
@@ -141,8 +137,6 @@ int parse_rgb(int *i, char *file, t_data *data)
 		data->checklist.ceiling = 1;
 		if (parse_and_get_rgb(i, CEILING, data))
 			return (EXIT_FAILURE);
-		// *i += ft_strlen_eol(data->mapinfo->file + *i) + 1;
-		
 	}
 	return (EXIT_SUCCESS);
 }
@@ -204,8 +198,54 @@ int	parse_file(char *file_name, t_data *data)
 }
 
 
+int	get_player_info(int i, int j, char **map, t_data *data)
+{
+	if (data->checklist.check_dir == 1)
+		return (print_error(DUPLICATE_ERROR));
+	data->checklist.check_dir = 1;
+	data->player.pos_x = i + 0.5;
+	data->player.pos_y = j + 0.5;
 
-int	get_player_info(char **map, t_data *data)
+	if (map[i][j] == 'N')
+	{
+		data->player.dir_x = -1.0;
+		data->player.dir_y = 0.0;
+		
+		data->plane.x = 0.0;
+		data->plane.y = 0.66;
+
+	}
+	else if (map[i][j] == 'S')
+	{
+		data->player.dir_x = 1.0;
+		data->player.dir_y = 0.0;
+
+		data->plane.x = 0.0;
+		data->plane.y = -0.66;
+
+	}
+	else if (map[i][j] == 'E')
+	{
+
+		data->player.dir_x = 0.0;
+		data->player.dir_y = 1.0;
+
+		data->plane.x = 0.66;
+		data->plane.y = 0.0;
+
+	}
+	else if (map[i][j] == 'W')
+	{
+		data->player.dir_x = 0.0;
+		data->player.dir_y = -1.0;
+
+		data->plane.x = -0.66;
+		data->plane.y = 0.0;
+	}	
+	return (EXIT_SUCCESS);
+}
+
+int	search_player(char **map, t_data *data)
 {
 	int	i;
 	int	j;
@@ -217,65 +257,15 @@ int	get_player_info(char **map, t_data *data)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'N')
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'E' || map[i][j] == 'W')
 			{
-				if (data->checklist.check_dir == 1)
-					return (print_error(DUPLICATE_ERROR));
-				data->checklist.check_dir = 1;
-				data->player.dir_x = -1.0;
-				data->player.dir_y = 0.0;
-				
-				data->plane.x = 0.0;
-				data->plane.y = 0.66;
-				
-				data->player.pos_x = i + 0.5;
-				data->player.pos_y = j + 0.5;
+				if (get_player_info(i, j, map, data))
+					return (EXIT_FAILURE);
 			}
-			else if (map[i][j] == 'S')
-			{
-				if (data->checklist.check_dir == 1)
-					return (print_error(DUPLICATE_ERROR));
-				data->checklist.check_dir = 1;
-				data->player.dir_x = 1.0;
-				data->player.dir_y = 0.0;
-
-				data->plane.x = 0.0;
-				data->plane.y = -0.66;
-
-				data->player.pos_x = i + 0.5;
-				data->player.pos_y = j + 0.5;
-			}
-			else if (map[i][j] == 'E')
-			{
-				if (data->checklist.check_dir == 1)
-					return (print_error(DUPLICATE_ERROR));
-				data->checklist.check_dir = 1;
-				data->player.dir_x = 0.0;
-				data->player.dir_y = 1.0;
-
-				data->plane.x = 0.66;
-				data->plane.y = 0.0;
-
-				data->player.pos_x = i + 0.5;
-				data->player.pos_y = j + 0.5;
-			}
-			else if (map[i][j] == 'W')
-			{
-				if (data->checklist.check_dir == 1)
-					return (print_error(DUPLICATE_ERROR));
-				data->checklist.check_dir = 1;
-				data->player.dir_x = 0.0;
-				data->player.dir_y = -1.0;
-
-				data->plane.x = -0.66;
-				data->plane.y = 0.0;
-
-				data->player.pos_x = i + 0.5;
-				data->player.pos_y = j + 0.5;
-			}
-			j++;
+			++j;
 		}
-		i++;
+		++i;
 	}
 	if (!data->checklist.check_dir)
 		return (print_error(NO_PLAYER_ERROR));
@@ -376,7 +366,7 @@ int main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 
-	if (get_player_info(data.mapinfo->map, &data))
+	if (search_player(data.mapinfo->map, &data))
 	{
 		ft_free_all(&data);
 		return (EXIT_FAILURE);
