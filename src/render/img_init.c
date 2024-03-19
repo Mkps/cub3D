@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:43:51 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 12:20:47 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:43:35 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,25 @@ t_xpm	xpm_load(t_data *data, char *path)
 	return (t);
 }
 
-t_sprite	init_sprite(t_data *data, t_coord pos, int frame, char **animpath)
+int	load_textures(t_data *data)
 {
-	t_sprite	ret;
-
-	ret.pos.x = pos.x;
-	ret.pos.y = pos.y;
-	ret.animation = ft_calloc(frame, sizeof(t_xpm));
-	ret.animation[0] = xpm_load(data, animpath[0]);
-	ret.frame_count = frame;
-	ret.frame = 0;
-	ret.frame_time = 12;
-	return (ret);
+	data->world.n = xpm_load(data, data->mapinfo.no_texture);
+	if (!data->world.n.path)
+		return (EXIT_FAILURE);
+	data->world.s = xpm_load(data, data->mapinfo.so_texture);
+	if (!data->world.s.path)
+		return (EXIT_FAILURE);
+	data->world.e = xpm_load(data, data->mapinfo.ea_texture);
+	if (!data->world.e.path)
+		return (EXIT_FAILURE);
+	data->world.w = xpm_load(data, data->mapinfo.we_texture);
+	if (!data->world.w.path)
+		return (EXIT_FAILURE);
+	if (BONUS > 0 && data->world.d.path)
+	{
+		data->world.d = xpm_load(data, data->world.d.path);
+		if (!data->world.d.path && BONUS > 0)
+			return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }

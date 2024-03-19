@@ -6,7 +6,7 @@
 /*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:06:47 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 17:16:02 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:41:06 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ int	ft_import(char **argv, t_data *data)
         return (EXIT_FAILURE);
     print_info(data);
 	if (map_convert(data) == EXIT_FAILURE)
+		return (ft_exit_cleanup(data, EXIT_FAILURE));
+	if (load_textures(data))
 		return (ft_exit_cleanup(data, EXIT_FAILURE));
 	return (0);
 }

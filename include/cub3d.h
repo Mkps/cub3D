@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:44:10 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 17:12:04 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:41:39 by aloubier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@
 # include <fcntl.h>
 # include <aio.h>
 # include <stdlib.h>
-// # include "../minilibx/mlx.h"
+# include "../minilibx/mlx.h"
 
 
 typedef void (*	t_function_ptr)(t_data *data);
 
+int			load_textures(t_data *data);
 int			pdir_check(t_data *data, char c);
 int			has_island(t_data *data);
 void		door_check(t_data *data, char c);
