@@ -110,23 +110,16 @@ int	ft_import(char **argv, t_data *data)
 {
 	if (parse_file(argv[1], data) == EXIT_FAILURE)
 		ft_mlx_exit(data, EXIT_FAILURE);
-	printf("here1\n");
 	if (check_paths(&data->mapinfo) == EXIT_FAILURE)
 		return (ft_exit_cleanup(data, EXIT_FAILURE));
-	printf("here2\n");
 	if (check_map_is_valid(data->cmap, data) == EXIT_FAILURE)
 		return (ft_exit_cleanup(data, EXIT_FAILURE));
-	printf("here3\n");
 	if (search_player(data->cmap, data))
 		return (ft_exit_cleanup(data, EXIT_FAILURE));
-	printf("here4\n");
 	print_info(data);
-	printf("here5\n");
 	if (map_convert(data) == EXIT_FAILURE)
 		return (ft_exit_cleanup(data, EXIT_FAILURE));
-	printf("here6\n");
 	if (load_textures(data))
 		return (ft_exit_cleanup(data, EXIT_FAILURE));
-	printf("here7\n");
 	return (0);
 }

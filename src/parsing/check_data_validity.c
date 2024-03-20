@@ -30,7 +30,6 @@ int	check_paths(t_mapinfo *mapinfo)
 		|| ft_strlen(mapinfo->ea_texture) < 5
 		|| ft_strlen(mapinfo->we_texture) < 5)
 		return (output_error(NULL, "Invalid texture", 1));
-	printf("herea1\n");
 	if (access(mapinfo->no_texture, F_OK)
 		|| access(mapinfo->so_texture, F_OK)
 		|| access(mapinfo->ea_texture, F_OK)
