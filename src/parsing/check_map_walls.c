@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:06:05 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 15:32:06 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:48:17 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	check_left_wall(char **map, t_data *data)
 			++j;
 			if (map[i][j])
 			{
-				if (left_elem_not_surrounded(i, j, map))
+				if (left_elem_not_surrounded(i, j, map, data->mapinfo.height))
 					return (-1);
 			}
 		}
@@ -131,7 +131,7 @@ int	check_right_wall(char **map, t_data *data)
 			--j;
 			if (map[i][j])
 			{
-				if (right_elem_not_surrounded(i, j, map))
+				if (right_elem_not_surrounded(i, j, map, data->mapinfo.height))
 					return (-1);
 			}
 		}

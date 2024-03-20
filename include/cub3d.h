@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:44:10 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/20 15:44:28 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:48:41 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <fcntl.h>
 # include <aio.h>
 # include <stdlib.h>
-# include "../minilibx/mlx.h"
+// # include "../minilibx/mlx.h"
 
 
 typedef void (*	t_function_ptr)(t_data *data);
@@ -130,21 +130,21 @@ int check_rgb_values(int red, int green, int blue);
 int	check_map_is_closed(char **map, t_data *data);
 
 int check_paths(t_mapinfo *mapinfo);
-int check_rgb_values(int red, int green, int blue);
-int check_rgb_syntax(char *str);
 int ft_strlen_eol(char *str);
 // int ft_strlen_char(char *str, char c);
 void	print_info(t_data *data);
 int     parse_file(char *str, t_data *data);
 int     check_map_is_valid(char **map, t_data *data);
-int     check_paths(t_mapinfo *mapinfo);
 int     search_player(char **map, t_data *data);
 int is_whitespace(char c);
 int	print_error(char *error_message);
 int	upper_elem_not_surrounded(int i, int j, char **map);
 int	bottom_elem_not_surrounded(int i, int j, char **map);
-int	left_elem_not_surrounded(int i, int j, char **map);
-int	right_elem_not_surrounded(int i, int j, char **map);
+int	left_elem_not_surrounded(int i, int j, char **map, int height);
+int	right_elem_not_surrounded(int i, int j, char **map, int height);
 int	get_file_content(char *file_name, t_data *data);
+int	init_data_mapinfo(char *file_name, t_data *data);
+int	check_xpm(char *str);
+
 
 #endif

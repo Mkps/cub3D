@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:30:43 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 15:32:00 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:48:08 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	bottom_elem_not_surrounded(int i, int j, char **map)
 	return (0);
 }
 
-int	left_elem_not_surrounded(int i, int j, char **map)
+int	left_elem_not_surrounded(int i, int j, char **map, int height)
 {
 	if ((map[i][j] != ' ' && map[i][j] != '1')
 		|| ((map[i][j] && map[i][j] != '1'
@@ -54,7 +54,7 @@ int	left_elem_not_surrounded(int i, int j, char **map)
 	return (0);
 }
 
-int	right_elem_not_surrounded(int i, int j, char **map)
+int	right_elem_not_surrounded(int i, int j, char **map, int height)
 {
 	if ((map[i][j] != ' ' && map[i][j] != '1')
 		|| ((map[i][j] && map[i][j] != '1'
