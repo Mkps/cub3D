@@ -325,7 +325,7 @@ int check_map_is_valid(char **map, t_data *data)
 	if (data->mapinfo.width < 3 || data->mapinfo.height < 3
 		|| check_map_is_closed(data->cmap, data))
 	{
-		printf("%s", MAP_ERROR);
+		output_error(data->mapinfo.path, MAP_ERROR, EXIT_FAILURE);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

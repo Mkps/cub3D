@@ -21,28 +21,22 @@ int parse_and_get_rgb(int *i, int flag, t_data *data)
 
 	++(*i);
 	if (!data->mapinfo.file[*i] || data->mapinfo.file[*i] != ' ')
-		printf("%s", SYNTAX_ERROR);
+        return (output_error(data->mapinfo.file, SYNTAX_ERROR, 1)); 
 
 	while (data->mapinfo.file[*i] && data->mapinfo.file[*i] == ' ')
 		++(*i);
 			
 	if (check_rgb_syntax(data->mapinfo.file + *i))
-	{
-		printf("%s", SYNTAX_ERROR);
-		return (EXIT_FAILURE);					
-	}
-
+        return (output_error(data->mapinfo.file, SYNTAX_ERROR, 1)); 
 	index = *i;
 	red = ft_atoi_rgb(data->mapinfo.file + index, &index);
 	green = ft_atoi_rgb(data->mapinfo.file + index, &index);
 	blue = ft_atoi_rgb(data->mapinfo.file + index, &index);
-			
 	if (check_rgb_values(red, green, blue))
 		return(print_error(RGB_VALUE_ERROR));
 	if (flag == FLOOR)
 		data->mapinfo.f_color = ft_rgb_to_int(red, green, blue);
 	else if (flag == CEILING)
 		data->mapinfo.c_color = ft_rgb_to_int(red, green, blue);
-	
 	return (EXIT_SUCCESS);
 }
