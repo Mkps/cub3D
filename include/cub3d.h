@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:44:10 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/20 11:24:14 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:32:40 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,9 @@ int     check_paths(t_mapinfo *mapinfo);
 int     search_player(char **map, t_data *data);
 int is_whitespace(char c);
 int	print_error(char *error_message);
-
+int	upper_elem_not_surrounded(int i, int j, char **map);
+int	bottom_elem_not_surrounded(int i, int j, char **map);
+int	left_elem_not_surrounded(int i, int j, char **map);
+int	right_elem_not_surrounded(int i, int j, char **map);
 
 #endif
