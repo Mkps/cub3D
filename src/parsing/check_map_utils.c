@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map_is_closed.c                              :+:      :+:    :+:   */
+/*   check_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:06:05 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 13:59:26 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:59:37 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../include/cub3d.h"
-
-
-// int get_map_nb_lines(char **map)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (map[i])
-// 		i++;
-// 	return (i);
-// }
 
 int	get_map_width(char **map, t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:11:43 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 13:52:20 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:13:59 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,28 @@ int ft_strlen_eol(char *str)
 	while (str[i] && str[i] != '\n')
 		i++;
 	return (i);
+}
+
+int	next_line_not_empty(int i, char *file)
+{
+	while (file[i] && file[i] != '\n')
+	{
+		if (file[i] == '1')
+			return (1);
+		++i;
+	}
+	return (0);
+}
+
+void	skip_whitespaces(int *i, char *file)
+{
+	while (file[*i] && is_whitespace(file[*i]))
+	{
+		if (file[*i] == '\n'
+			&& next_line_not_empty(*i, file + *i + 1))
+			return ;
+		++(*i);
+	}
 }
 
 void	print_info(t_data *data)

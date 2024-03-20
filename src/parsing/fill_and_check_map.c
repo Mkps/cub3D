@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:57:08 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 14:00:16 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:12:14 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	check_map_is_valid(char **map, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-int	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
+void	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 {
 	static int	line = 0;
 	int			j;
@@ -60,8 +60,6 @@ int	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 	}
 	data->cmap[line][j + l] = '\0';
 	*i += ft_strlen_eol(file) + 1;
-	line++;
-	return (line);
 }
 
 int	is_a_map_line(char *str)

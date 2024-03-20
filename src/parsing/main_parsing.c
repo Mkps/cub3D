@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 14:46:25 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:12:42 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,133 +51,77 @@ int	get_file_content(char *file_name, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-
 int	parse_cardinal_pt(int *i, char *file, t_data *data)
 {
 	if (file[*i] == 'N' && file[*i + 1] && file[*i + 1] == 'O')
-	{
-		if (data->checklist.check_no)
-			return (output_error(NULL, DUPLICATE_ERROR, 1));
-		data->checklist.check_no = 1;
-		*i += 2;
-		if (!file[*i] || !is_whitespace(file[*i]))
-			return (output_error(NULL, SYNTAX_ERROR, 1));
-		while (is_whitespace(file[*i]))
-			++(*i);
-		data->mapinfo.no_texture = ft_substr(file + *i, 0,
-				ft_strlen_eol(file + *i));
-	}
+		if (get_north_texture(i, file, data))
+			return (EXIT_FAILURE);
 	else if (file[*i] == 'S' && file[*i + 1]
 		&& file[*i + 1] == 'O')
 	{
-		if (data->checklist.check_so)
-			return (output_error(NULL, DUPLICATE_ERROR, 1));
-		data->checklist.check_so = 1;
-		*i += 2;
-		if (!file[*i] || !is_whitespace(file[*i]))
-			return (output_error(NULL, SYNTAX_ERROR, 1));
-		while (is_whitespace(file[*i]))
-			++(*i);
-		data->mapinfo.so_texture = ft_substr(file + *i, 0,
-				ft_strlen_eol(file + *i));
+		if (get_south_texture(i, file, data))
+			return (EXIT_FAILURE);
 	}
 	else if (file[*i] == 'W' && file[*i + 1]
 		&& file[*i + 1] == 'E')
 	{
-		if (data->checklist.check_we)
-			return (output_error(NULL, DUPLICATE_ERROR, 1));
-		data->checklist.check_we = 1;
-		*i += 2;
-		if (!file[*i] || !is_whitespace(file[*i]))
-			return (output_error(NULL, SYNTAX_ERROR, 1));
-		while (is_whitespace(file[*i]))
-			++(*i);
-		data->mapinfo.we_texture = ft_substr(file + *i,
-				0, ft_strlen_eol(file + *i));
+		if (get_west_texture(i, file, data))
+			return (EXIT_FAILURE);
 	}
 	else if (file[*i] == 'E' && file[*i + 1]
 		&& file[*i + 1] == 'A')
 	{
-		if (data->checklist.check_ea)
-			return (output_error(NULL, DUPLICATE_ERROR, 1));
-		data->checklist.check_ea = 1;
-		*i += 2;
-		if (!file[*i] || !is_whitespace(file[*i]))
-			return (output_error(NULL, SYNTAX_ERROR, 1));
-		while (is_whitespace(file[*i]))
-			++(*i);
-		data->mapinfo.ea_texture = ft_substr(file + *i,
-				0, ft_strlen_eol(file + *i));
+		if (get_east_texture(i, file, data))
+			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
 
-int	next_line_not_empty(int i, char *file)
+void	skip_first_whitespaces(int *nb_whitespaces, int *i, t_data *data)
 {
-	while (file[i] && file[i] != '\n')
+	nb_whitespaces = 0;
+	while (data->mapinfo.file[*i] && is_whitespace(data->mapinfo.file[*i]))
 	{
-		if (file[i] == '1')
-			return (1);
-		++i;
+		++(*i);
+		++(*nb_whitespaces);
 	}
-	return (0);
 }
 
-void	skip_whitespaces(int *i, char *file)
+int	parse_info_line(int *i, char *file, t_data *data)
 {
-	while (file[*i])
-	{
-		if (file[*i] == '\n'
-			&& next_line_not_empty(*i, file + *i + 1))
-			return ;
-		else if (is_whitespace(file[*i]))
-			++(*i);
-	}
+	if (parse_cardinal_pt(i, file, data))
+		return (EXIT_FAILURE);
+	if (parse_rgb(i, file, data))
+		return (EXIT_FAILURE);
+	*i += ft_strlen_eol(file + *i) + 1;
+	skip_whitespaces(i, file);
+	return (EXIT_SUCCESS);
 }
 
 int	parse_file(char *file_name, t_data *data)
 {
 	int	i;
-	int	j;
 	int	nb_whitespaces;
-	int	nb_lines;
 
 	get_file_content(file_name, data);
 	data->checklist = (t_checklist){0};
 	i = 0;
-	nb_whitespaces = 0;
 	data->cmap = ft_calloc(sizeof(char *), data->mapinfo.height + 1);
 	while (data->mapinfo.file[i])
 	{
-		nb_whitespaces = 0;
-		while (data->mapinfo.file[i] && is_whitespace(data->mapinfo.file[i]))
-		{
-			++nb_whitespaces;
-			++i;
-		}
+		skip_first_whitespaces(&nb_whitespaces, &i, data);
 		if (data->mapinfo.file[i]
 			&& ft_isprint(data->mapinfo.file[i])
 			&& !ft_isdigit(data->mapinfo.file[i]))
 		{
-			if (parse_cardinal_pt(&i, data->mapinfo.file, data))
+			if (parse_info_line(&i, data->mapinfo.file, data))
 				return (EXIT_FAILURE);
-			if (parse_rgb(&i, data->mapinfo.file, data))
-				return (EXIT_FAILURE);
-			i += ft_strlen_eol(data->mapinfo.file + i) + 1;
-			skip_whitespaces(&i, data->mapinfo.file);
 		}
 		else if (data->mapinfo.file[i]
 			&& ft_isdigit(data->mapinfo.file[i]))
-			nb_lines = fill_map_line(nb_whitespaces,
-					&i, data->mapinfo.file + i, data);
+			fill_map_line(nb_whitespaces, &i, data->mapinfo.file + i, data);
 		else
 			++i;
-	}
-	j = 0;
-	while (data->cmap[j])
-	{
-		printf("%s\n", data->cmap[j]);
-		j++;
 	}
 	return (EXIT_SUCCESS);
 }
