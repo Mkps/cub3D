@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:32:25 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 16:23:03 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:22:01 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int		ft_atoi_rgb(const char *nptr, int *index);
 char	*ft_strjoin_and_free(char *s1, char const *s2);
 char	*ft_strjoin_n(char *s1, char *s2);
 int	ft_strnchr(const char *s);
+size_t	ft_array_size(char **array);
 
 
 #endif

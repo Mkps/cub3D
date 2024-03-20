@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   safe_fd_functions.c                                :+:      :+:    :+:   */
+/*   ft_array_size.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/29 13:58:15 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 11:13:24 by rraffi-k         ###   ########.fr       */
+/*   Created: 2023/10/16 11:25:29 by rraffi-k          #+#    #+#             */
+/*   Updated: 2023/10/19 19:58:17 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "libft.h"
 
-
-int safe_open(char *file_name)
+size_t	ft_array_size(char **array)
 {
-	int fd;
+	size_t	i;
 
-	fd = open(file_name, O_RDONLY);
-	if (fd == -1)
-		printf(OPEN_FD_ERROR);	
-	return (fd);
+	i = 0;
+	while (array[i])
+		i++;
+	return (i);
 }
 
-int	safe_close(int fd)
-{
-	if (close(fd) == -1)
-	{
-		printf(CLOSE_FD_ERROR);
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
-}
+// int main(int argc, char **argv)
+// {
+// 	int i = 0;
+// 	while (argv[i])
+// 	{
+// 		printf("%s ; ", argv[i]);
+// 		i++;
+// 	}
+// 	printf("nb = %zu\n", ft_array_size(argv));
+// }

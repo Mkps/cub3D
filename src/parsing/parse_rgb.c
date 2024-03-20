@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:34:15 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 17:24:53 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/20 12:10:07 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int parse_and_get_rgb(int *i, int flag, t_data *data)
 	int index;
 
 	++(*i);
-	if (!data->mapinfo.file[*i] || data->mapinfo.file[*i] != ' ')
+	if (!data->mapinfo.file[*i] || !is_whitespace(data->mapinfo.file[*i]))
         return (output_error(data->mapinfo.file, SYNTAX_ERROR, 1)); 
 
-	while (data->mapinfo.file[*i] && data->mapinfo.file[*i] == ' ')
+	while (data->mapinfo.file[*i] && is_whitespace(data->mapinfo.file[*i]))
 		++(*i);
 			
 	if (check_rgb_syntax(data->mapinfo.file + *i))
@@ -32,6 +32,8 @@ int parse_and_get_rgb(int *i, int flag, t_data *data)
 	red = ft_atoi_rgb(data->mapinfo.file + index, &index);
 	green = ft_atoi_rgb(data->mapinfo.file + index, &index);
 	blue = ft_atoi_rgb(data->mapinfo.file + index, &index);
+
+
 	if (check_rgb_values(red, green, blue))
 		return(print_error(RGB_VALUE_ERROR));
 	if (flag == FLOOR)

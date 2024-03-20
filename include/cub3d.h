@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:44:10 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 17:41:39 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:24:14 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <fcntl.h>
 # include <aio.h>
 # include <stdlib.h>
-# include "../minilibx/mlx.h"
+// # include "../minilibx/mlx.h"
 
 
 typedef void (*	t_function_ptr)(t_data *data);
@@ -108,7 +108,7 @@ int			check_map_validity(t_data *data, char **map_tab);
 int			check_textures_validity(t_data *data, t_world *w);
 
 int safe_open(char *file_name);
-void safe_close(int fd);
+int safe_close(int fd);
 // int get_map_nb_lines(char **map);
 int	get_map_width(char **map, t_data *data);
 int ft_rgb_to_int(int red, int green, int blue);

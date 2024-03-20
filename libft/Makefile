@@ -6,7 +6,7 @@
 #    By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 17:37:47 by aloubier          #+#    #+#              #
-#    Updated: 2024/03/19 16:23:08 by rraffi-k         ###   ########.fr        #
+#    Updated: 2024/03/20 11:22:08 by rraffi-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC = ft_substr.c ft_strdup.c ft_calloc.c ft_memchr.c ft_memcmp.c ft_strnstr.c f
       ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
 	  ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c get_next_line.c \
 	  ft_printf.c ft_printf_hex.c ft_printf_nbr.c ft_printf_ptr.c ft_printf_utils.c ft_strjoin_n.c \
-	  ft_strjoin_and_free.c ft_atoi_rgb.c ft_strnchr.c \
+	  ft_strjoin_and_free.c ft_atoi_rgb.c ft_strnchr.c ft_array_size.c \
 
 OBJ = $(SRC:%.c= %.o)
 

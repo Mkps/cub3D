@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 17:45:49 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/20 12:09:21 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,29 @@
 int ft_rgb_to_int(int red, int green, int blue)
 {
     return ((int)red << 16) | ((int)green << 8) | blue;
+}
+
+int is_a_map_line(char *str)
+{
+	int	i;
+	int flag;
+
+	i = 0;
+	flag = 0;
+	while (str[i])
+	{
+		if (str[i] == '1' || str[i] == '0')
+			flag = 1;
+		if (str[i] != '1' && str[i] != '0' 
+			&& str[i] != 'N' && str[i] != 'S'
+			&& str[i] != 'W' && str[i] != 'E'
+			&& !is_whitespace(str[i]))
+			return (0);
+		++i;
+	}
+	if (flag)
+		return (1);
+	return (0);
 }
 
 int get_file_content(char *file_name, t_data *data)
@@ -38,7 +61,7 @@ int get_file_content(char *file_name, t_data *data)
 	{
 		data->mapinfo.file = ft_strjoin_and_free(data->mapinfo.file, line);
 		data->mapinfo.file_size += ft_strlen(line);
-		if (ft_isdigit(line[0]))
+		if (is_a_map_line(line))
 			++map_height;
 		free(line);
 		line = get_next_line(data->fd);
@@ -142,6 +165,7 @@ int	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 {
 	static int line = 0;
 	int j;
+	int l;
 
 	data->cmap[line] = ft_calloc(sizeof(char), data->mapinfo.width + 1);
 	
@@ -151,18 +175,18 @@ int	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 		data->cmap[line][j] = ' ';		
 		++j;
 	}
-	j = 0;
-	while (file[j] && file[j] != '\n')
+	l = 0;
+	while (file[l] && file[l] != '\n')
 	{
-		data->cmap[line][j] = file[j];
-		++j;
+		data->cmap[line][j + l] = file[l];
+		++l;
 	}
-	while (j < data->mapinfo.width)
+	while (j + l < data->mapinfo.width)
 	{
-		data->cmap[line][j] = ' ';
-		++j;
+		data->cmap[line][j + l] = ' ';
+		++l;
 	}
-	data->cmap[line][j] = '\0';
+	data->cmap[line][j + l] = '\0';
 	*i += ft_strlen_eol(file) + 1;
 	line++;
 	return (line);
@@ -172,7 +196,7 @@ int is_whitespace(char c)
 {
 	if (c == '\f' || c == '\n'
 		|| c == '\r' || c == '\t'
-		|| c == '\v')
+		|| c == '\v' || c == ' ')
 		return (1);
 	return (0);
 }
@@ -190,63 +214,43 @@ int	parse_file(char *file_name, t_data *data)
 
 	nb_whitespaces = 0;
 	data->cmap = ft_calloc(sizeof(char *), data->mapinfo.height + 1);
+
+
 	while (data->mapinfo.file[i])
 	{
-		while (is_whitespace(data->mapinfo.file[i]))
+		nb_whitespaces = 0;
+		while (data->mapinfo.file[i] && is_whitespace(data->mapinfo.file[i]))
 		{
 			++nb_whitespaces;
 			++i;
 		}
-		if (ft_isprint(data->mapinfo.file[i]) && !ft_isdigit(data->mapinfo.file[i]))
+		if (data->mapinfo.file[i] && ft_isprint(data->mapinfo.file[i]) && !ft_isdigit(data->mapinfo.file[i]))
 		{
 			if (parse_cardinal_pt(&i, data->mapinfo.file, data))
 				return (EXIT_FAILURE);
 
 			if (parse_rgb(&i, data->mapinfo.file, data))
 				return (EXIT_FAILURE);
-				
+			
 			i += ft_strlen_eol(data->mapinfo.file + i) + 1;
+
+			while (data->mapinfo.file[i] && is_whitespace(data->mapinfo.file[i]))
+				++i;
 		}
-		else if (ft_isdigit(data->mapinfo.file[i]))
+		else if (data->mapinfo.file[i] && ft_isdigit(data->mapinfo.file[i]))
 			nb_lines = fill_map_line(nb_whitespaces, &i, data->mapinfo.file + i, data);
 		else
-			i++;
+			++i;
+	}
+	
+	int j = 0;
+	while (data->cmap[j])
+	{
+		printf("%s\n", data->cmap[j]);
+		j++;
 	}
 	return (EXIT_SUCCESS);
 }
-
-// int	parse_file(char *file_name, t_data *data)
-// {
-// 	int	i;
-// 	int nb_lines;
-		
-// 	get_file_content(file_name, data);
-
-// 	data->checklist = (t_checklist){0};
-// 	i = 0;
-
-// 	data->mapinfo->map = malloc(sizeof(char *) * data->mapinfo->height + 1);
-// 	data->mapinfo->map[0] = NULL;
-	
-// 	while (data->mapinfo->file[i])
-// 	{
-// 		if (ft_isprint(data->mapinfo->file[i]) && !ft_isdigit(data->mapinfo->file[i]))
-// 		{
-// 			if (parse_cardinal_pt(&i, data->mapinfo->file, data))
-// 				return (EXIT_FAILURE);
-
-// 			if (parse_rgb(&i, data->mapinfo->file, data))
-// 				return (EXIT_FAILURE);
-				
-// 			i += ft_strlen_eol(data->mapinfo->file + i) + 1;
-// 		}
-// 		else if (ft_isdigit(data->mapinfo->file[i]))
-// 			nb_lines = fill_map_line(&i, data->mapinfo->file + i, data);
-// 		else
-// 			i++;
-// 	}
-// 	return (EXIT_SUCCESS);
-// }
 
 void	get_player_info_cont(int i, int j, char **map, t_data *data)
 {
@@ -366,21 +370,24 @@ void	ft_free_all(t_data *data)
 //	free(data.mapinfo);
 	// free(data->player);	
 
-/**
-int main(int argc, char **argv, t_data *data)
+
+int main(int argc, char **argv)
 {
-	if (parse_file(argv[1], data))
+	t_data data;
+
+
+	if (parse_file(argv[1], &data))
 		return (EXIT_FAILURE);
-	if (check_paths(data->mapinfo))
+	if (check_paths(&data.mapinfo))
 		return (EXIT_FAILURE);
-	if (check_map_is_valid(data->cmap, data))
+	if (check_map_is_valid(data.cmap, &data))
 		return (EXIT_FAILURE);
-	if (search_player(data->cmap, data))
+	if (search_player(data.cmap, &data))
 		return (EXIT_FAILURE);
-	print_info(data);
-	ft_free_all(data);
+	print_info(&data);
+	ft_free_all(&data);
 }
-**/
+
 
 // int	main(int argc, char **argv)
 // {
