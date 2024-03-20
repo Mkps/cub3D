@@ -33,6 +33,9 @@
 
 typedef void (*	t_function_ptr)(t_data *data);
 
+int			is_a_map_line(char *str); 
+int			parse_rgb(int *i, char *file, t_data *data); 
+int			fill_map_line(int nb_ws, int *i, char *file, t_data *data);
 int			load_textures(t_data *data);
 int			pdir_check(t_data *data, char c);
 int			has_island(t_data *data);

@@ -29,9 +29,7 @@ SRC_NAME =	main.c \
 			parsing/parse_rgb.c \
 			parsing/struct_utils.c \
 			parsing/ft_import.c \
-			parsing/set_pdir.c \
 			parsing/init_data.c \
-			parsing/parsing.c \
 			parsing/utils.c \
 			render/hooks.c \
 			render/raycast_wall.c \
