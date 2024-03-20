@@ -6,20 +6,19 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:15 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 11:13:24 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:34:39 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-
-int safe_open(char *file_name)
+int	safe_open(char *file_name)
 {
-	int fd;
+	int	fd;
 
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
-		printf(OPEN_FD_ERROR);	
+		printf(OPEN_FD_ERROR);
 	return (fd);
 }
 
