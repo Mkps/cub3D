@@ -15,8 +15,10 @@
 int	parse_cardinal_pt(int *i, char *file, t_data *data)
 {
 	if (file[*i] == 'N' && file[*i + 1] && file[*i + 1] == 'O')
+	{
 		if (get_north_texture(i, file, data))
 			return (EXIT_FAILURE);
+	}
 	else if (file[*i] == 'S' && file[*i + 1]
 		&& file[*i + 1] == 'O')
 	{
@@ -38,14 +40,17 @@ int	parse_cardinal_pt(int *i, char *file, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-void	skip_first_whitespaces(int *nb_whitespaces, int *i, t_data *data)
+int	skip_first_whitespaces(int *i, t_data *data)
 {
+	int	nb_whitespaces;
+
 	nb_whitespaces = 0;
 	while (data->mapinfo.file[*i] && is_whitespace(data->mapinfo.file[*i]))
 	{
 		++(*i);
-		++(*nb_whitespaces);
+		++nb_whitespaces;
 	}
+	return (nb_whitespaces);
 }
 
 int	parse_info_line(int *i, char *file, t_data *data)
@@ -70,7 +75,7 @@ int	parse_file(char *file_name, t_data *data)
 	data->cmap = ft_calloc(sizeof(char *), data->mapinfo.height + 1);
 	while (data->mapinfo.file[i])
 	{
-		skip_first_whitespaces(&nb_whitespaces, &i, data);
+		nb_whitespaces = skip_first_whitespaces(&i, data);
 		if (data->mapinfo.file[i]
 			&& ft_isprint(data->mapinfo.file[i])
 			&& !ft_isdigit(data->mapinfo.file[i]))

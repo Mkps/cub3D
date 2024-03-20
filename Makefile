@@ -6,7 +6,7 @@
 #    By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 12:58:01 by aloubier          #+#    #+#              #
-#    Updated: 2024/03/20 15:23:28 by rraffi-k         ###   ########.fr        #
+#    Updated: 2024/03/20 15:40:02 by rraffi-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,17 @@ INCDIR = ./include/
 OBJ_DIR = ./build
 
 SRC_NAME =	main.c \
-			error_handling.c \
 			bonus/bonus_utils_door.c \
 			bonus/minimap.c \
+			error_handling.c \
+			parsing/parse_player_info.c \
 			parsing/check_data_validity.c \
 			parsing/safe_fd_functions.c \
 			parsing/main_parsing.c \
+			parsing/get_textures.c \
 			parsing/parsing_utils.c \
+			parsing/check_map_utils.c \
+			parsing/fill_and_check_map.c \
 			parsing/parse_rgb.c \
 			parsing/struct_utils.c \
 			parsing/ft_import.c \
@@ -33,6 +37,7 @@ SRC_NAME =	main.c \
 			parsing/utils.c \
 			parsing/get_file_content.c \
 			parsing/check_map_walls.c \
+			parsing/parsing_free.c \
 			render/hooks.c \
 			render/raycast_wall.c \
 			render/exit.c \
@@ -47,7 +52,7 @@ SRC_NAME =	main.c \
 			render/destroy.c \
 			render/key_input.c \
 			render/raycast_wall_init.c \
-			render/player_move.c \
+			render/player_move.c
 
 SRC = $(addprefix $(SRCDIR)/, $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_NAME:c=o))
