@@ -111,11 +111,11 @@ int	ft_import(char **argv, t_data *data)
 	if (parse_file(argv[1], data) == EXIT_FAILURE)
 		ft_mlx_exit(data, EXIT_FAILURE);
 	if (check_paths(&data->mapinfo) == EXIT_FAILURE)
-		ft_mlx_exit(data, EXIT_FAILURE);
+		return (ft_exit_cleanup(data, EXIT_FAILURE));
 	if (check_map_is_valid(data->cmap, data) == EXIT_FAILURE)
 		return (ft_exit_cleanup(data, EXIT_FAILURE));
     if (search_player(data->cmap, data))
-        return (EXIT_FAILURE);
+        return (ft_exit_cleanup(data, EXIT_FAILURE));
     print_info(data);
 	if (map_convert(data) == EXIT_FAILURE)
 		return (ft_exit_cleanup(data, EXIT_FAILURE));

@@ -42,11 +42,11 @@ void	destroy_map(t_data *data)
 	if (data->map)
 	{
 		while (++x < data->mapinfo.height)
-		{
 			free(data->map[x]);
-		}
+	    x = -1;
 	}
-	x = -1;
+	if (data->map)
+		free(data->map);
 	if (data->cmap)
 	{
 		while (data->cmap[++x])
@@ -56,9 +56,8 @@ void	destroy_map(t_data *data)
 	if (data->mapinfo.fd > 0)
 		close(data->mapinfo.fd);
 	if (data->mapinfo.file)
-		free_tab((void **)data->mapinfo.file);
-	if (data->map)
-		free(data->map);
+        free(data->mapinfo.file);
+		//free_tab((void **)data->mapinfo.file);
 }
 
 void	ft_mlx_exit(t_data *data, int errcode)
