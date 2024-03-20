@@ -34,10 +34,10 @@ int check_paths(t_mapinfo *mapinfo)
 		|| ft_strlen(mapinfo->we_texture) < 5)
 		return (EXIT_FAILURE);
 	
-	if (!access(mapinfo->no_texture, F_OK)
-		|| !access(mapinfo->so_texture, F_OK)
-		|| !access(mapinfo->ea_texture, F_OK)
-		|| !access(mapinfo->we_texture, F_OK))
+	if (access(mapinfo->no_texture, F_OK)
+		|| access(mapinfo->so_texture, F_OK)
+		|| access(mapinfo->ea_texture, F_OK)
+		|| access(mapinfo->we_texture, F_OK))
 		return (EXIT_FAILURE);
 	
 	if (check_xpm(mapinfo->no_texture)
