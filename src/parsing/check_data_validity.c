@@ -29,17 +29,18 @@ int	check_paths(t_mapinfo *mapinfo)
 		|| ft_strlen(mapinfo->so_texture) < 5
 		|| ft_strlen(mapinfo->ea_texture) < 5
 		|| ft_strlen(mapinfo->we_texture) < 5)
-		return (EXIT_FAILURE);
+		return (output_error(NULL, "Invalid texture", 1));
+	printf("herea1\n");
 	if (access(mapinfo->no_texture, F_OK)
 		|| access(mapinfo->so_texture, F_OK)
 		|| access(mapinfo->ea_texture, F_OK)
 		|| access(mapinfo->we_texture, F_OK))
-		return (EXIT_FAILURE);
+		return (output_error(NULL, "Invalid texture", 1));
 	if (check_xpm(mapinfo->no_texture)
 		|| check_xpm(mapinfo->so_texture)
 		|| check_xpm(mapinfo->ea_texture)
 		|| check_xpm(mapinfo->we_texture))
-		return (EXIT_FAILURE);
+		return (output_error(NULL, "Invalid texture", 1));
 	return (EXIT_SUCCESS);
 }
 
