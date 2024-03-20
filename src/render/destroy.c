@@ -40,9 +40,22 @@ void	destroy_walls(t_data *data)
 	}
 }
 
+void	destroy_mapinfo(t_data *data)
+{
+	if (data->mapinfo.no_texture)
+		free(data->mapinfo.no_texture);
+	if (data->mapinfo.so_texture)
+		free(data->mapinfo.so_texture);
+	if (data->mapinfo.ea_texture)
+		free(data->mapinfo.ea_texture);
+	if (data->mapinfo.we_texture)
+		free(data->mapinfo.we_texture);
+}
+
 void	destroy_world(t_data *data)
 {
 	destroy_walls(data);
+	destroy_mapinfo(data);
 	destroy_door(data);
 	if (!data->world.is_f_color)
 		mlx_destroy_image(data->mlx, data->world.f.img.img);
