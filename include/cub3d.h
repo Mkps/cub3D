@@ -33,9 +33,18 @@
 
 typedef void (*	t_function_ptr)(t_data *data);
 
+void		skip_whitespaces(int *i, char *file);
+int			get_north_texture(int *i, char *file, t_data *data);
+int			get_south_texture(int *i, char *file, t_data *data);
+int			get_west_texture(int *i, char *file, t_data *data);
+int			get_east_texture(int *i, char *file, t_data *data);
+int			check_left_wall(char **map, t_data *data);
+int			check_upper_wall(char **map, t_data *data);
+int			check_bottom_wall(char **map, t_data *data);
+int			check_right_wall(char **map, t_data *data);
 int			is_a_map_line(char *str); 
 int			parse_rgb(int *i, char *file, t_data *data); 
-int			fill_map_line(int nb_ws, int *i, char *file, t_data *data);
+void		fill_map_line(int nb_ws, int *i, char *file, t_data *data);
 int			load_textures(t_data *data);
 int			pdir_check(t_data *data, char c);
 int			has_island(t_data *data);
