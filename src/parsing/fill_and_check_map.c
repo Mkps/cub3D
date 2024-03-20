@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:57:08 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 16:07:42 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:18:25 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ int	check_map_is_closed(char **map, t_data *data)
 
 int	check_map_is_valid(char **map, t_data *data)
 {
+
+	int i = 0;
+	while (map[i])
+	{
+		printf("%s\n", map[i]);
+		++i;
+	}
+	
 	(void)map;
 	if (data->mapinfo.width < 3 || data->mapinfo.height < 3
 		|| check_map_is_closed(data->cmap, data))
@@ -40,7 +48,7 @@ void	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 	int			j;
 	int			l;
 
-	data->cmap[line] = ft_calloc(sizeof(char), data->mapinfo.width + 1);
+	data->cmap[line] = ft_calloc(sizeof(char), data->mapinfo.width + 2);
 	j = 0;
 	while (j < nb_whitespaces)
 	{
@@ -48,7 +56,7 @@ void	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 		++j;
 	}
 	l = 0;
-	while (file[l] && file[l] != '\n')
+	while (j + l < data->mapinfo.width && file[l] && file[l] != '\n')
 	{
 		data->cmap[line][j + l] = file[l];
 		l++;

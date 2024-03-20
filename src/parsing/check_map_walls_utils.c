@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:30:43 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 15:48:08 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:17:44 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,25 @@
 
 int	upper_elem_not_surrounded(int i, int j, char **map)
 {
+
+/* 
+
+Si en-dessous d'un SPACE ce n'est ni un 1 ni un SPACE,
+OU 
+que c'est un SPACE mais pas de 1 ni de SPACE a droite
+OU
+que c'est un SPACE mais pas de 1 ni de SPACE a gauche
+
+>>>>> ERREUR
+*/
+
+
 	if ((map[i][j]
 		&& (map[i][j] != ' ' && map[i][j] != '1'))
 		|| ((map[i][j] && map[i][j] != '1'
 			&& map[i][j + 1] && map[i][j + 1] != '1'
 			&& map[i][j + 1] != ' ')
-		|| (map[i][j] && map[i][j] != '1' && map[i][j - 1]
+		|| (map[i][j] && map[i][j] != '1' && j > 1 && map[i][j - 1]
 			&& map[i][j - 1] != '1' && map[i][j - 1] != ' ')))
 		return (1);
 	return (0);
@@ -32,7 +45,7 @@ int	bottom_elem_not_surrounded(int i, int j, char **map)
 		|| ((map[i][j] && map[i][j] != '1'
 			&& map[i][j + 1] && map[i][j + 1] != '1'
 			&& map[i][j + 1] != ' ')
-		|| (map[i][j] && map[i][j] != '1'
+		|| (map[i][j] && map[i][j] != '1' && j > 1
 			&& map[i][j - 1] && map[i][j - 1] != '1'
 			&& map[i][j - 1] != ' ')))
 		return (1);

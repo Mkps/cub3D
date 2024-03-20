@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 15:18:27 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:26:04 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ int	skip_first_whitespaces(int *i, t_data *data)
 	int	nb_whitespaces;
 
 	nb_whitespaces = 0;
-	while (data->mapinfo.file[*i] && is_whitespace(data->mapinfo.file[*i]))
+	while (data->mapinfo.file[*i]
+		&& is_whitespace(data->mapinfo.file[*i])
+		&& next_line_not_empty(*i, data->mapinfo.file))
 	{
 		++(*i);
 		++nb_whitespaces;
