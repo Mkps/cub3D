@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 12:09:21 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 12:15:14 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -375,7 +375,7 @@ int main(int argc, char **argv)
 {
 	t_data data;
 
-
+	data.mapinfo.path = argv[1];
 	if (parse_file(argv[1], &data))
 		return (EXIT_FAILURE);
 	if (check_paths(&data.mapinfo))
