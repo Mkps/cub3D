@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 12:15:14 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 12:20:28 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 		data->checklist.check_so = 1;
 		*i += 2;
 		if (!file[*i] || !is_whitespace(file[*i]))
+			return (output_error(NULL, SYNTAX_ERROR, 1));
 		while (is_whitespace(file[*i]))
 			++(*i);
 		data->mapinfo.so_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
