@@ -59,15 +59,19 @@ int	load_textures(t_data *data)
 	data->world.n = xpm_load(data, data->mapinfo.no_texture);
 	if (!data->world.n.path)
 		return (EXIT_FAILURE);
+	data->mapinfo.no_texture = NULL;
 	data->world.s = xpm_load(data, data->mapinfo.so_texture);
 	if (!data->world.s.path)
 		return (EXIT_FAILURE);
+	data->mapinfo.so_texture = NULL;
 	data->world.e = xpm_load(data, data->mapinfo.ea_texture);
 	if (!data->world.e.path)
 		return (EXIT_FAILURE);
+	data->mapinfo.ea_texture = NULL;
 	data->world.w = xpm_load(data, data->mapinfo.we_texture);
 	if (!data->world.w.path)
 		return (EXIT_FAILURE);
+	data->mapinfo.we_texture = NULL;
 	data->world.f_color = data->mapinfo.f_color;
 	data->world.c_color = data->mapinfo.c_color;
 	if (BONUS > 0 && data->world.d.path)

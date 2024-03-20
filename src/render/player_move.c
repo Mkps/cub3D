@@ -23,7 +23,6 @@ static void	move_forward(t_data *data)
 
 	m_x = data->player.pos_x + data->player.dir_x * MS;
 	m_y = data->player.pos_y + data->player.dir_y * MS;
-
 	if (m_x > 0.25 && m_x < data->mapinfo.height - 0.25)
 	{
 		map.x = data->map[(int)m_x][(int)(data->player.pos_y)];
