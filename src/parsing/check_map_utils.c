@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   check_map_is_closed.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:06:05 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/19 17:10:55 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/20 13:59:26 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,23 +178,6 @@ int check_right_wall(char **map, t_data *data)
 		}
 		++i;
 	}
-	return (EXIT_SUCCESS);
-}
-
-int	check_map_is_closed(char **map, t_data *data)
-{
-	// int i1 = check_bottom_wall(map) ;
-	// int i2 = check_upper_wall(map);
-	// int i3 = check_left_wall(map);
-	// int i4 = check_right_wall(map);
-
-	// printf("%d\n%d\n%d\n%d\n", i1, i2, i3, i4);
-
-	if (check_bottom_wall(map, data) == -1
-		|| check_upper_wall(map, data) == - 1
-		|| check_left_wall(map, data) == -1
-		|| check_right_wall(map, data) == -1)
-		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

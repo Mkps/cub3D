@@ -6,13 +6,26 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:11:43 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 12:20:58 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 13:52:20 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
+int	print_error(char *error_message)
+{
+	printf("%s\n", error_message);
+	return (EXIT_FAILURE);
+}
 
+int	is_whitespace(char c)
+{
+	if (c == '\f' || c == '\n'
+		|| c == '\r' || c == '\t'
+		|| c == '\v' || c == ' ')
+		return (1);
+	return (0);
+}
 
 int ft_strlen_eol(char *str)
 {
@@ -23,16 +36,6 @@ int ft_strlen_eol(char *str)
 		i++;
 	return (i);
 }
-
-// int ft_strlen_comma(char *str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (str[i] && str[i] != ',')
-// 		i++;
-// 	return (i);
-// }
 
 void	print_info(t_data *data)
 {
