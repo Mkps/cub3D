@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:57:08 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 15:38:35 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:07:42 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,11 @@ void	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 	l = 0;
 	while (file[l] && file[l] != '\n')
 	{
-		data->cmap[line][j + l] = file[l];
+		if (file[j] == 'N' || file[j] == 'S'
+			|| file[j] == 'E' || file[j] == 'W')
+			data->cmap[line][j + l] = '0';
+		else
+			data->cmap[line][j + l] = file[l];
 		++l;
 	}
 	while (j + l < data->mapinfo.width)
