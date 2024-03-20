@@ -47,16 +47,9 @@ void	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 		data->cmap[line][j] = ' ';
 		++j;
 	}
-	l = 0;
-	while (file[l] && file[l] != '\n')
-	{
-		if (file[j] == 'N' || file[j] == 'S'
-			|| file[j] == 'E' || file[j] == 'W')
-			data->cmap[line][j + l] = '0';
-		else
-			data->cmap[line][j + l] = file[l];
-		++l;
-	}
+	l = -1;
+	while (file[++l] && file[l] != '\n')
+		data->cmap[line][j + l] = file[l];
 	while (j + l < data->mapinfo.width)
 	{
 		data->cmap[line][j + l] = ' ';
