@@ -21,13 +21,13 @@ int parse_and_get_rgb(int *i, int flag, t_data *data)
 
 	++(*i);
 	if (!data->mapinfo.file[*i] || !is_whitespace(data->mapinfo.file[*i]))
-        return (output_error(data->mapinfo.file, SYNTAX_ERROR, 1)); 
+        return (output_error(data->mapinfo.path, SYNTAX_ERROR, 1)); 
 
 	while (data->mapinfo.file[*i] && is_whitespace(data->mapinfo.file[*i]))
 		++(*i);
 			
 	if (check_rgb_syntax(data->mapinfo.file + *i))
-        return (output_error(data->mapinfo.file, SYNTAX_ERROR, 1)); 
+        return (output_error(data->mapinfo.path, SYNTAX_ERROR, 1)); 
 	index = *i;
 	red = ft_atoi_rgb(data->mapinfo.file + index, &index);
 	green = ft_atoi_rgb(data->mapinfo.file + index, &index);
