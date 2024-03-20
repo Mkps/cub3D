@@ -28,7 +28,7 @@
 # include <fcntl.h>
 # include <aio.h>
 # include <stdlib.h>
-// # include "../minilibx/mlx.h"
+# include "../minilibx/mlx.h"
 
 
 typedef void (*	t_function_ptr)(t_data *data);

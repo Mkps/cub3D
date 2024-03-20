@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:13:22 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 13:44:05 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:40:11 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	check_paths(t_mapinfo *mapinfo)
 		|| ft_strlen(mapinfo->ea_texture) < 5
 		|| ft_strlen(mapinfo->we_texture) < 5)
 		return (EXIT_FAILURE);
-	if (!access(mapinfo->no_texture, F_OK)
-		|| !access(mapinfo->so_texture, F_OK)
-		|| !access(mapinfo->ea_texture, F_OK)
-		|| !access(mapinfo->we_texture, F_OK))
+	if (access(mapinfo->no_texture, F_OK)
+		|| access(mapinfo->so_texture, F_OK)
+		|| access(mapinfo->ea_texture, F_OK)
+		|| access(mapinfo->we_texture, F_OK))
 		return (EXIT_FAILURE);
 	if (check_xpm(mapinfo->no_texture)
 		|| check_xpm(mapinfo->so_texture)
