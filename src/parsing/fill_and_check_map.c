@@ -64,6 +64,7 @@ void	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 	}
 	data->cmap[line][j + l] = '\0';
 	*i += ft_strlen_eol(file) + 1;
+	line++;
 }
 
 int	is_a_map_line(char *str)

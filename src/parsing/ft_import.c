@@ -116,7 +116,7 @@ int	ft_import(char **argv, t_data *data)
 		return (ft_exit_cleanup(data, EXIT_FAILURE));
 	if (search_player(data->cmap, data))
 		return (ft_exit_cleanup(data, EXIT_FAILURE));
-	print_info(data);
+	//print_info(data);
 	if (map_convert(data) == EXIT_FAILURE)
 		return (ft_exit_cleanup(data, EXIT_FAILURE));
 	if (load_textures(data))
