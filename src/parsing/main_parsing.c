@@ -6,11 +6,20 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 14:04:40 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:32:04 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void	init_data_mapinfo(char *file_name, t_data *data)
+{
+	data->fd = safe_open(file_name);
+	if (data->fd == -1)
+		return (EXIT_FAILURE);
+	data->mapinfo.file = ft_strdup("\0");
+	data->mapinfo.file_size = 0;
+}
 
 int	get_file_content(char *file_name, t_data *data)
 {
@@ -19,11 +28,7 @@ int	get_file_content(char *file_name, t_data *data)
 	int		max_width;
 	int		map_height;
 
-	data->fd = safe_open(file_name);
-	if (data->fd == -1)
-		return (EXIT_FAILURE);
-	data->mapinfo.file = ft_strdup("\0");
-	data->mapinfo.file_size = 0;
+	init_data_mapinfo(file_name, data);
 	line = get_next_line(data->fd);
 	max_width = ft_strlen(line);
 	map_height = 0;
@@ -44,6 +49,7 @@ int	get_file_content(char *file_name, t_data *data)
 	data->mapinfo.height = map_height;
 	return (EXIT_SUCCESS);
 }
+
 
 int	parse_cardinal_pt(int *i, char *file, t_data *data)
 {
@@ -105,6 +111,29 @@ int	parse_cardinal_pt(int *i, char *file, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+int	next_line_not_empty(int i, char *file)
+{
+	while (file[i] && file[i] != '\n')
+	{
+		if (file[i] == '1')
+			return (1);
+		++i;
+	}
+	return (0);
+}
+
+void	skip_whitespaces(int *i, char *file)
+{
+	while (file[*i])
+	{
+		if (file[*i] == '\n'
+			&& next_line_not_empty(*i, file + *i + 1))
+			return ;
+		else if (is_whitespace(file[*i]))
+			++(*i);
+	}
+}
+
 int	parse_file(char *file_name, t_data *data)
 {
 	int	i;
@@ -134,9 +163,10 @@ int	parse_file(char *file_name, t_data *data)
 			if (parse_rgb(&i, data->mapinfo.file, data))
 				return (EXIT_FAILURE);
 			i += ft_strlen_eol(data->mapinfo.file + i) + 1;
-			while (data->mapinfo.file[i]
-				&& is_whitespace(data->mapinfo.file[i]))
-				++i;
+			// while (data->mapinfo.file[i]
+			// 	&& is_whitespace(data->mapinfo.file[i]))
+			// 	++i;
+			skip_whitespaces(&i, data->mapinfo.file);
 		}
 		else if (data->mapinfo.file[i]
 			&& ft_isdigit(data->mapinfo.file[i]))
