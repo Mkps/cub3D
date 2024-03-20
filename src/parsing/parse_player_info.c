@@ -71,9 +71,9 @@ int	search_player(char **map, t_data *data)
 			if (map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'E' || map[i][j] == 'W')
 			{
-				map[i][j] = '0';
 				if (get_player_info(i, j, map, data))
 					return (EXIT_FAILURE);
+				map[i][j] = '0';
 			}
 			++j;
 		}
