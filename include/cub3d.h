@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:44:10 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/20 15:48:41 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:49:54 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,9 @@ int	right_elem_not_surrounded(int i, int j, char **map, int height);
 int	get_file_content(char *file_name, t_data *data);
 int	init_data_mapinfo(char *file_name, t_data *data);
 int	check_xpm(char *str);
+int	chr_convert(char c);
+static void	free_map(t_data *data, int current_index);
+
 
 
 #endif
