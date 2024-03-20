@@ -6,19 +6,20 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 14:38:16 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:46:25 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	init_data_mapinfo(char *file_name, t_data *data)
+int	init_data_mapinfo(char *file_name, t_data *data)
 {
 	data->fd = safe_open(file_name);
 	if (data->fd == -1)
 		return (EXIT_FAILURE);
 	data->mapinfo.file = ft_strdup("\0");
 	data->mapinfo.file_size = 0;
+	return (EXIT_SUCCESS);
 }
 
 int	get_file_content(char *file_name, t_data *data)
@@ -163,9 +164,6 @@ int	parse_file(char *file_name, t_data *data)
 			if (parse_rgb(&i, data->mapinfo.file, data))
 				return (EXIT_FAILURE);
 			i += ft_strlen_eol(data->mapinfo.file + i) + 1;
-			// while (data->mapinfo.file[i]
-			// 	&& is_whitespace(data->mapinfo.file[i]))
-			// 	++i;
 			skip_whitespaces(&i, data->mapinfo.file);
 		}
 		else if (data->mapinfo.file[i]
