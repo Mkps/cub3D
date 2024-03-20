@@ -25,8 +25,8 @@ void	init_wall(t_data *data, t_ray_data ray, t_wall *t)
 	t->draw.y = (double)t->line_h / 2 + (double)t->h / 2;
 	if (t->draw.y >= t->h)
 		t->draw.y = t->h - 1;
-	if (ray.map.x < 0 || ray.map.x > data->mapinfo.height
-		|| ray.map.y < 0 || ray.map.y > data->mapinfo.width)
+	if (ray.map.x < 0 || ray.map.x >= data->mapinfo.height 
+		|| ray.map.y < 0 || ray.map.y >= data->mapinfo.width)
 		t->tex_num = 0;
 	else
 		t->tex_num = data->map[(int)ray.map.x][(int)ray.map.y];

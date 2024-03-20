@@ -15,10 +15,10 @@
 
 int check_paths(t_mapinfo *mapinfo)
 {
-	if (!access(mapinfo->no_texture, F_OK)
-		|| !access(mapinfo->so_texture, F_OK)
-		|| !access(mapinfo->ea_texture, F_OK)
-		|| !access(mapinfo->we_texture, F_OK))
+	if (access(mapinfo->no_texture, F_OK)
+		|| access(mapinfo->so_texture, F_OK)
+		|| access(mapinfo->ea_texture, F_OK)
+		|| access(mapinfo->we_texture, F_OK))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

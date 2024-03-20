@@ -18,12 +18,11 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (output_error(NULL, "Incorrect argument count", 1));
+	data.mapinfo.path = argv[1];
 	if (ft_data_init(&data) != EXIT_SUCCESS)
 		ft_mlx_exit(&data, EXIT_FAILURE);
 	if (ft_import(argv, &data) == EXIT_FAILURE)
-	{
 		return (EXIT_FAILURE);
-	}
 	mlx_hook(data.w_ptr, 6, 1L << 6, ft_mlx_mouse_move, &data);
 	mlx_mouse_hook(data.w_ptr, ft_mlx_mouse_hook, &data);
 	mlx_hook(data.w_ptr, 2, 1L << 0, ft_mlx_key_hook, &data);

@@ -313,6 +313,7 @@ int	search_player(char **map, t_data *data)
 			{
 				if (get_player_info(i, j, map, data))
 					return (EXIT_FAILURE);
+				map[i][j] = '0';
 			}
 			++j;
 		}
@@ -370,7 +371,7 @@ void	ft_free_all(t_data *data)
 //	free(data.mapinfo);
 	// free(data->player);	
 
-
+/**
 int main(int argc, char **argv)
 {
 	t_data data;
@@ -387,6 +388,7 @@ int main(int argc, char **argv)
 	print_info(&data);
 	ft_free_all(&data);
 }
+*/
 
 
 // int	main(int argc, char **argv)
