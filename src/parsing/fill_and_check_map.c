@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:57:08 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 15:12:14 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:38:35 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_map_is_closed(char **map, t_data *data)
 {
 	if (check_bottom_wall(map, data) == -1
-		|| check_upper_wall(map, data) == - 1
+		|| check_upper_wall(map, data) == -1
 		|| check_left_wall(map, data) == -1
 		|| check_right_wall(map, data) == -1)
 		return (EXIT_FAILURE);
@@ -84,4 +84,3 @@ int	is_a_map_line(char *str)
 		return (1);
 	return (0);
 }
-

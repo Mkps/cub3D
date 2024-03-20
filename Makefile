@@ -6,7 +6,7 @@
 #    By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 12:58:01 by aloubier          #+#    #+#              #
-#    Updated: 2024/03/19 16:44:24 by rraffi-k         ###   ########.fr        #
+#    Updated: 2024/03/20 15:23:28 by rraffi-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SRC_NAME =	main.c \
 			parsing/ft_import.c \
 			parsing/init_data.c \
 			parsing/utils.c \
+			parsing/get_file_content.c \
+			parsing/check_map_walls.c \
 			render/hooks.c \
 			render/raycast_wall.c \
 			render/exit.c \
