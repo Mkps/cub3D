@@ -63,11 +63,11 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 	if (file[*i] == 'N' && file[*i + 1] && file[*i + 1] == 'O')
 	{
 		if (data->checklist.check_no)
-			return (print_error(DUPLICATE_ERROR));
+			return (output_error(NULL, DUPLICATE_ERROR, 1));
 		data->checklist.check_no = 1;
 		*i += 2;
 		if (!file[*i] || !is_whitespace(file[*i]))
-			return (print_error(SYNTAX_ERROR));
+			return (output_error(NULL, SYNTAX_ERROR, 1));
 		while (is_whitespace(file[*i]))
 			++(*i);
 		data->mapinfo.no_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
@@ -75,11 +75,10 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 	else if (file[*i] == 'S' && file[*i + 1] && file[*i + 1] == 'O')
 	{
 		if (data->checklist.check_so)
-			return (print_error(DUPLICATE_ERROR));
+			return (output_error(NULL, DUPLICATE_ERROR, 1));
 		data->checklist.check_so = 1;
 		*i += 2;
 		if (!file[*i] || !is_whitespace(file[*i]))
-			return (print_error(SYNTAX_ERROR));
 		while (is_whitespace(file[*i]))
 			++(*i);
 		data->mapinfo.so_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
@@ -88,11 +87,11 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 	else if (file[*i] == 'W' && file[*i + 1] && file[*i + 1] == 'E')
 	{
 		if (data->checklist.check_we)
-			return (print_error(DUPLICATE_ERROR));
+			return (output_error(NULL, DUPLICATE_ERROR, 1));
 		data->checklist.check_we = 1;
 		*i += 2;
 		if (!file[*i] || !is_whitespace(file[*i]))
-			return (print_error(SYNTAX_ERROR));
+			return (output_error(NULL, SYNTAX_ERROR, 1));
 		
 		while (is_whitespace(file[*i]))
 			++(*i);
@@ -103,11 +102,11 @@ int parse_cardinal_pt(int *i, char *file, t_data *data)
 	else if (file[*i] == 'E' && file[*i + 1] && file[*i + 1] == 'A')
 	{
 		if (data->checklist.check_ea)
-			return (print_error(DUPLICATE_ERROR));
+			return (output_error(NULL, DUPLICATE_ERROR, 1));
 		data->checklist.check_ea = 1;
 		*i += 2;
 		if (!file[*i] || !is_whitespace(file[*i]))
-			return (print_error(SYNTAX_ERROR));
+			return (output_error(NULL, SYNTAX_ERROR, 1));
 		while (is_whitespace(file[*i]))
 			++(*i);
 		data->mapinfo.ea_texture = ft_substr(file + *i, 0, ft_strlen_eol(file + *i));
@@ -121,7 +120,7 @@ int parse_rgb(int *i, char *file, t_data *data)
 	if (file[*i] == 'F')
 	{
 		if (data->checklist.floor)
-			return (print_error(DUPLICATE_ERROR));
+			return (output_error(NULL, DUPLICATE_ERROR, 1));
 		data->checklist.floor = 1;
 		if (parse_and_get_rgb(i, FLOOR, data))
 			return (EXIT_FAILURE);
@@ -130,7 +129,7 @@ int parse_rgb(int *i, char *file, t_data *data)
 	else if (file[*i] == 'C')
 	{
 		if (data->checklist.ceiling)
-			return (print_error(DUPLICATE_ERROR));
+			return (output_error(NULL, DUPLICATE_ERROR, 1));
 		data->checklist.ceiling = 1;
 		if (parse_and_get_rgb(i, CEILING, data))
 			return (EXIT_FAILURE);
