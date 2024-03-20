@@ -33,6 +33,7 @@ int	init_img(t_data *data, t_img *current_img)
 	current_img->endian = endian;
 	return (EXIT_SUCCESS);
 }
+
 t_xpm	xpm_load(t_data *data, char *path)
 {
 	t_xpm	t;

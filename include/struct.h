@@ -37,14 +37,14 @@
 # define E_INVRGVF "Invalid RGB color for floor"
 # define E_DUPTXT "Duplicate texture"
 
-# define ARG_ERROR "Error : Invalid arguments"
-# define OPEN_FD_ERROR "Error : Could not open file"
-# define CLOSE_FD_ERROR "Error : Could not close file"
-# define DUPLICATE_ERROR "Error : Duplicate detected in file"
-# define SYNTAX_ERROR "Error : Wrong syntax"
-# define MAP_ERROR "Error : Map isn't valid"
-# define NO_PLAYER_ERROR "Error : There is no player"
-# define RGB_VALUE_ERROR "Error : There is no player"
+# define ARG_ERROR "Invalid arguments"
+# define OPEN_FD_ERROR "Could not open file"
+# define CLOSE_FD_ERROR "Could not close file"
+# define DUPLICATE_ERROR "Duplicate detected in file"
+# define SYNTAX_ERROR "Wrong syntax"
+# define MAP_ERROR "Map isn't valid"
+# define NO_PLAYER_ERROR "There is no player"
+# define RGB_VALUE_ERROR "Invalid RGB value"
 
 # define FLOOR 1
 # define CEILING 2
