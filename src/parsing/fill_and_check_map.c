@@ -43,7 +43,7 @@ int	map_is_fragmented(char **map, t_data *data)
 	i = 0;
 	while (i < data->mapinfo.height)
 	{
-		if (line_is_empty(map[i]) && i != data->mapinfo.height - 1)
+		if (!map[i] || (line_is_empty(map[i]) && i != data->mapinfo.height - 1))
 			return (1);
 		++i;
 	}
@@ -97,7 +97,7 @@ void	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 	int			j;
 	int			l;
 
-	data->cmap[line] = ft_calloc(sizeof(char), data->mapinfo.width + 2);
+	data->cmap[line] = ft_calloc(sizeof(char), data->mapinfo.width + 1);
 	j = 0;
 	if (line_is_empty_until_eol(file) && checklist_completed(data->checklist))
 	{
