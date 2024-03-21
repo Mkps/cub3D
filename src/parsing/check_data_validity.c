@@ -30,14 +30,6 @@ int	check_paths(t_mapinfo *mapinfo)
 		|| ft_strlen(mapinfo->ea_texture) < 5
 		|| ft_strlen(mapinfo->we_texture) < 5)
 		return (output_error(NULL, "Invalid texture length", 1));
-	if (access(mapinfo->no_texture, F_OK))
-		printf("n ko\n");
-	if (access(mapinfo->so_texture, F_OK))
-		printf("s ko\n");
-	if (access(mapinfo->we_texture, F_OK))
-		printf("w ko |%s|\n", mapinfo->we_texture);
-	if (access(mapinfo->ea_texture, F_OK))
-		printf("e ko\n");
 	if (access(mapinfo->no_texture, F_OK)
 		|| access(mapinfo->so_texture, F_OK)
 		|| access(mapinfo->ea_texture, F_OK)

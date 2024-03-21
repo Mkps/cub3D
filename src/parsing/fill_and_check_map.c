@@ -80,16 +80,13 @@ int	is_a_map_line(char *str)
 	flag = 0;
 	while (str[i])
 	{
+		while (is_whitespace(str[i]))
+			i++;
 		if (str[i] == '1' || str[i] == '0')
-			flag = 1;
-		if (str[i] != '1' && str[i] != '0'
-			&& str[i] != 'N' && str[i] != 'S'
-			&& str[i] != 'W' && str[i] != 'E'
-			&& !is_whitespace(str[i]))
+			return (1);
+		else
 			return (0);
 		++i;
 	}
-	if (flag)
-		return (1);
 	return (0);
 }
