@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/21 12:18:11 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:37:53 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ int	skip_first_whitespaces(int *i, t_data *data)
 	int	nb_whitespaces;
 
 	nb_whitespaces = 0;
+	
+	// printf("index %d ICI\n%s\n", *i, data->mapinfo.file);
+
 	while (data->mapinfo.file[*i]
 		&& is_whitespace(data->mapinfo.file[*i])
 		&& next_line_not_empty(*i, data->mapinfo.file))
@@ -57,6 +60,11 @@ int	skip_first_whitespaces(int *i, t_data *data)
 
 int	parse_info_line(int *i, char *file, t_data *data)
 {
+	static int l = 0;
+
+	// printf("%d - %c\n", l, file[*i]);
+	++l;
+
 	if (parse_cardinal_pt(i, file, data))
 		return (EXIT_FAILURE);
 	if (parse_rgb(i, file, data))

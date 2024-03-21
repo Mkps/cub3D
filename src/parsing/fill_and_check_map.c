@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:57:08 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 18:18:25 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:22:07 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	check_map_is_closed(char **map, t_data *data)
 int	check_map_is_valid(char **map, t_data *data)
 {
 
-	int i = 0;
-	while (map[i])
-	{
-		printf("%s\n", map[i]);
-		++i;
-	}
+	// int i = 0;
+	// while (map[i])
+	// {
+	// 	printf("%s\n", map[i]);
+	// 	++i;
+	// }
 	
 	(void)map;
 	if (data->mapinfo.width < 3 || data->mapinfo.height < 3
