@@ -69,8 +69,12 @@ int	parse_info_line(int *i, char *file, t_data *data)
 		return (EXIT_FAILURE);
 	if (parse_rgb(i, file, data))
 		return (EXIT_FAILURE);
-	*i += ft_strlen_eol(file + *i) + 1;
-	skip_whitespaces(i, file);
+	*i += ft_strlen_eol(file + *i);
+	if (file[*i])
+	{
+		*i += 1;
+		skip_whitespaces(i, file);
+	}
 	return (EXIT_SUCCESS);
 }
 

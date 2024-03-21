@@ -45,7 +45,7 @@ int	next_line_not_empty(int i, char *file)
 
 void	skip_whitespaces(int *i, char *file)
 {
-	// printf("index %d ICI\n%s\n", *i, file);
+//	 printf("index %d ICI\n%s\n", *i, file);
 
 	while (file[*i] && is_whitespace(file[*i]))
 	{
