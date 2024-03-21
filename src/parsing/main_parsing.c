@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/21 14:37:53 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:21:40 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,18 @@ int	parse_info_line(int *i, char *file, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+int	checklist_completed(t_checklist checklist)
+{
+	if (checklist.check_no == 1
+		&& checklist.check_so == 1
+		&& checklist.check_ea == 1
+		&& checklist.check_we == 1
+		&& checklist.ceiling == 1
+		&& checklist.floor == 1)
+		return (1);
+	return (0);
+}
+
 int	parse_file(char *file_name, t_data *data)
 {
 	int	i;
@@ -97,7 +109,8 @@ int	parse_file(char *file_name, t_data *data)
 				return (EXIT_FAILURE);
 		}
 		else if (data->mapinfo.file[i]
-			&& ft_isdigit(data->mapinfo.file[i]))
+			&& (ft_isdigit(data->mapinfo.file[i])
+				|| checklist_completed(data->checklist)))
 			fill_map_line(nb_whitespaces, &i, data->mapinfo.file + i, data);
 		else
 			++i;

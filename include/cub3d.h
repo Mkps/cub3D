@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:44:10 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/21 11:44:36 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:50:36 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,8 @@ int	check_xpm(char *str);
 int	chr_convert(char c);
 // static void	free_map(t_data *data, int current_index);
 int	next_line_not_empty(int i, char *file);
-
+int	checklist_completed(t_checklist checklist);
+int	line_is_empty(char *str);
 
 
 #endif

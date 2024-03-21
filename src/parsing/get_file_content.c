@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:18:01 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/21 12:19:52 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:03:16 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,22 @@ int	get_file_content(char *file_name, t_data *data)
 	if (init_data_mapinfo(file_name, data))
 		return (EXIT_FAILURE);
 	line = get_next_line(data->fd);
-	max_width = ft_strlen(line);
+	max_width = 0;
 	map_height = 0;
 	while (line)
 	{
 		data->mapinfo.file = ft_strjoin_and_free(data->mapinfo.file, line);
 		data->mapinfo.file_size += ft_strlen(line);
-		if (is_a_map_line(line))
+		if (is_a_map_line(line)
+			|| (line_is_empty(line) && map_height > 0))
+		{
+			line_len = ft_strlen(line);
+			if (max_width < line_len)
+				max_width = line_len;
 			++map_height;
+		}
 		free(line);
 		line = get_next_line(data->fd);
-		line_len = ft_strlen(line);
-		if (max_width < line_len)
-			max_width = line_len;
 	}
 	if (safe_close(data->fd))
 		return (EXIT_FAILURE);
