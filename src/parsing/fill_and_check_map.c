@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:57:08 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/21 16:25:00 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:34:10 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,15 @@ int	check_map_is_valid(char **map, t_data *data)
 	// }
 	
 	(void)map;
+
+	if (map_is_fragmented(map, data))
+	{
+		output_error(data->mapinfo.path, MAP_ERROR, EXIT_FAILURE);
+		return (EXIT_FAILURE);
+	}	
+	
 	if (data->mapinfo.width < 3 || data->mapinfo.height < 3
-		|| check_map_is_closed(data->cmap, data)
-		|| map_is_fragmented(map, data))
+		|| check_map_is_closed(data->cmap, data))
 	{
 		output_error(data->mapinfo.path, MAP_ERROR, EXIT_FAILURE);
 		return (EXIT_FAILURE);
