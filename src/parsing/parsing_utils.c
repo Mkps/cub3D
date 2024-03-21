@@ -33,7 +33,6 @@ int	ft_strlen_eol(char *str)
 
 int	next_line_not_empty(int i, char *file)
 {
-	printf("index %d\n", i);
 	// printf("index %d ICI\n%s\n", i, file);
 	while (file[i] && file[i] != '\n')
 	{
@@ -51,7 +50,7 @@ void	skip_whitespaces(int *i, char *file)
 	while (file[*i] && is_whitespace(file[*i]))
 	{
 		if (file[*i] == '\n'
-			&& next_line_not_empty(*i, file))
+			&& next_line_not_empty(*i + 1, file))
 			return ;
 		++(*i);
 	}
