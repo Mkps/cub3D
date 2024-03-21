@@ -68,25 +68,20 @@ int	check_rgb_syntax(char *str)
 	count = 0;
 	while (str[i] && str[i] != '\n')
 	{
-		while (is_whitespace(str[i]))
+		while (is_whitespace(str[i]) && str[i] != '\n')
 				i++;
 		if (!ft_isdigit(str[i]) && str[i] != ',')
-		{
-			printf("bad char %c i %i \n", str[i], i);
 			return (1);
-		}
 		if (ft_isdigit(str[i]))
 		{
 			while (ft_isdigit(str[i]))
 				i++;
 			count ++;
 		}
-		i++;
+		else
+			i++;
 	}
 	if (count != 3)
-	{
-		printf("bad count %i\n", count);
 		return (1);
-	}
 	return (0);
 }
