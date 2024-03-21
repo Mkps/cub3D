@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:11:43 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/21 14:53:55 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:52:03 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_strlen_eol(char *str)
 
 int	next_line_not_empty(int i, char *file)
 {
-	printf("index %d\n", i);
+	// printf("index %d\n", i);
 	// printf("index %d ICI\n%s\n", i, file);
 	while (file[i] && file[i] != '\n')
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aloubier <aloubier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:43:51 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 17:01:52 by aloubier         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:22:32 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	destroy_map(t_data *data)
 		free(data->map);
 	if (data->cmap)
 	{
-		while (data->cmap[++x])
+		while (++x < data->mapinfo.height)
 			free(data->cmap[x]);
 		free(data->cmap);
 	}
@@ -58,6 +58,8 @@ void	destroy_map(t_data *data)
 	if (data->mapinfo.file)
 		free(data->mapinfo.file);
 }
+
+// print data->mapinfo.file
 
 void	ft_mlx_exit(t_data *data, int errcode)
 {

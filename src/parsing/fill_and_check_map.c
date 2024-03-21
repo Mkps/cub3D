@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:57:08 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/21 14:22:07 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:25:00 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,34 @@ int	check_map_is_closed(char **map, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+int	line_is_empty(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isprint(str[i]))
+			return (0);
+		++i;
+	}
+	return (1);
+}
+
+int	map_is_fragmented(char **map, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->mapinfo.height)
+	{
+		if (line_is_empty(map[i]) && i != data->mapinfo.height - 1)
+			return (1);
+		++i;
+	}
+	return (0);
+}
+
 int	check_map_is_valid(char **map, t_data *data)
 {
 
@@ -34,12 +62,27 @@ int	check_map_is_valid(char **map, t_data *data)
 	
 	(void)map;
 	if (data->mapinfo.width < 3 || data->mapinfo.height < 3
-		|| check_map_is_closed(data->cmap, data))
+		|| check_map_is_closed(data->cmap, data)
+		|| map_is_fragmented(map, data))
 	{
 		output_error(data->mapinfo.path, MAP_ERROR, EXIT_FAILURE);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
+}
+
+int line_is_empty_until_eol(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] && line[i] != '\n')
+	{
+		if (ft_isprint(line[i]))
+			return (0);
+		++i;
+	}
+	return (1);
 }
 
 void	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
@@ -50,6 +93,17 @@ void	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 
 	data->cmap[line] = ft_calloc(sizeof(char), data->mapinfo.width + 2);
 	j = 0;
+	if (line_is_empty_until_eol(file) && checklist_completed(data->checklist))
+	{
+		while (j < data->mapinfo.width)
+		{
+			data->cmap[line][j] = ' ';
+			++j;
+		}
+		*i += ft_strlen_eol(file) + 1;
+		++line;
+		return ;
+	}
 	while (j < nb_whitespaces)
 	{
 		data->cmap[line][j] = ' ';
@@ -68,7 +122,7 @@ void	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 	}
 	data->cmap[line][j + l] = '\0';
 	*i += ft_strlen_eol(file) + 1;
-	line++;
+	++line;
 }
 
 int	is_a_map_line(char *str)
