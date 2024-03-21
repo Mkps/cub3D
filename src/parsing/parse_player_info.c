@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:52:56 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 16:20:01 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:44:18 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	get_player_info_cont(int i, int j, char **map, t_data *data)
 int	get_player_info(int i, int j, char **map, t_data *data)
 {
 	if (data->checklist.check_dir == 1)
-		return (print_error(DUPLICATE_ERROR));
+		return (output_error(NULL, DUPLICATE_ERROR, 2));
 	data->checklist.check_dir = 1;
 	data->player.pos_x = i + 0.5;
 	data->player.pos_y = j + 0.5;
@@ -80,6 +80,6 @@ int	search_player(char **map, t_data *data)
 		++i;
 	}
 	if (!data->checklist.check_dir)
-		return (print_error(NO_PLAYER_ERROR));
+		return (output_error(NULL, NO_PLAYER_ERROR, 2));
 	return (EXIT_SUCCESS);
 }

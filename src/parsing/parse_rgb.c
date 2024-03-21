@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:34:15 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 15:38:03 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:48:17 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ int	parse_and_get_rgb(int *i, int flag, t_data *data)
 	while (data->mapinfo.file[*i] && is_whitespace(data->mapinfo.file[*i]))
 		++(*i);
 	if (check_rgb_syntax(data->mapinfo.file + *i))
-		return (output_error(data->mapinfo.path, SYNTAX_ERROR, 1));
+		return (output_error(data->mapinfo.path, E_ITXT, 1));
 	index = *i;
 	red = ft_atoi_rgb(data->mapinfo.file + index, &index);
 	green = ft_atoi_rgb(data->mapinfo.file + index, &index);
 	blue = ft_atoi_rgb(data->mapinfo.file + index, &index);
 	if (check_rgb_values(red, green, blue))
-		return (print_error(RGB_VALUE_ERROR));
+		return (output_error(NULL, E_ITXT, 2));
 	if (flag == FLOOR)
 		data->mapinfo.f_color = ft_rgb_to_int(red, green, blue);
 	else if (flag == CEILING)

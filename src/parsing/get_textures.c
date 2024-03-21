@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 14:56:36 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 14:57:06 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:47:46 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	get_north_texture(int *i, char *file, t_data *data)
 	data->checklist.check_no = 1;
 	*i += 2;
 	if (!file[*i] || !is_whitespace(file[*i]))
-		return (output_error(NULL, SYNTAX_ERROR, 1));
+		return (output_error(NULL, E_ITXT, 1));
 	while (is_whitespace(file[*i]))
 		++(*i);
 	data->mapinfo.no_texture = ft_substr(file + *i, 0,
@@ -34,7 +34,7 @@ int	get_south_texture(int *i, char *file, t_data *data)
 	data->checklist.check_so = 1;
 	*i += 2;
 	if (!file[*i] || !is_whitespace(file[*i]))
-		return (output_error(NULL, SYNTAX_ERROR, 1));
+		return (output_error(NULL, E_ITXT, 1));
 	while (is_whitespace(file[*i]))
 		++(*i);
 	data->mapinfo.so_texture = ft_substr(file + *i, 0,
@@ -49,7 +49,7 @@ int	get_east_texture(int *i, char *file, t_data *data)
 	data->checklist.check_ea = 1;
 	*i += 2;
 	if (!file[*i] || !is_whitespace(file[*i]))
-		return (output_error(NULL, SYNTAX_ERROR, 1));
+		return (output_error(NULL, E_ITXT, 1));
 	while (is_whitespace(file[*i]))
 		++(*i);
 	data->mapinfo.ea_texture = ft_substr(file + *i,
@@ -64,7 +64,7 @@ int	get_west_texture(int *i, char *file, t_data *data)
 	data->checklist.check_we = 1;
 	*i += 2;
 	if (!file[*i] || !is_whitespace(file[*i]))
-		return (output_error(NULL, SYNTAX_ERROR, 1));
+		return (output_error(NULL, E_ITXT, 1));
 	while (is_whitespace(file[*i]))
 		++(*i);
 	data->mapinfo.we_texture = ft_substr(file + *i,
