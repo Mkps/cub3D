@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:18:01 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 15:18:30 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:19:52 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 
 int	init_data_mapinfo(char *file_name, t_data *data)
 {
+	data->mapinfo.file = ft_strdup("\0");
+	data->mapinfo.file_size = 0;
+	data->mapinfo.no_texture = NULL;
+	data->mapinfo.so_texture = NULL;
+	data->mapinfo.ea_texture = NULL;
+	data->mapinfo.we_texture = NULL;
 	data->fd = safe_open(file_name);
 	if (data->fd == -1)
 		return (EXIT_FAILURE);
-	data->mapinfo.file = ft_strdup("\0");
-	data->mapinfo.file_size = 0;
 	return (EXIT_SUCCESS);
 }
 
@@ -29,7 +33,8 @@ int	get_file_content(char *file_name, t_data *data)
 	int		max_width;
 	int		map_height;
 
-	init_data_mapinfo(file_name, data);
+	if (init_data_mapinfo(file_name, data))
+		return (EXIT_FAILURE);
 	line = get_next_line(data->fd);
 	max_width = ft_strlen(line);
 	map_height = 0;
@@ -45,7 +50,8 @@ int	get_file_content(char *file_name, t_data *data)
 		if (max_width < line_len)
 			max_width = line_len;
 	}
-	safe_close(data->fd);
+	if (safe_close(data->fd))
+		return (EXIT_FAILURE);
 	data->mapinfo.width = max_width;
 	data->mapinfo.height = map_height;
 	return (EXIT_SUCCESS);

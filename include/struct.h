@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:44:06 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/19 17:11:07 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:15:05 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define E_DUPTXT "Duplicate texture"
 
 # define ARG_ERROR "Invalid arguments"
+# define E_EMPTY_FILE "Empty file"
 # define OPEN_FD_ERROR "Could not open file"
 # define CLOSE_FD_ERROR "Could not close file"
 # define DUPLICATE_ERROR "Duplicate detected in file"
@@ -70,7 +71,7 @@ typedef struct s_mapinfo
 
     char **map;
     char *file;
-    size_t file_size;
+    int file_size;
     size_t file_nb_lines;
 
     char *no_texture;

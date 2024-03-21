@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/20 18:26:04 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:18:11 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,14 @@ int	parse_file(char *file_name, t_data *data)
 	int	i;
 	int	nb_whitespaces;
 
-	get_file_content(file_name, data);
+	if (get_file_content(file_name, data))
+		return (output_error(NULL, OPEN_FD_ERROR, 1));
+	if (data->mapinfo.file_size < 1)
+		return (output_error(NULL, E_EMPTY_FILE, 1));
 	data->checklist = (t_checklist){0};
 	i = 0;
 	data->cmap = ft_calloc(sizeof(char *), data->mapinfo.height + 1);
-	while (data->mapinfo.file[i])
+	while (i < data->mapinfo.file_size && data->mapinfo.file[i])
 	{
 		nb_whitespaces = skip_first_whitespaces(&i, data);
 		if (data->mapinfo.file[i]
