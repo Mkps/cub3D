@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:06:47 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/20 15:49:25 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:22:41 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ int	ft_import(char **argv, t_data *data)
 		if (init_data_sprite(data))
 			return (ft_exit_cleanup(data, EXIT_FAILURE));
 	}
-	//print_info(data);
 	if (map_convert(data) == EXIT_FAILURE)
 		return (ft_exit_cleanup(data, EXIT_FAILURE));
 	if (load_textures(data))

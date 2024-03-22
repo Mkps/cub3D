@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:18:01 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/21 12:19:52 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:32:22 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,18 @@ int	init_data_mapinfo(char *file_name, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+static void	update_max_width(int *max_width, char *line)
+{
+	int	line_len;
+
+	line_len = ft_strlen(line);
+	if (*max_width < line_len)
+		*max_width = line_len;
+}
+
 int	get_file_content(char *file_name, t_data *data)
 {
 	char	*line;
-	int		line_len;
 	int		max_width;
 	int		map_height;
 
@@ -47,9 +55,7 @@ int	get_file_content(char *file_name, t_data *data)
 			++map_height;
 		free(line);
 		line = get_next_line(data->fd);
-		line_len = ft_strlen(line);
-		if (max_width < line_len)
-			max_width = line_len;
+		update_max_width(&max_width, line);
 	}
 	if (safe_close(data->fd))
 		return (EXIT_FAILURE);

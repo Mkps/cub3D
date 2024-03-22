@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:11:43 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/21 14:53:55 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:21:35 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	ft_strlen_eol(char *str)
 
 int	next_line_not_empty(int i, char *file)
 {
-	// printf("index %d ICI\n%s\n", i, file);
 	while (file[i] && file[i] != '\n')
 	{
 		if (file[i] == '1')
@@ -47,8 +46,6 @@ int	next_line_not_empty(int i, char *file)
 
 void	skip_whitespaces(int *i, char *file)
 {
-//	 printf("index %d ICI\n%s\n", *i, file);
-
 	while (file[*i] && is_whitespace(file[*i]))
 	{
 		if (file[*i] == '\n'
@@ -56,6 +53,13 @@ void	skip_whitespaces(int *i, char *file)
 			return ;
 		++(*i);
 	}
+}
+
+int	checklist_ok(t_data *d)
+{
+	if (!d->checklist.floor || !d->checklist.ceiling)
+		return (output_error(NULL, "Missing color information", 1));
+	return (EXIT_SUCCESS);
 }
 
 // void	print_info(t_data *data)

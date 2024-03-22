@@ -6,92 +6,42 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/21 14:37:53 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:19:48 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include <stdlib.h>
 
-int	parse_cardinal_pt(int *i, char *file, t_data *data)
+int	parse_map_line(int nb_whitespaces, t_data *data)
 {
-	if (file[*i] == 'N' && file[*i + 1] && file[*i + 1] == 'O')
-	{
-		if (get_north_texture(i, file, data))
-			return (EXIT_FAILURE);
-	}
-	else if (file[*i] == 'S' && file[*i + 1]
-		&& file[*i + 1] == 'O')
-	{
-		if (get_south_texture(i, file, data))
-			return (EXIT_FAILURE);
-	}
-	else if (file[*i] == 'W' && file[*i + 1]
-		&& file[*i + 1] == 'E')
-	{
-		if (get_west_texture(i, file, data))
-			return (EXIT_FAILURE);
-	}
-	else if (file[*i] == 'E' && file[*i + 1]
-		&& file[*i + 1] == 'A')
-	{
-		if (get_east_texture(i, file, data))
-			return (EXIT_FAILURE);
-	}
-	else if (file[*i] == 'D' && file[*i + 1]
-		&& file[*i + 1] == 'O')
-	{
-		if (get_door_texture(i, file, data))
-			return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
-}
-
-int	skip_first_whitespaces(int *i, t_data *data)
-{
-	int	nb_whitespaces;
-
-	nb_whitespaces = 0;
-	
-	// printf("index %d ICI\n%s\n", *i, data->mapinfo.file);
-
-	while (data->mapinfo.file[*i]
-		&& is_whitespace(data->mapinfo.file[*i])
-		&& next_line_not_empty(*i, data->mapinfo.file))
-	{
-		++(*i);
-		++nb_whitespaces;
-	}
-	return (nb_whitespaces);
-}
-
-int	parse_info_line(int *i, char *file, t_data *data)
-{
-	static int l = 0;
-
-	// printf("%d - %c\n", l, file[*i]);
-	++l;
-
-	if (parse_cardinal_pt(i, file, data))
+	if (data->checklist.map > 1)
 		return (EXIT_FAILURE);
-	if (parse_rgb(i, file, data))
-		return (EXIT_FAILURE);
-	*i += ft_strlen_eol(file + *i);
-	if (file[*i])
-	{
-		*i += 1;
-		skip_whitespaces(i, file);
-	}
+	fill_map_line(nb_whitespaces, &i,
+		data->mapinfo.file + i, data);
+	if (data->checklist.map && data->mapinfo.file[i]
+		&& !next_line_not_empty(i + 1, data->mapinfo.file))
+		data->checklist.map = 2;
 	return (EXIT_SUCCESS);
 }
 
-int	checklist_ok(t_data *d)
+static int	is_an_info_line(int i, t_data *data)
 {
-
-	if (!d->checklist.floor || !d->checklist.ceiling)
-		return (output_error(NULL, "Missing color information", 1));
-	return (EXIT_SUCCESS);
+	if (data->mapinfo.file[i]
+		&& ft_isprint(data->mapinfo.file[i])
+		&& !ft_isdigit(data->mapinfo.file[i]))
+		return (1);
+	return (0);
 }
+
+static int	is_map(int i, t_data *data)
+{
+	if (data->mapinfo.file[i]
+		&& ft_isdigit(data->mapinfo.file[i]))
+		return (1);
+	return (0);
+}
+
 int	parse_file(char *file_name, t_data *data)
 {
 	int	i;
@@ -107,24 +57,12 @@ int	parse_file(char *file_name, t_data *data)
 	while (i < data->mapinfo.file_size && data->mapinfo.file[i])
 	{
 		nb_whitespaces = skip_first_whitespaces(&i, data);
-		if (data->mapinfo.file[i]
-			&& ft_isprint(data->mapinfo.file[i])
-			&& !ft_isdigit(data->mapinfo.file[i]))
-		{
-			if (data->checklist.map != 0)
-				return (output_error(NULL, "Character after map", 1));
-			if (parse_info_line(&i, data->mapinfo.file, data))
-				return (EXIT_FAILURE);
-		}
-		else if (data->mapinfo.file[i]
-			&& ft_isdigit(data->mapinfo.file[i]))
-		{
-			if (data->checklist.map > 1)
-				return (output_error(NULL, "Character after map end", 1));
-			fill_map_line(nb_whitespaces, &i, data->mapinfo.file + i, data);
-			if (data->checklist.map && data->mapinfo.file[i] && !next_line_not_empty(i + 1, data->mapinfo.file))
-				data->checklist.map = 2;
-		}
+		if (is_an_info_line(i, data)
+			&& parse_info_line(&i, data->mapinfo.file, data))
+			return (EXIT_FAILURE);
+		else if (is_map(i, data)
+			&& parse_map_line(nb_whitespaces, data))
+			return (output_error(NULL, "Character after map end", 1));
 		else
 			++i;
 	}
