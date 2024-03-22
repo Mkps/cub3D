@@ -34,12 +34,12 @@ int	ft_mlx_mouse_hook(int keycode, int x, int y, t_data *data)
 	{
 		if (data->mouselook_on == 0)
 		{
-			mlx_mouse_hide(data->mlx, data->w_ptr);
+			//mlx_mouse_hide(data->mlx, data->w_ptr);
 			data->mouselook_on = 1;
 		}
 		else if (data->mouselook_on == 1)
 		{
-			mlx_mouse_show(data->mlx, data->w_ptr);
+			//mlx_mouse_show(data->mlx, data->w_ptr);
 			data->mouselook_on = 0;
 		}
 	}

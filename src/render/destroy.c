@@ -54,11 +54,28 @@ void	destroy_mapinfo(t_data *data)
 		free(data->mapinfo.do_texture);
 }
 
+void	destroy_sprite(t_data *data)
+{
+	int	x;
+
+	x = -1;
+	while (++x < data->sprite_count)
+	{
+		mlx_destroy_image(data->mlx, data->sprite[x].animation[0].img.img);
+		if (data->sprite[x].animation[0].path)
+			free(data->sprite[x].animation[0].path);
+		free(data->sprite[x].animation);
+	}
+	free(data->sprite);
+}
+
 void	destroy_world(t_data *data)
 {
 	destroy_walls(data);
 	destroy_mapinfo(data);
 	destroy_door(data);
+	if (BONUS)
+		destroy_sprite(data);
 	if (!data->world.is_f_color)
 		mlx_destroy_image(data->mlx, data->world.f.img.img);
 	if (!data->world.is_c_color)
