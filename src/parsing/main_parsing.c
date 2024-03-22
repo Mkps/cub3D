@@ -6,21 +6,21 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/22 14:19:48 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:57:06 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include <stdlib.h>
 
-int	parse_map_line(int nb_whitespaces, t_data *data)
+int	parse_map_line(int *i, int nb_whitespaces, t_data *data)
 {
 	if (data->checklist.map > 1)
 		return (EXIT_FAILURE);
-	fill_map_line(nb_whitespaces, &i,
-		data->mapinfo.file + i, data);
-	if (data->checklist.map && data->mapinfo.file[i]
-		&& !next_line_not_empty(i + 1, data->mapinfo.file))
+	fill_map_line(nb_whitespaces, i,
+		data->mapinfo.file + *i, data);
+	if (data->checklist.map && data->mapinfo.file[*i]
+		&& !next_line_not_empty(*i + 1, data->mapinfo.file))
 		data->checklist.map = 2;
 	return (EXIT_SUCCESS);
 }
@@ -61,7 +61,7 @@ int	parse_file(char *file_name, t_data *data)
 			&& parse_info_line(&i, data->mapinfo.file, data))
 			return (EXIT_FAILURE);
 		else if (is_map(i, data)
-			&& parse_map_line(nb_whitespaces, data))
+			&& parse_map_line(&i, nb_whitespaces, data))
 			return (output_error(NULL, "Character after map end", 1));
 		else
 			++i;
