@@ -112,13 +112,19 @@ int	parse_file(char *file_name, t_data *data)
 			&& !ft_isdigit(data->mapinfo.file[i]))
 		{
 			if (data->checklist.map != 0)
-				return (EXIT_FAILURE);
+				return (output_error(NULL, "Character after map", 1));
 			if (parse_info_line(&i, data->mapinfo.file, data))
 				return (EXIT_FAILURE);
 		}
 		else if (data->mapinfo.file[i]
 			&& ft_isdigit(data->mapinfo.file[i]))
+		{
+			if (data->checklist.map > 1)
+				return (output_error(NULL, "Character after map end", 1));
 			fill_map_line(nb_whitespaces, &i, data->mapinfo.file + i, data);
+			if (data->checklist.map && data->mapinfo.file[i] && !next_line_not_empty(i + 1, data->mapinfo.file))
+				data->checklist.map = 2;
+		}
 		else
 			++i;
 	}

@@ -28,6 +28,8 @@ int	ft_strlen_eol(char *str)
 	i = 0;
 	while (str[i] && str[i] != '\n')
 		i++;
+	if (!str[i])
+		i--;
 	return (i);
 }
 

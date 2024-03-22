@@ -39,6 +39,11 @@ int	check_map_is_valid(char **map, t_data *data)
 		output_error(data->mapinfo.path, MAP_ERROR, EXIT_FAILURE);
 		return (EXIT_FAILURE);
 	}
+	if (has_island(data))
+	{
+		output_error(data->mapinfo.path, "Non contiguous map", EXIT_FAILURE);
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
