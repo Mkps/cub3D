@@ -35,6 +35,8 @@ void	init_world(t_data *data)
 	data->mapinfo.fd = -1;
 	data->mapinfo.file = NULL;
 	data->mapinfo.has_door = 0;
+	data->sprite = NULL;
+	data->sprite_count = 0;
 }
 
 static void	zero_data(t_data *data)

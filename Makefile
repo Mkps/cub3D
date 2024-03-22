@@ -20,6 +20,10 @@ OBJ_DIR = ./build
 
 SRC_NAME =	main.c \
 			bonus/bonus_utils_door.c \
+			bonus/raycast_sprite_sort.c \
+			bonus/raycast_sprite_init.c \
+			bonus/raycast_sprite.c \
+			bonus/sprite_init.c \
 			bonus/minimap.c \
 			error_handling.c \
 			parsing/parse_player_info.c \
@@ -34,6 +38,7 @@ SRC_NAME =	main.c \
 			parsing/struct_utils.c \
 			parsing/ft_import.c \
 			parsing/check_map_walls.c \
+			parsing/check_map_island.c \
 			parsing/init_data.c \
 			parsing/utils.c \
 			parsing/get_file_content.c \
@@ -52,7 +57,7 @@ SRC_NAME =	main.c \
 			render/destroy.c \
 			render/key_input.c \
 			render/raycast_wall_init.c \
-			render/player_move.c 
+			render/player_move.c \
 
 SRC = $(addprefix $(SRCDIR)/, $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_NAME:c=o))

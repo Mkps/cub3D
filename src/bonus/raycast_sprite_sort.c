@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../include/cub3d.h"
 
 int	compare_pairs(const void *a, const void *b)
 {

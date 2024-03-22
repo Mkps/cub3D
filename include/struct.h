@@ -242,6 +242,8 @@ typedef struct s_data
 	t_window	w_data;
 	double		*z_buffer;
 	int			mouselook_on;
+	int			sprite_count;
+	t_sprite	*sprite;
 }	t_data;
 
 typedef struct s_argb

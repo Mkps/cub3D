@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../include/cub3d.h"
 
 void	init_sprite_data(t_data *data, t_sdata *s)
 {
