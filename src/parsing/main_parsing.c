@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/21 15:21:40 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 18:47:31 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,33 @@ int	checklist_completed(t_checklist checklist)
 	return (0);
 }
 
+int	check_filename(char *file_name)
+{
+	int	len;
+
+	len = ft_strlen(file_name) - 1;
+	if (len < 4)
+		return (EXIT_FAILURE);
+	if (file_name[len] != 'b'
+		|| file_name[len - 1] != 'u'
+		|| file_name[len - 2] != 'c'
+		|| file_name[len - 3] != '.')
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+int	first_printable_is_digit(char *file)
+{
+	int	i;
+
+	i = 0;
+	while (file[i] && !ft_isprint(file[i]))
+		++i;
+	if (file[i] && ft_isdigit(file[i]))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
 int	parse_file(char *file_name, t_data *data)
 {
 	int	i;
@@ -93,6 +120,10 @@ int	parse_file(char *file_name, t_data *data)
 
 	if (get_file_content(file_name, data))
 		return (output_error(NULL, OPEN_FD_ERROR, 1));
+	if (first_printable_is_digit(data->mapinfo.file))
+		return (output_error(NULL, E_MAP_POSITION, 1));
+	if (check_filename(file_name))
+		return (output_error(NULL, E_FILE_NAME, 1));
 	if (data->mapinfo.file_size < 1)
 		return (output_error(NULL, E_EMPTY_FILE, 1));
 	data->checklist = (t_checklist){0};
@@ -109,14 +140,23 @@ int	parse_file(char *file_name, t_data *data)
 				return (EXIT_FAILURE);
 		}
 		else if (data->mapinfo.file[i]
-			&& (ft_isdigit(data->mapinfo.file[i])
-				|| checklist_completed(data->checklist)))
+			&& ft_isdigit(data->mapinfo.file[i])
+				&& checklist_completed(data->checklist))
 			fill_map_line(nb_whitespaces, &i, data->mapinfo.file + i, data);
+		else if (data->mapinfo.file[i]
+			&& ft_isdigit(data->mapinfo.file[i]
+			&& !checklist_completed(data->checklist)))
+			return (output_error(NULL, E_MAP_POSITION, 1));
 		else
 			++i;
+		
+		// printf("%d\n", checklist_completed(data->checklist));
 	}
 	return (EXIT_SUCCESS);
 }
+
+
+
 
 // int main(int argc, char **argv)
 // {

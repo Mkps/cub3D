@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:44:06 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/21 12:15:05 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/21 18:30:32 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 
 # define ARG_ERROR "Invalid arguments"
 # define E_EMPTY_FILE "Empty file"
+# define E_FILE_NAME "Wrong file name"
+# define E_MAP_POSITION "Map must be at the end of the file"
 # define OPEN_FD_ERROR "Could not open file"
 # define CLOSE_FD_ERROR "Could not close file"
 # define DUPLICATE_ERROR "Duplicate detected in file"
