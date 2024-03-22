@@ -55,15 +55,6 @@ t_xpm	xpm_load(t_data *data, char *path)
 	return (t);
 }
 
-static int	load_door_tex(t_data *data)
-{
-	data->world.d = xpm_load(data, data->mapinfo.do_texture);
-	data->mapinfo.do_texture = NULL;
-	if (!data->world.d.path)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
-
 int	load_textures(t_data *data)
 {
 	data->world.n = xpm_load(data, data->mapinfo.no_texture);
@@ -84,7 +75,12 @@ int	load_textures(t_data *data)
 		return (EXIT_FAILURE);
 	data->world.f_color = data->mapinfo.f_color;
 	data->world.c_color = data->mapinfo.c_color;
-	if (BONUS > 0 && load_door_tex(data))
-		return (EXIT_FAILURE);
+	if (BONUS > 0 && data->mapinfo.do_texture)
+	{
+		data->world.d = xpm_load(data, data->mapinfo.do_texture);
+		data->mapinfo.do_texture = NULL;
+		if (!data->world.d.path && BONUS > 0)
+			return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }

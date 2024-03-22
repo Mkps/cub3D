@@ -6,7 +6,7 @@
 #    By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 12:58:01 by aloubier          #+#    #+#              #
-#    Updated: 2024/03/22 14:19:37 by rraffi-k         ###   ########.fr        #
+#    Updated: 2024/03/22 16:11:25 by rraffi-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,9 +34,9 @@ SRC_NAME =	main.c \
 			parsing/check_map_walls_utils.c \
 			parsing/parsing_utils.c \
 			parsing/parsing_utils_2.c \
-			parsing/parse_info_line.c \
 			parsing/fill_and_check_map.c \
 			parsing/parse_rgb.c \
+			parsing/parse_info_line.c \
 			parsing/struct_utils.c \
 			parsing/ft_import.c \
 			parsing/check_map_walls.c \

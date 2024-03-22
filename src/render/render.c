@@ -21,8 +21,7 @@ void	update_sprite(t_data *data)
 	{
 		if (data->sprite[i].frame_count > 1)
 			data->sprite[i].frame++;
-		if (data->sprite[i].frame > data->sprite[i].frame_count \
-			* data->sprite[i].frame_time)
+		if (data->sprite[i].frame > data->sprite[i].frame_count * data->sprite[i].frame_time)
 			data->sprite[i].frame = 0;
 	}
 }

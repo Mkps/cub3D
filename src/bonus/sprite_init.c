@@ -14,13 +14,13 @@
 
 t_sprite	init_sprite(t_data *data, t_coord pos, int frame, char **animpath)
 {
-	t_sprite	ret;
+	t_sprite ret;
 
 	ret.pos.x = pos.x;
 	ret.pos.y = pos.y;
 	ret.animation = ft_calloc(frame, sizeof(t_xpm));
 	ret.animation[0] = xpm_load(data, animpath[0]);
-	ret.frame_count = frame;
+	ret.frame_count = frame; 
 	ret.frame = 0;
 	ret.frame_time = 12;
 	return (ret);
@@ -28,18 +28,16 @@ t_sprite	init_sprite(t_data *data, t_coord pos, int frame, char **animpath)
 
 int	init_data_sprite(t_data *data)
 {
-	char		*sprite_path;
-	t_sprite	*sprite;
+	char	*sprite_path;
 
 	sprite_path = ft_strdup("./flameskull.xpm");
 	data->sprite_count = 1;
-	sprite = ft_calloc(data->sprite_count, sizeof(t_sprite));
+	t_sprite *sprite = ft_calloc(data->sprite_count, sizeof(t_sprite));
 	if (!sprite)
-		return (output_error(NULL, "Error memalloc for sprite", 1));
-	sprite[0] = init_sprite(data, to_coord(data->player.pos_x, \
-				data->player.pos_y), 2, &sprite_path);
+		return (output_error(NULL, "Error allocation memory for sprite", EXIT_FAILURE));
+	sprite[0] = init_sprite(data, to_coord(data->player.pos_x, data->player.pos_y), 2, &sprite_path);
 	if (!sprite[0].animation->path)
-		return (EXIT_FAILURE);
+		return(EXIT_FAILURE);
 	data->sprite = sprite;
 	return (EXIT_SUCCESS);
 }

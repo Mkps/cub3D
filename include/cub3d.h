@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 18:44:10 by aloubier          #+#    #+#             */
-/*   Updated: 2024/03/22 14:20:37 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:08:28 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,11 +144,8 @@ int			init_data_mapinfo(char *file_name, t_data *data);
 int			check_xpm(char *str);
 int			chr_convert(char c);
 int			next_line_not_empty(int i, char *file);
-int			checklist_ok(t_data *d);
 int			skip_first_whitespaces(int *i, t_data *data);
-int			parse_cardinal_pt_cont(int *i, char *file, t_data *data);
-int			parse_cardinal_pt(int *i, char *file, t_data *data);
 int			parse_info_line(int *i, char *file, t_data *data);
-
+int			checklist_ok(t_data *d);
 
 #endif

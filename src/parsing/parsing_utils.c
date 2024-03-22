@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:11:43 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/22 14:21:35 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:12:11 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,6 @@ void	skip_whitespaces(int *i, char *file)
 			return ;
 		++(*i);
 	}
-}
-
-int	checklist_ok(t_data *d)
-{
-	if (!d->checklist.floor || !d->checklist.ceiling)
-		return (output_error(NULL, "Missing color information", 1));
-	return (EXIT_SUCCESS);
 }
 
 // void	print_info(t_data *data)

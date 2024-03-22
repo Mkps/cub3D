@@ -6,26 +6,14 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:58:27 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/22 14:57:06 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:08:08 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include <stdlib.h>
 
-int	parse_map_line(int *i, int nb_whitespaces, t_data *data)
-{
-	if (data->checklist.map > 1)
-		return (EXIT_FAILURE);
-	fill_map_line(nb_whitespaces, i,
-		data->mapinfo.file + *i, data);
-	if (data->checklist.map && data->mapinfo.file[*i]
-		&& !next_line_not_empty(*i + 1, data->mapinfo.file))
-		data->checklist.map = 2;
-	return (EXIT_SUCCESS);
-}
-
-static int	is_an_info_line(int i, t_data *data)
+static int	is_info_line(int i, t_data *data)
 {
 	if (data->mapinfo.file[i]
 		&& ft_isprint(data->mapinfo.file[i])
@@ -42,27 +30,50 @@ static int	is_map(int i, t_data *data)
 	return (0);
 }
 
-int	parse_file(char *file_name, t_data *data)
+static int	parse_map_line(int nb_whitespaces, int *i, t_data *data)
 {
-	int	i;
-	int	nb_whitespaces;
+	if (data->checklist.map > 1)
+		return (output_error(NULL, "Character after map end", 1));
+	fill_map_line(nb_whitespaces, i, data->mapinfo.file + *i, data);
+	if (data->checklist.map
+		&& data->mapinfo.file[*i]
+		&& !next_line_not_empty(*i + 1, data->mapinfo.file))
+		data->checklist.map = 2;
+	return (EXIT_SUCCESS);
+}
 
+int	init_function_parse_file(char *file_name, t_data *data)
+{
 	if (get_file_content(file_name, data))
 		return (output_error(NULL, OPEN_FD_ERROR, 1));
 	if (data->mapinfo.file_size < 1)
 		return (output_error(NULL, E_EMPTY_FILE, 1));
 	data->checklist = (t_checklist){0};
-	i = 0;
 	data->cmap = ft_calloc(sizeof(char *), data->mapinfo.height + 1);
+	return (EXIT_SUCCESS);
+}
+
+int	parse_file(char *file_name, t_data *data)
+{
+	int	i;
+	int	nb_whitespaces;
+
+	if (init_function_parse_file(file_name, data))
+		return (EXIT_FAILURE);
+	i = 0;
 	while (i < data->mapinfo.file_size && data->mapinfo.file[i])
 	{
 		nb_whitespaces = skip_first_whitespaces(&i, data);
-		if (is_an_info_line(i, data)
-			&& parse_info_line(&i, data->mapinfo.file, data))
-			return (EXIT_FAILURE);
-		else if (is_map(i, data)
-			&& parse_map_line(&i, nb_whitespaces, data))
-			return (output_error(NULL, "Character after map end", 1));
+		if (is_info_line(i, data))
+		{
+			if (parse_info_line(&i, data->mapinfo.file, data))
+				return (EXIT_FAILURE);
+		}
+		else if (is_map(i, data))
+		{
+			if (parse_map_line(nb_whitespaces, &i, data))
+				return (EXIT_FAILURE);
+		}
 		else
 			++i;
 	}

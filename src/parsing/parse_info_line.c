@@ -6,7 +6,7 @@
 /*   By: rraffi-k <rraffi-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:19:16 by rraffi-k          #+#    #+#             */
-/*   Updated: 2024/03/22 14:19:50 by rraffi-k         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:01:27 by rraffi-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ int	parse_cardinal_pt(int *i, char *file, t_data *data)
 			return (EXIT_FAILURE);
 	}
 	else
-		parse_cardinal_pt_cont(i, file, data);
+	{
+		if (parse_cardinal_pt_cont(i, file, data))
+			return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
