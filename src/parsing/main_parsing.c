@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+#include <stdlib.h>
 
 int	parse_cardinal_pt(int *i, char *file, t_data *data)
 {
@@ -35,6 +36,12 @@ int	parse_cardinal_pt(int *i, char *file, t_data *data)
 		&& file[*i + 1] == 'A')
 	{
 		if (get_east_texture(i, file, data))
+			return (EXIT_FAILURE);
+	}
+	else if (file[*i] == 'D' && file[*i + 1]
+		&& file[*i + 1] == 'O')
+	{
+		if (get_door_texture(i, file, data))
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -78,6 +85,13 @@ int	parse_info_line(int *i, char *file, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+int	checklist_ok(t_data *d)
+{
+
+	if (!d->checklist.floor || !d->checklist.ceiling)
+		return (output_error(NULL, "Missing color information", 1));
+	return (EXIT_SUCCESS);
+}
 int	parse_file(char *file_name, t_data *data)
 {
 	int	i;
@@ -97,6 +111,8 @@ int	parse_file(char *file_name, t_data *data)
 			&& ft_isprint(data->mapinfo.file[i])
 			&& !ft_isdigit(data->mapinfo.file[i]))
 		{
+			if (data->checklist.map != 0)
+				return (EXIT_FAILURE);
 			if (parse_info_line(&i, data->mapinfo.file, data))
 				return (EXIT_FAILURE);
 		}
@@ -106,6 +122,8 @@ int	parse_file(char *file_name, t_data *data)
 		else
 			++i;
 	}
+	if (checklist_ok(data))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

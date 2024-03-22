@@ -55,6 +55,8 @@
 
 typedef struct s_checklist
 {
+	int	map;
+    int check_do;
     int check_no;
     int check_so;
     int check_we;
@@ -75,6 +77,7 @@ typedef struct s_mapinfo
     size_t file_nb_lines;
 
     char *no_texture;
+    char *do_texture;
     char *so_texture;
     char *we_texture;
     char *ea_texture;

@@ -43,6 +43,7 @@ t_xpm	xpm_load(t_data *data, char *path)
 	t.img.img = mlx_xpm_file_to_image(data->mlx, t.path, &t.w, &t.h);
 	if (!t.img.img)
 	{
+		printf("t_path |%s|\n", t.path);
 		free(t.path);
 		t.path = NULL;
 		ft_putstr_fd("Error\n", 2);
@@ -74,9 +75,10 @@ int	load_textures(t_data *data)
 		return (EXIT_FAILURE);
 	data->world.f_color = data->mapinfo.f_color;
 	data->world.c_color = data->mapinfo.c_color;
-	if (BONUS > 0 && data->world.d.path)
+	if (BONUS > 0 && data->mapinfo.do_texture)
 	{
-		data->world.d = xpm_load(data, data->world.d.path);
+		data->world.d = xpm_load(data, data->mapinfo.do_texture);
+		data->mapinfo.do_texture = NULL;
 		if (!data->world.d.path && BONUS > 0)
 			return (EXIT_FAILURE);
 	}

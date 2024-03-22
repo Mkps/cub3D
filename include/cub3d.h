@@ -35,6 +35,7 @@ typedef void (*	t_function_ptr)(t_data *data);
 
 void		skip_whitespaces(int *i, char *file);
 int			get_north_texture(int *i, char *file, t_data *data);
+int			get_door_texture(int *i, char *file, t_data *data);
 int			get_south_texture(int *i, char *file, t_data *data);
 int			get_west_texture(int *i, char *file, t_data *data);
 int			get_east_texture(int *i, char *file, t_data *data);

@@ -50,6 +50,8 @@ void	destroy_mapinfo(t_data *data)
 		free(data->mapinfo.ea_texture);
 	if (data->mapinfo.we_texture)
 		free(data->mapinfo.we_texture);
+	if (data->mapinfo.do_texture)
+		free(data->mapinfo.do_texture);
 }
 
 void	destroy_world(t_data *data)

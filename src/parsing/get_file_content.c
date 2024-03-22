@@ -16,6 +16,7 @@ int	init_data_mapinfo(char *file_name, t_data *data)
 {
 	data->mapinfo.file = ft_strdup("\0");
 	data->mapinfo.file_size = 0;
+	data->mapinfo.do_texture = NULL;
 	data->mapinfo.no_texture = NULL;
 	data->mapinfo.so_texture = NULL;
 	data->mapinfo.ea_texture = NULL;

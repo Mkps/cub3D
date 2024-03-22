@@ -48,6 +48,7 @@ void	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 	int			j;
 	int			l;
 
+	data->checklist.map = 1;
 	data->cmap[line] = ft_calloc(sizeof(char), data->mapinfo.width + 2);
 	j = 0;
 	while (j < nb_whitespaces)
