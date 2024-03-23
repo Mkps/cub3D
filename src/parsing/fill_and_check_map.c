@@ -80,10 +80,8 @@ void	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 int	is_a_map_line(char *str)
 {
 	int	i;
-	int	flag;
 
 	i = 0;
-	flag = 0;
 	while (str[i])
 	{
 		while (is_whitespace(str[i]))
