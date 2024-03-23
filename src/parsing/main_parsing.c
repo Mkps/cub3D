@@ -52,9 +52,6 @@ int	skip_first_whitespaces(int *i, t_data *data)
 	int	nb_whitespaces;
 
 	nb_whitespaces = 0;
-	
-	// printf("index %d ICI\n%s\n", *i, data->mapinfo.file);
-
 	while (data->mapinfo.file[*i]
 		&& is_whitespace(data->mapinfo.file[*i])
 		&& next_line_not_empty(*i, data->mapinfo.file))
@@ -67,11 +64,9 @@ int	skip_first_whitespaces(int *i, t_data *data)
 
 int	parse_info_line(int *i, char *file, t_data *data)
 {
-	static int l = 0;
+	static int	l = 0;
 
-	// printf("%d - %c\n", l, file[*i]);
 	++l;
-
 	if (parse_cardinal_pt(i, file, data))
 		return (EXIT_FAILURE);
 	if (parse_rgb(i, file, data))
@@ -87,11 +82,11 @@ int	parse_info_line(int *i, char *file, t_data *data)
 
 int	checklist_ok(t_data *d)
 {
-
 	if (!d->checklist.floor || !d->checklist.ceiling)
 		return (output_error(NULL, "Missing color information", 1));
 	return (EXIT_SUCCESS);
 }
+
 int	parse_file(char *file_name, t_data *data)
 {
 	int	i;
@@ -122,7 +117,8 @@ int	parse_file(char *file_name, t_data *data)
 			if (data->checklist.map > 1)
 				return (output_error(NULL, "Character after map end", 1));
 			fill_map_line(nb_whitespaces, &i, data->mapinfo.file + i, data);
-			if (data->checklist.map && data->mapinfo.file[i] && !next_line_not_empty(i + 1, data->mapinfo.file))
+			if (data->checklist.map && data->mapinfo.file[i] \
+					&& !next_line_not_empty(i + 1, data->mapinfo.file))
 				data->checklist.map = 2;
 		}
 		else

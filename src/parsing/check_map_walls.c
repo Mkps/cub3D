@@ -48,7 +48,7 @@ int	check_upper_wall(char **map, t_data *data)
 			return (-1);
 		i = 0;
 		while (i < height && map[i][j] && map[i][j] == ' ')
-		{				
+		{
 			++i;
 			if (i < height)
 			{
@@ -75,7 +75,7 @@ int	check_bottom_wall(char **map, t_data *data)
 		if (map[i][j] != '1' && map[i][j] != ' ')
 			return (-1);
 		while (i >= 0 && map[i][j] && map[i][j] == ' ')
-		{				
+		{
 			--i;
 			if (i >= 0)
 			{
@@ -101,7 +101,7 @@ int	check_left_wall(char **map, t_data *data)
 		if (map[i][j] != '1' && map[i][j] != ' ')
 			return (-1);
 		while (i < data->mapinfo.height && map[i][j] && map[i][j] == ' ')
-		{				
+		{
 			++j;
 			if (map[i][j])
 			{
@@ -127,7 +127,7 @@ int	check_right_wall(char **map, t_data *data)
 		if (map[i][j] != '1' && map[i][j] != ' ')
 			return (-1);
 		while (i < data->mapinfo.height && map[i][j] && map[i][j] == ' ')
-		{				
+		{
 			--j;
 			if (map[i][j])
 			{

@@ -14,19 +14,6 @@
 
 int	upper_elem_not_surrounded(int i, int j, char **map)
 {
-
-/* 
-
-Si en-dessous d'un SPACE ce n'est ni un 1 ni un SPACE,
-OU 
-que c'est un SPACE mais pas de 1 ni de SPACE a droite
-OU
-que c'est un SPACE mais pas de 1 ni de SPACE a gauche
-
->>>>> ERREUR
-*/
-
-
 	if ((map[i][j]
 		&& (map[i][j] != ' ' && map[i][j] != '1'))
 		|| ((map[i][j] && map[i][j] != '1'

@@ -31,7 +31,7 @@ void	ft_free_all(t_data *data)
 	ft_free_textures(data);
 	i = 0;
 	if (data->cmap[0])
-	{	
+	{
 		while (i < data->mapinfo.height)
 		{
 			free(data->cmap[i]);

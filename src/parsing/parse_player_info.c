@@ -27,7 +27,7 @@ void	get_player_info_cont(int i, int j, char **map, t_data *data)
 		data->player.dir_y = -1.0;
 		data->plane.x = -0.66;
 		data->plane.y = 0.0;
-	}	
+	}
 }
 
 int	get_player_info(int i, int j, char **map, t_data *data)

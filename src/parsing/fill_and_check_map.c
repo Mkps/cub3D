@@ -24,14 +24,6 @@ int	check_map_is_closed(char **map, t_data *data)
 
 int	check_map_is_valid(char **map, t_data *data)
 {
-
-	// int i = 0;
-	// while (map[i])
-	// {
-	// 	printf("%s\n", map[i]);
-	// 	++i;
-	// }
-	
 	(void)map;
 	if (data->mapinfo.width < 3 || data->mapinfo.height < 3
 		|| check_map_is_closed(data->cmap, data))
