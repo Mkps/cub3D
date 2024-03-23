@@ -15,8 +15,9 @@
 
 # include "struct.h"
 # include "s_player.h"
-
+# include "../minilibx/mlx.h"
 # include "../libft/libft.h"
+# include <aio.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <sys/types.h>
@@ -28,8 +29,6 @@
 # include <fcntl.h>
 # include <aio.h>
 # include <stdlib.h>
-# include "../minilibx/mlx.h"
-
 
 typedef void (*	t_function_ptr)(t_data *data);
 
@@ -43,8 +42,8 @@ int			check_left_wall(char **map, t_data *data);
 int			check_upper_wall(char **map, t_data *data);
 int			check_bottom_wall(char **map, t_data *data);
 int			check_right_wall(char **map, t_data *data);
-int			is_a_map_line(char *str); 
-int			parse_rgb(int *i, char *file, t_data *data); 
+int			is_a_map_line(char *str);
+int			parse_rgb(int *i, char *file, t_data *data);
 void		fill_map_line(int nb_ws, int *i, char *file, t_data *data);
 int			load_textures(t_data *data);
 int			pdir_check(t_data *data, char c);
@@ -131,9 +130,9 @@ int			check_map_is_closed(char **map, t_data *data);
 int			check_paths(t_mapinfo *mapinfo);
 int			ft_strlen_eol(char *str);
 void		print_info(t_data *data);
-int     	parse_file(char *str, t_data *data);
-int     	check_map_is_valid(char **map, t_data *data);
-int     	search_player(char **map, t_data *data);
+int			parse_file(char *str, t_data *data);
+int			check_map_is_valid(char **map, t_data *data);
+int			search_player(char **map, t_data *data);
 int			is_whitespace(char c);
 int			upper_elem_not_surrounded(int i, int j, char **map);
 int			bottom_elem_not_surrounded(int i, int j, char **map);
@@ -144,7 +143,5 @@ int			init_data_mapinfo(char *file_name, t_data *data);
 int			check_xpm(char *str);
 int			chr_convert(char c);
 int			next_line_not_empty(int i, char *file);
-
-
 
 #endif

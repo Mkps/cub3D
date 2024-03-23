@@ -36,7 +36,6 @@
 # define E_INVRGVC "Invalid RGB color for ceiling"
 # define E_INVRGVF "Invalid RGB color for floor"
 # define E_DUPTXT "Duplicate texture"
-
 # define ARG_ERROR "Invalid arguments"
 # define E_EMPTY_FILE "Empty file"
 # define OPEN_FD_ERROR "Could not open file"
@@ -46,53 +45,44 @@
 # define MAP_ERROR "Map isn't valid"
 # define NO_PLAYER_ERROR "There is no player"
 # define RGB_VALUE_ERROR "Invalid RGB value"
-
 # define FLOOR 1
 # define CEILING 2
-
-# include <aio.h>
-
+# include <stddef.h>
 
 typedef struct s_checklist
 {
-	int	map;
-    int check_do;
-    int check_no;
-    int check_so;
-    int check_we;
-    int check_ea;
-    int floor;
-    int ceiling;
-    int check_dir;
-} t_checklist;
+	int			map;
+	int			check_do;
+	int			check_no;
+	int			check_so;
+	int			check_we;
+	int			check_ea;
+	int			floor;
+	int			ceiling;
+	int			check_dir;
+}	t_checklist;
 
 typedef struct s_mapinfo
 {
-    int width;
-    int height;
-
-    char **map;
-    char *file;
-    int file_size;
-    size_t file_nb_lines;
-
-    char *no_texture;
-    char *do_texture;
-    char *so_texture;
-    char *we_texture;
-    char *ea_texture;
-    //door
-
-    int f_color; //floor
-    int c_color; //ceiling
-
+	int			width;
+	int			height;
+	char		**map;
+	char		*file;
+	int			file_size;
+	size_t		file_nb_lines;
+	char		*no_texture;
+	char		*do_texture;
+	char		*so_texture;
+	char		*we_texture;
+	char		*ea_texture;
+	int			f_color; //floor
+	int			c_color; //ceiling
 	int			fd;
 	int			line_count;
 	char		*path;
 	int			eom;
 	int			has_door;
-
-} t_mapinfo;
+}	t_mapinfo;
 
 typedef struct s_img
 {
@@ -217,12 +207,11 @@ typedef struct s_world
 
 typedef struct s_data
 {
-    char 		*file;
-    size_t 		file_size;
-    int 		fd;
-    t_mapinfo 	mapinfo;
-    t_checklist checklist;
-
+	char		*file;
+	size_t		file_size;
+	int			fd;
+	t_mapinfo	mapinfo;
+	t_checklist	checklist;
 	void		*mlx;
 	t_world		world;
 	char		**cmap;
