@@ -12,15 +12,6 @@
 
 #include "../../include/cub3d.h"
 
-int	is_whitespace(char c)
-{
-	if (c == '\f' || c == '\n'
-		|| c == '\r' || c == '\t'
-		|| c == '\v' || c == ' ')
-		return (1);
-	return (0);
-}
-
 int	ft_strlen_eol(char *str)
 {
 	int	i;
@@ -46,13 +37,35 @@ int	next_line_not_empty(int i, char *file)
 
 void	skip_whitespaces(int *i, char *file)
 {
-	while (file[*i] && is_whitespace(file[*i]))
+	while (file[*i] && ft_isws(file[*i]))
 	{
 		if (file[*i] == '\n'
 			&& next_line_not_empty(*i + 1, file))
 			return ;
 		++(*i);
 	}
+}
+
+int	checklist_ok(t_data *d)
+{
+	if (!d->checklist.floor || !d->checklist.ceiling)
+		return (output_error(NULL, "Missing color information", 1));
+	return (EXIT_SUCCESS);
+}
+
+int	skip_first_whitespaces(int *i, t_data *data)
+{
+	int	nb_whitespaces;
+
+	nb_whitespaces = 0;
+	while (data->mapinfo.file[*i]
+		&& ft_isws(data->mapinfo.file[*i])
+		&& next_line_not_empty(*i, data->mapinfo.file))
+	{
+		++(*i);
+		++nb_whitespaces;
+	}
+	return (nb_whitespaces);
 }
 
 // void	print_info(t_data *data)

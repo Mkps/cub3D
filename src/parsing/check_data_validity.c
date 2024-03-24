@@ -60,7 +60,7 @@ int	check_rgb_syntax(char *str)
 	count = 0;
 	while (str[i] && str[i] != '\n')
 	{
-		while (is_whitespace(str[i]) && str[i] != '\n')
+		while (ft_isws(str[i]) && str[i] != '\n')
 			i++;
 		if (!ft_isdigit(str[i]) && str[i] != ',')
 			return (1);

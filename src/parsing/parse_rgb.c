@@ -25,9 +25,9 @@ int	parse_and_get_rgb(int *i, int flag, t_data *data)
 	int	index;
 
 	++(*i);
-	if (!data->mapinfo.file[*i] || !is_whitespace(data->mapinfo.file[*i]))
+	if (!data->mapinfo.file[*i] || !ft_isws(data->mapinfo.file[*i]))
 		return (output_error(data->mapinfo.path, SYNTAX_ERROR, 1));
-	while (data->mapinfo.file[*i] && is_whitespace(data->mapinfo.file[*i]))
+	while (data->mapinfo.file[*i] && ft_isws(data->mapinfo.file[*i]))
 		++(*i);
 	if (check_rgb_syntax(data->mapinfo.file + *i))
 		return (output_error(data->mapinfo.path, "IRGBS", 1));

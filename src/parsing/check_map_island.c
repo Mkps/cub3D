@@ -94,10 +94,10 @@ int	has_island(t_data *data)
 		j = 0;
 		while (dup[i][++j])
 		{
-			if (!is_whitespace(dup[i][j]))
+			if (!ft_isws(dup[i][j]))
 				ft_flood(data, dup, i, j);
 		}
-		if (!is_whitespace(dup[i][j]))
+		if (!ft_isws(dup[i][j]))
 			break ;
 	}
 	if (!ret && check_remainder(dup) == EXIT_FAILURE)

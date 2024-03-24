@@ -21,12 +21,12 @@ int	get_north_texture(int *i, char *file, t_data *data)
 		return (output_error(NULL, DUPLICATE_ERROR, 1));
 	data->checklist.check_no = 1;
 	*i += 2;
-	if (!file[*i] || !is_whitespace(file[*i]))
+	if (!file[*i] || !ft_isws(file[*i]))
 		return (output_error(NULL, E_ITXT, 1));
-	while (is_whitespace(file[*i]))
+	while (ft_isws(file[*i]))
 		++(*i);
 	j = 0;
-	while (!is_whitespace(file[j + *i]))
+	while (!ft_isws(file[j + *i]))
 		j++;
 	data->mapinfo.no_texture = ft_substr(file + *i,
 			0, j);
@@ -43,12 +43,12 @@ int	get_door_texture(int *i, char *file, t_data *data)
 		return (output_error(NULL, DUPLICATE_ERROR, 1));
 	data->checklist.check_do = 1;
 	*i += 2;
-	if (!file[*i] || !is_whitespace(file[*i]))
+	if (!file[*i] || !ft_isws(file[*i]))
 		return (output_error(NULL, E_ITXT, 1));
-	while (is_whitespace(file[*i]))
+	while (ft_isws(file[*i]))
 		++(*i);
 	j = 0;
-	while (!is_whitespace(file[j + *i]))
+	while (!ft_isws(file[j + *i]))
 		j++;
 	data->mapinfo.do_texture = ft_substr(file + *i,
 			0, j);
@@ -63,12 +63,12 @@ int	get_south_texture(int *i, char *file, t_data *data)
 		return (output_error(NULL, DUPLICATE_ERROR, 1));
 	data->checklist.check_so = 1;
 	*i += 2;
-	if (!file[*i] || !is_whitespace(file[*i]))
+	if (!file[*i] || !ft_isws(file[*i]))
 		return (output_error(NULL, E_ITXT, 1));
-	while (is_whitespace(file[*i]))
+	while (ft_isws(file[*i]))
 		++(*i);
 	j = 0;
-	while (!is_whitespace(file[j + *i]))
+	while (!ft_isws(file[j + *i]))
 		j++;
 	data->mapinfo.so_texture = ft_substr(file + *i,
 			0, j);
@@ -83,12 +83,12 @@ int	get_east_texture(int *i, char *file, t_data *data)
 		return (output_error(NULL, DUPLICATE_ERROR, 1));
 	data->checklist.check_ea = 1;
 	*i += 2;
-	if (!file[*i] || !is_whitespace(file[*i]))
+	if (!file[*i] || !ft_isws(file[*i]))
 		return (output_error(NULL, E_ITXT, 1));
-	while (is_whitespace(file[*i]))
+	while (ft_isws(file[*i]))
 		++(*i);
 	j = 0;
-	while (!is_whitespace(file[j + *i]))
+	while (!ft_isws(file[j + *i]))
 		j++;
 	data->mapinfo.ea_texture = ft_substr(file + *i,
 			0, j);
@@ -103,12 +103,12 @@ int	get_west_texture(int *i, char *file, t_data *data)
 		return (output_error(NULL, DUPLICATE_ERROR, 1));
 	data->checklist.check_we = 1;
 	*i += 2;
-	if (!file[*i] || !is_whitespace(file[*i]))
+	if (!file[*i] || !ft_isws(file[*i]))
 		return (output_error(NULL, E_ITXT, 1));
-	while (is_whitespace(file[*i]))
+	while (ft_isws(file[*i]))
 		++(*i);
 	j = 0;
-	while (!is_whitespace(file[j + *i]))
+	while (!ft_isws(file[j + *i]))
 		j++;
 	data->mapinfo.we_texture = ft_substr(file + *i,
 			0, j);

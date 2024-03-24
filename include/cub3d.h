@@ -33,6 +33,8 @@
 typedef void (*	t_function_ptr)(t_data *data);
 
 void		skip_whitespaces(int *i, char *file);
+int			skip_first_whitespaces(int *i, t_data *data);
+int			checklist_ok(t_data *data);
 int			get_north_texture(int *i, char *file, t_data *data);
 int			get_door_texture(int *i, char *file, t_data *data);
 int			get_south_texture(int *i, char *file, t_data *data);
@@ -44,7 +46,7 @@ int			check_bottom_wall(char **map, t_data *data);
 int			check_right_wall(char **map, t_data *data);
 int			is_a_map_line(char *str);
 int			parse_rgb(int *i, char *file, t_data *data);
-void		fill_map_line(int nb_ws, int *i, char *file, t_data *data);
+int			fill_map_line(int nb_ws, int *i, char *file, t_data *data);
 int			load_textures(t_data *data);
 int			pdir_check(t_data *data, char c);
 int			has_island(t_data *data);
@@ -133,7 +135,6 @@ void		print_info(t_data *data);
 int			parse_file(char *str, t_data *data);
 int			check_map_is_valid(char **map, t_data *data);
 int			search_player(char **map, t_data *data);
-int			is_whitespace(char c);
 int			upper_elem_not_surrounded(int i, int j, char **map);
 int			bottom_elem_not_surrounded(int i, int j, char **map);
 int			left_elem_not_surrounded(int i, int j, char **map, int height);

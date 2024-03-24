@@ -74,7 +74,7 @@ int	is_a_map_line(char *str)
 	i = 0;
 	while (str[i])
 	{
-		while (is_whitespace(str[i]))
+		while (ft_isws(str[i]))
 			i++;
 		if (str[i] == '1' || str[i] == '0')
 			return (1);
