@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+#include <stdlib.h>
 
 int	check_map_is_closed(char **map, t_data *data)
 {
@@ -39,7 +40,7 @@ int	check_map_is_valid(char **map, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-void	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
+int	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 {
 	static int	line = 0;
 	int			j;
@@ -47,18 +48,14 @@ void	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 
 	data->checklist.map = 1;
 	data->cmap[line] = ft_calloc(sizeof(char), data->mapinfo.width + 2);
-	j = 0;
-	while (j < nb_whitespaces)
-	{
+	if (!data->cmap[line])
+		return (EXIT_FAILURE);
+	j = -1;
+	while (++j < nb_whitespaces)
 		data->cmap[line][j] = ' ';
-		++j;
-	}
-	l = 0;
-	while (j + l < data->mapinfo.width && file[l] && file[l] != '\n')
-	{
+	l = -1;
+	while (j + ++l < data->mapinfo.width && file[l] && file[l] != '\n')
 		data->cmap[line][j + l] = file[l];
-		l++;
-	}
 	while (j + l < data->mapinfo.width)
 	{
 		data->cmap[line][j + l] = ' ';
@@ -67,6 +64,7 @@ void	fill_map_line(int nb_whitespaces, int *i, char *file, t_data *data)
 	data->cmap[line][j + l] = '\0';
 	*i += ft_strlen_eol(file) + 1;
 	line++;
+	return (EXIT_SUCCESS);
 }
 
 int	is_a_map_line(char *str)

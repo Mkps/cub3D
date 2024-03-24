@@ -96,7 +96,8 @@ int	map_handler(t_data *data, int *i, int nb_whitespaces)
 	{
 		if (data->checklist.map > 1)
 			return (output_error(NULL, "Character after map end", 1));
-		fill_map_line(nb_whitespaces, i, data->mapinfo.file + *i, data);
+		if (fill_map_line(nb_whitespaces, i, data->mapinfo.file + *i, data))
+			return (output_error(NULL, "Error init cmap line", 1));
 		if (data->checklist.map && data->mapinfo.file[*i] \
 				&& !next_line_not_empty(((*i) + 1), data->mapinfo.file))
 			data->checklist.map = 2;
