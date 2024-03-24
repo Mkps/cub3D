@@ -31,29 +31,23 @@ int	get_file_content(char *file_name, t_data *data)
 {
 	char	*line;
 	int		line_len;
-	int		max_width;
-	int		map_height;
 
 	if (init_data_mapinfo(file_name, data))
 		return (EXIT_FAILURE);
 	line = get_next_line(data->fd);
-	max_width = ft_strlen(line);
-	map_height = 0;
+	data->mapinfo.width = ft_strlen(line);
+	data->mapinfo.height = 0;
 	while (line)
 	{
 		data->mapinfo.file = ft_strjoin_and_free(data->mapinfo.file, line);
 		data->mapinfo.file_size += ft_strlen(line);
 		if (is_a_map_line(line))
-			++map_height;
+			++data->mapinfo.height;
 		free(line);
 		line = get_next_line(data->fd);
 		line_len = ft_strlen(line);
-		if (max_width < line_len)
-			max_width = line_len;
+		if (data->mapinfo.width < line_len)
+			data->mapinfo.width = line_len;
 	}
-	if (safe_close(data->fd))
-		return (EXIT_FAILURE);
-	data->mapinfo.width = max_width;
-	data->mapinfo.height = map_height;
-	return (EXIT_SUCCESS);
+	return (safe_close(data->fd));
 }

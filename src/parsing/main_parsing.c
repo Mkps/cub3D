@@ -13,37 +13,18 @@
 #include "../../include/cub3d.h"
 #include <stdlib.h>
 
-int	parse_cardinal_pt(int *i, char *file, t_data *data)
+int	parse_cardinal_pt(int *i, char *f, t_data *data)
 {
-	if (file[*i] == 'N' && file[*i + 1] && file[*i + 1] == 'O')
-	{
-		if (get_north_texture(i, file, data))
-			return (EXIT_FAILURE);
-	}
-	else if (file[*i] == 'S' && file[*i + 1]
-		&& file[*i + 1] == 'O')
-	{
-		if (get_south_texture(i, file, data))
-			return (EXIT_FAILURE);
-	}
-	else if (file[*i] == 'W' && file[*i + 1]
-		&& file[*i + 1] == 'E')
-	{
-		if (get_west_texture(i, file, data))
-			return (EXIT_FAILURE);
-	}
-	else if (file[*i] == 'E' && file[*i + 1]
-		&& file[*i + 1] == 'A')
-	{
-		if (get_east_texture(i, file, data))
-			return (EXIT_FAILURE);
-	}
-	else if (file[*i] == 'D' && file[*i + 1]
-		&& file[*i + 1] == 'O')
-	{
-		if (get_door_texture(i, file, data))
-			return (EXIT_FAILURE);
-	}
+	if (f[*i] == 'N' && f[*i + 1] && f[*i + 1] == 'O')
+		return (get_north_texture(i, f, data));
+	if (f[*i] == 'S' && f[*i + 1] && f[*i + 1] == 'O')
+		return (get_south_texture(i, f, data));
+	if (f[*i] == 'W' && f[*i + 1] && f[*i + 1] == 'E')
+		return (get_west_texture(i, f, data));
+	if (f[*i] == 'E' && f[*i + 1] && f[*i + 1] == 'A')
+		return (get_east_texture(i, f, data));
+	if (f[*i] == 'D' && f[*i + 1] && f[*i + 1] == 'O')
+		return (get_door_texture(i, f, data));
 	return (EXIT_SUCCESS);
 }
 
