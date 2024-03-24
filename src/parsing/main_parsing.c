@@ -87,46 +87,59 @@ int	checklist_ok(t_data *d)
 	return (EXIT_SUCCESS);
 }
 
-int	parse_file(char *file_name, t_data *data)
+int	init_parsing(t_data *data, char *file_name)
 {
-	int	i;
-	int	nb_whitespaces;
-
 	if (get_file_content(file_name, data))
 		return (output_error(NULL, OPEN_FD_ERROR, 1));
 	if (data->mapinfo.file_size < 1)
 		return (output_error(NULL, E_EMPTY_FILE, 1));
 	data->checklist = (t_checklist){0};
-	i = 0;
 	data->cmap = ft_calloc(sizeof(char *), data->mapinfo.height + 1);
+	if (!data->cmap)
+		return (output_error(NULL, "Error init cmap", 1));
+	return (EXIT_SUCCESS);
+}
+
+int	map_handler(t_data *data, int *i, int nb_whitespaces)
+{
+	if (data->mapinfo.file[*i] && ft_isprint(data->mapinfo.file[*i])
+		&& !ft_isdigit(data->mapinfo.file[*i]))
+	{
+		if (data->checklist.map != 0)
+			return (output_error(NULL, "Character after map", 1));
+		if (parse_info_line(i, data->mapinfo.file, data))
+			return (EXIT_FAILURE);
+	}
+	else if (data->mapinfo.file[*i]
+		&& ft_isdigit(data->mapinfo.file[*i]))
+	{
+		if (data->checklist.map > 1)
+			return (output_error(NULL, "Character after map end", 1));
+		fill_map_line(nb_whitespaces, i, data->mapinfo.file + *i, data);
+		if (data->checklist.map && data->mapinfo.file[*i] \
+				&& !next_line_not_empty(((*i) + 1), data->mapinfo.file))
+			data->checklist.map = 2;
+	}
+	else
+		*i += 1;
+	return (EXIT_SUCCESS);
+}
+
+int	parse_file(char *file_name, t_data *data)
+{
+	int	i;
+	int	nb_whitespaces;
+
+	if (init_parsing(data, file_name))
+		return (EXIT_FAILURE);
+	i = 0;
 	while (i < data->mapinfo.file_size && data->mapinfo.file[i])
 	{
 		nb_whitespaces = skip_first_whitespaces(&i, data);
-		if (data->mapinfo.file[i]
-			&& ft_isprint(data->mapinfo.file[i])
-			&& !ft_isdigit(data->mapinfo.file[i]))
-		{
-			if (data->checklist.map != 0)
-				return (output_error(NULL, "Character after map", 1));
-			if (parse_info_line(&i, data->mapinfo.file, data))
-				return (EXIT_FAILURE);
-		}
-		else if (data->mapinfo.file[i]
-			&& ft_isdigit(data->mapinfo.file[i]))
-		{
-			if (data->checklist.map > 1)
-				return (output_error(NULL, "Character after map end", 1));
-			fill_map_line(nb_whitespaces, &i, data->mapinfo.file + i, data);
-			if (data->checklist.map && data->mapinfo.file[i] \
-					&& !next_line_not_empty(i + 1, data->mapinfo.file))
-				data->checklist.map = 2;
-		}
-		else
-			++i;
+		if (map_handler(data, &i, nb_whitespaces))
+			return (EXIT_FAILURE);
 	}
-	if (checklist_ok(data))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	return (checklist_ok(data));
 }
 
 // int main(int argc, char **argv)
