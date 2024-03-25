@@ -55,7 +55,7 @@ int	init_parsing(t_data *data, char *file_name)
 	data->checklist = (t_checklist){0};
 	data->cmap = ft_calloc(sizeof(char *), data->mapinfo.height + 1);
 	if (!data->cmap)
-		return (output_error(NULL, "Error init cmap", 1));
+		return (output_error(NULL, E_MALLOC_CMAP, 1));
 	return (EXIT_SUCCESS);
 }
 
@@ -65,7 +65,7 @@ int	map_handler(t_data *data, int *i, int nb_whitespaces)
 		&& !ft_isdigit(data->mapinfo.file[*i]))
 	{
 		if (data->checklist.map != 0)
-			return (output_error(NULL, "Character after map", 1));
+			return (output_error(NULL, E_MAP_NE, 1));
 		if (parse_info_line(i, data->mapinfo.file, data))
 			return (EXIT_FAILURE);
 	}
@@ -73,9 +73,9 @@ int	map_handler(t_data *data, int *i, int nb_whitespaces)
 		&& ft_isdigit(data->mapinfo.file[*i]))
 	{
 		if (data->checklist.map > 1)
-			return (output_error(NULL, "Character after map end", 1));
+			return (output_error(NULL, E_MAP_NE, 1));
 		if (fill_map_line(nb_whitespaces, i, data->mapinfo.file + *i, data))
-			return (output_error(NULL, "Error init cmap line", 1));
+			return (output_error(NULL, E_INIT_CMAPL, 1));
 		if (data->checklist.map && data->mapinfo.file[*i] \
 				&& !next_line_not_empty(((*i) + 1), data->mapinfo.file))
 			data->checklist.map = 2;

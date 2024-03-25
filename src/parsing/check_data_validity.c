@@ -23,23 +23,34 @@ int	check_xpm(char *str)
 	return (0);
 }
 
+int	all_set(t_mapinfo *mapinfo)
+{
+	if (!mapinfo->no_texture || !mapinfo->so_texture
+		|| !mapinfo->ea_texture || !mapinfo->we_texture
+		|| (BONUS && mapinfo->has_door && !mapinfo->do_texture))
+		return (output_error(NULL, E_MISSTXT, 1));
+	return (EXIT_SUCCESS);
+}
+
 int	check_paths(t_mapinfo *mapinfo)
 {
+	if (all_set(mapinfo))
+		return (EXIT_FAILURE);
 	if (ft_strlen(mapinfo->no_texture) < 5
 		|| ft_strlen(mapinfo->so_texture) < 5
 		|| ft_strlen(mapinfo->ea_texture) < 5
 		|| ft_strlen(mapinfo->we_texture) < 5)
-		return (output_error(NULL, "Invalid texture length", 1));
+		return (output_error(NULL, E_ITXT, 1));
 	if (access(mapinfo->no_texture, F_OK)
 		|| access(mapinfo->so_texture, F_OK)
 		|| access(mapinfo->ea_texture, F_OK)
 		|| access(mapinfo->we_texture, F_OK))
-		return (output_error(NULL, "Invalid texture access", 1));
+		return (output_error(NULL, E_TEX_NOACC, 1));
 	if (check_xpm(mapinfo->no_texture)
 		|| check_xpm(mapinfo->so_texture)
 		|| check_xpm(mapinfo->ea_texture)
 		|| check_xpm(mapinfo->we_texture))
-		return (output_error(NULL, "Invalid texture xpm", 1));
+		return (output_error(NULL, E_TEX_NOTXPM, 1));
 	return (EXIT_SUCCESS);
 }
 

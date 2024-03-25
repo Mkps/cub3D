@@ -35,7 +35,7 @@ int	init_data_sprite(t_data *data)
 	data->sprite_count = 1;
 	sprite = ft_calloc(data->sprite_count, sizeof(t_sprite));
 	if (!sprite)
-		return (output_error(NULL, "Error memalloc for sprite", 1));
+		return (output_error(NULL, E_MALLOC_SP, 1));
 	data->sprite = sprite;
 	sprite[0] = init_sprite(data, to_coord(data->player.pos_x, \
 				data->player.pos_y), 2, &sprite_path);

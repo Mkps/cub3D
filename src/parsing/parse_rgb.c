@@ -30,7 +30,7 @@ int	parse_and_get_rgb(int *i, int flag, t_data *data)
 	while (data->mapinfo.file[*i] && ft_isws(data->mapinfo.file[*i]))
 		++(*i);
 	if (check_rgb_syntax(data->mapinfo.file + *i))
-		return (output_error(data->mapinfo.path, "IRGBS", 1));
+		return (output_error(data->mapinfo.path, E_IS_RGB, 1));
 	index = *i;
 	red = ft_atoi_rgb(data->mapinfo.file + index, &index);
 	green = ft_atoi_rgb(data->mapinfo.file + index, &index);
