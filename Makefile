@@ -26,6 +26,7 @@ SRC_NAME =	main.c \
 			bonus/sprite_init.c \
 			bonus/minimap.c \
 			error_handling.c \
+			parsing/spacehandler.c \
 			parsing/parse_player_info.c \
 			parsing/check_data_validity.c \
 			parsing/safe_fd_functions.c \

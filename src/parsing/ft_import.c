@@ -91,6 +91,7 @@ int	map_convert(t_data *data)
 
 	if (map_alloc(data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	spacehandler(data);
 	i = -1;
 	while (data->cmap[++i])
 	{

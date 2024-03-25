@@ -32,6 +32,7 @@
 
 typedef void (*	t_function_ptr)(t_data *data);
 
+void		spacehandler(t_data *data);
 void		skip_whitespaces(int *i, char *file);
 int			skip_first_whitespaces(int *i, t_data *data);
 int			checklist_ok(t_data *data);
@@ -65,7 +66,6 @@ void		destroy_world(t_data *data);
 void		destroy_sprite(t_data *data);
 int			ft_import(char **argv, t_data *data);
 int			is_valid_rgb(int *rgb);
-int			is_skipped(char c);
 t_xpm		xpm_load(t_data *data, char *path);
 int			get_file_data(t_data *data, char **map);
 int			create_map(t_data *data, char **cub_map, int c_line);
