@@ -75,8 +75,8 @@ typedef struct s_mapinfo
 	char		*so_texture;
 	char		*we_texture;
 	char		*ea_texture;
-	int			f_color; //floor
-	int			c_color; //ceiling
+	int			f_color;
+	int			c_color;
 	int			fd;
 	int			line_count;
 	char		*path;
