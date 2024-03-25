@@ -14,6 +14,7 @@
 
 int	valid_mapchr(t_data *data, char c)
 {
+	(void)data;
 	if (BONUS == 0)
 	{
 		if (!(ft_strchr("10NSEW", c)))
@@ -22,8 +23,6 @@ int	valid_mapchr(t_data *data, char c)
 	}
 	if (BONUS == 1)
 	{
-		if (!(ft_strchr("D", c)))
-			data->mapinfo.has_door = 1;
 		if (!(ft_strchr("10NSEWD", c)))
 			return (0);
 		return (1);

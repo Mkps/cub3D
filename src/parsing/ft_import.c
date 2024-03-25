@@ -96,7 +96,11 @@ int	map_convert(t_data *data)
 	{
 		j = -1;
 		while (data->cmap[i][++j])
+		{
+			if (data->cmap[i][j] == 'D')
+				data->mapinfo.has_door = 1;
 			data->map[i][j] = chr_convert(data->cmap[i][j]);
+		}
 		while (j < data->mapinfo.width)
 		{
 			data->map[i][j] = -42;

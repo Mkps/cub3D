@@ -43,7 +43,6 @@ t_xpm	xpm_load(t_data *data, char *path)
 	t.img.img = mlx_xpm_file_to_image(data->mlx, t.path, &t.w, &t.h);
 	if (!t.img.img)
 	{
-		printf("t_path |%s|\n", t.path);
 		free(t.path);
 		t.path = NULL;
 		ft_putstr_fd("Error\n", 2);
@@ -57,6 +56,8 @@ t_xpm	xpm_load(t_data *data, char *path)
 
 static int	load_door_tex(t_data *data)
 {
+	if (data->mapinfo.has_door == 0)
+		return (EXIT_SUCCESS);
 	data->world.d = xpm_load(data, data->mapinfo.do_texture);
 	data->mapinfo.do_texture = NULL;
 	if (!data->world.d.path)
