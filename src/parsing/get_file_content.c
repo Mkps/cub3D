@@ -56,7 +56,7 @@ int	init_data_mapinfo(char *file_name, t_data *data)
 		return (output_error(file_name, "is a directory", 1));
 	data->fd = safe_open(file_name);
 	if (data->fd == -1)
-		return (EXIT_FAILURE);
+		return (output_error(file_name, OPEN_FD_ERROR, 1));
 	return (EXIT_SUCCESS);
 }
 

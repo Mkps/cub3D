@@ -49,7 +49,7 @@ int	parse_info_line(int *i, char *file, t_data *data)
 int	init_parsing(t_data *data, char *file_name)
 {
 	if (get_file_content(file_name, data))
-		return (output_error(NULL, OPEN_FD_ERROR, 1));
+		return (EXIT_FAILURE);
 	if (data->mapinfo.file_size < 1)
 		return (output_error(NULL, E_EMPTY_FILE, 1));
 	data->checklist = (t_checklist){0};
