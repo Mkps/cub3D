@@ -59,22 +59,22 @@ void	destroy_sprite(t_data *data)
 	int	x;
 
 	x = -1;
+	if (!data->sprite)
+		return ;
 	while (++x < data->sprite_count)
 	{
-		if (data->sprite)
+		if (data->sprite[x].animation)
 		{
-			if (data->sprite[x].animation)
+			if (data->sprite[x].animation[0].path)
 			{
-				if (data->sprite[x].animation[0].path)
-				{
-					mlx_destroy_image(data->mlx, data->sprite[x].animation[0].img.img);
-					free(data->sprite[x].animation[0].path);
-				}
-				free(data->sprite[x].animation);
+				mlx_destroy_image(data->mlx, \
+					data->sprite[x].animation[0].img.img);
+				free(data->sprite[x].animation[0].path);
 			}
-			free(data->sprite);
+			free(data->sprite[x].animation);
 		}
 	}
+	free(data->sprite);
 }
 
 void	destroy_world(t_data *data)
