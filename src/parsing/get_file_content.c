@@ -12,6 +12,35 @@
 
 #include "../../include/cub3d.h"
 
+static int	is_dir(char *arg)
+{
+	int	fd;
+	int	ret;
+
+	ret = 0;
+	fd = open(arg, O_DIRECTORY);
+	if (fd >= 0)
+	{
+		close (fd);
+		ret = 1;
+	}
+	return (ret);
+}
+
+static int	is_cub(char *arg)
+{
+	size_t	len;
+
+	len = ft_strlen(arg);
+	if (len <= 4)
+		return (0);
+	if ((arg[len - 4] != '.' || arg[len - 3] != 'c'
+			|| arg[len - 2] != 'u'
+			|| arg[len - 1] != 'b'))
+		return (0);
+	return (1);
+}
+
 int	init_data_mapinfo(char *file_name, t_data *data)
 {
 	data->mapinfo.file = ft_strdup("\0");
@@ -21,6 +50,10 @@ int	init_data_mapinfo(char *file_name, t_data *data)
 	data->mapinfo.so_texture = NULL;
 	data->mapinfo.ea_texture = NULL;
 	data->mapinfo.we_texture = NULL;
+	if (!is_cub(file_name))
+		return (output_error(file_name, "not a .cub file", 1));
+	if (is_dir(file_name))
+		return (output_error(file_name, "is a directory", 1));
 	data->fd = safe_open(file_name);
 	if (data->fd == -1)
 		return (EXIT_FAILURE);
